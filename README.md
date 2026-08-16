@@ -1,1 +1,0 @@
-# OSL-Team-Owners
