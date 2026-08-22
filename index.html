@@ -584,7 +584,7 @@ label.fl{display:block;font-size:10px;letter-spacing:.12em;text-transform:upperc
 <script>
 /* ============================================================================
    ODYSSEY SPORTS LEAGUE 2026 — single file, offline, saves to this browser
-   Data: OSL Rules v5.2 · Auction bidding plans · Live group draws · Day schedule
+   Data: OSL Rules v5.3 · Auction bidding plans · Live group draws · Day schedule
    ========================================================================== */
 
 const LOGO = 'data:image/png;base64,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';
@@ -854,12 +854,14 @@ const sportsOfPlayer = (tid,pid) => SPORT_ORDER.filter(k=>nomOf(tid,k).includes(
 /* §3.1 — the sole-woman exception counts women who are actually available. */
 const soleWoman = tid => squadIn(teamById(tid)).filter(p=>p.g==='F').length<=1;
 
-/* Three racket sports need 5 men each, and every man is capped at two sports,
-   so 8 available men (16 slots for 15) is the floor at which a squad can still
-   field them all. Below that the team is short, and a Men General B player may
-   take a third sport — with the Sports Committee's and the opponent's approval.
-   The cap on every other man stays absolute. */
-const MIN_MEN = 8;
+/* The minimum squad that can cover the whole league is 9 men + 1 woman: the
+   three racket sports need 5 men each (15 man-slots) plus Carrom's 2 and Chess's
+   1, and every man is capped at two sports — 9 men give exactly 18. The one
+   woman covers the compulsory woman in all three racket sports under the
+   sole-woman exception. Below 9 men a team cannot field everything, so a Men
+   General B player may take a third sport, with the Sports Committee's and the
+   opponent's approval. The cap on every other man stays absolute. */
+const MIN_MEN = 9, MIN_WOMEN = 1;
 const menAvailable = tid => squadIn(teamById(tid)).filter(p=>p.g==='M').length;
 const shortOfMen   = tid => menAvailable(tid) < MIN_MEN;
 const thirdSportAllowed = (tid,pid) => { const p=pOf(pid);
@@ -1083,16 +1085,39 @@ function setPen(tid,pts,note){
   save();
 }
 
+/* ============================ SHORT-HANDED PLAY ============================
+   A team that cannot field the compulsory six has three ways out, in the order
+   a captain should try them:
+
+   1. Give a Men General B player a third sport (see MIN_MEN above).
+   2. Play short, with a handicap. Two pairs instead of three and the opponent
+      starts at 7; one pair and the opponent starts at 14. The short side still
+      has to reach 25, so its pairs cover the whole climb.
+   3. Forfeit the sport, and the opponent takes it 25-0.
+
+   The handicap is held as a head start, which means every gate, rotation and
+   table downstream keeps working off one number — the running score. A side
+   given a 7-point start is already past the first rotation, so its opponent's
+   two pairs come on as Pair B and Pair C, which is exactly right. */
+const headOf = m => (m.head&&(m.head.a||m.head.b)) ? {a:m.head.a||0, b:m.head.b||0} : {a:0,b:0};
+const pairsFor = (m,key) => { const h=headOf(m)[otherK(key)]; return h>=GATE2?1:(h>=GATE1?2:3); };
+const shortSide = m => { const h=headOf(m); return h.a?'b':(h.b?'a':null); };
+const ffOf = m => m.ff||null;                       // the side that forfeited
+const ffWinner = m => m.ff ? (m.ff===m.a?'b':'a') : null;
+
 /* ============================ RACKET SCORING ============================ */
-const scoreOf = m => { const s={a:0,b:0}; (m.log||[]).forEach(w=>s[w]++); return s; };
+const scoreOf = m => { const h=headOf(m); const s={a:h.a,b:h.b};
+  (m.log||[]).forEach(w=>s[w]++); return s; };
 const leadOf  = m => { const s=scoreOf(m); return Math.max(s.a,s.b); };
 const pairIdx = lead => lead<GATE1?0:(lead<GATE2?1:2);
 const PAIR_LABEL=['Pair A','Pair B','Pair C'];
 const PAIR_RANGE=['0–'+GATE1, GATE1+'–'+GATE2, GATE2+'–'+TARGET];
 const overOf  = m => { const s=scoreOf(m); return s.a>=TARGET||s.b>=TARGET; };
 const otherK  = k => k==='a'?'b':'a';
-const lineupReady = m => !!(m.a&&m.b&&m.lineup&&(m.lineup[m.a]||[]).filter(Boolean).length===6
-                                            &&(m.lineup[m.b]||[]).filter(Boolean).length===6);
+const needFor = (m,tid) => pairsFor(m, tid===m.a?'a':'b')*2;
+const lineupReady = m => !!(m.a&&m.b&&m.lineup&&!m.ff
+  &&(m.lineup[m.a]||[]).filter(Boolean).length===needFor(m,m.a)
+  &&(m.lineup[m.b]||[]).filter(Boolean).length===needFor(m,m.b));
 function racketWinner(m){ if(!m.a||!m.b) return null; const s=scoreOf(m);
   if(s.a>=TARGET) return 'a'; if(s.b>=TARGET) return 'b'; return null; }
 
@@ -1103,15 +1128,22 @@ const marqueeOf = (tid,sport) => { const c=MARQ_CAT[sport]; if(!c) return null;
   return p?p.id:null; };
 
 function lineupIssues(m,tid){
+  if(m.ff) return m.ff===tid?['Sport forfeited — no line-up needed']:[];
   const l=(m.lineup&&m.lineup[tid])||[], out=[];
   const set=l.filter(Boolean);
-  if(set.length<6) return ['Pick all six players'];
-  if(new Set(set).size!==6) out.push('A player is listed twice');
+  const need=needFor(m,tid), pairs=need/2;
+  /* a short side enters late — two pairs come on as B and C, one pair as C —
+     so its players sit in the last slots and the earlier ones stay empty */
+  const first=3-pairs;
+  if(set.length<need) return ['Pick all '+need+' player'+(need===1?'':'s')+
+    (pairs<3?' — '+pairs+' pair'+(pairs===1?'':'s')+', starting at '+PAIR_LABEL[first]:'')];
+  if(new Set(set).size!==need) out.push('A player is listed twice');
+  for(let i=0;i<first*2;i++) if(l[i]) out.push('Playing short — leave '+PAIR_LABEL[Math.floor(i/2)]+' empty');
   const nom=nomOf(tid,m.sport);
   set.forEach(pid=>{
     if(isOut(tid,pid)) out.push(pName(pid)+' is marked unavailable');
     else if(!nom.includes(pid)) out.push(pName(pid)+' is not nominated for '+SP[m.sport].name); });
-  if(!set.some(pid=>pOf(pid).g==='F')) out.push('At least one woman must be in the playing six');
+  if(!set.some(pid=>pOf(pid).g==='F')) out.push('At least one woman must be on court');
   [[0,1],[2,3],[4,5]].forEach((pr,i)=>{
     if(l[pr[0]]&&l[pr[1]]&&pOf(l[pr[0]]).g==='F'&&pOf(l[pr[1]]).g==='F')
       out.push(PAIR_LABEL[i]+' is two women — each woman needs a male partner');
@@ -1243,6 +1275,7 @@ function carromAgg(m){ const s={a:0,b:0};
 const carromPlayed = m => (m.boards||[]).every(b=>b&&b.a!=null&&b.b!=null);
 
 function resultOf(m){                       // 'a' | 'b' | 'd' | null
+  if(m.ff) return ffWinner(m);
   const s=SP[m.sport];
   if(s.kind==='racket'){ return racketWinner(m); }
   if(m.sport==='CR'){ if(!carromPlayed(m)) return null;
@@ -1252,12 +1285,20 @@ function resultOf(m){                       // 'a' | 'b' | 'd' | null
 const isPlayed = m => resultOf(m)!==null;
 function scoreText(m){
   const s=SP[m.sport];
-  if(s.kind==='racket'){ const x=scoreOf(m); return (m.log&&m.log.length)?[x.a,x.b]:['','']; }
+  if(m.ff){ const w=ffWinner(m);
+    if(s.kind==='racket') return w==='a'?[TARGET,0]:[0,TARGET];
+    if(m.sport==='CR')    return w==='a'?[FF_CARROM,0]:[0,FF_CARROM];
+    return w==='a'?['2','0']:['0','2'];
+  }
+  if(s.kind==='racket'){ const x=scoreOf(m);
+    return (m.log&&m.log.length)||shortSide(m)?[x.a,x.b]:['','']; }
   if(m.sport==='CR'){ const g=carromAgg(m); return carromPlayed(m)?[g.a,g.b]:['',''] ; }
   const r=m.result; if(!r) return ['',''];
   return r==='d'?['1','1']:(r==='a'?['2','0']:['0','2']);
 }
+const FF_CARROM = 25;      // a walkover board score, so the tables have a figure to work with
 const isLive = m => { const s=SP[m.sport];
+  if(m.ff) return false;
   if(s.kind==='racket') return !!(m.log&&m.log.length) && !overOf(m);
   if(m.sport==='CR') return (m.boards||[]).some(b=>b&&(b.a!=null||b.b!=null)) && !carromPlayed(m);
   return false; };
@@ -1270,7 +1311,8 @@ function groupTable(sportKey,grp){
   const ms=state.matches.filter(m=>m.sport===sportKey&&m.stage==='group'&&m.grp===grp);
   ms.forEach(m=>{ [m.a,m.b].forEach(t=>{ if(t&&!rows[t]) rows[t]=blankRow(t); }); });
   ms.forEach(m=>{ const r=resultOf(m); if(!r) return;
-    const sc=scoreOf(m), A=rows[m.a], B=rows[m.b];
+    const t=scoreText(m), sc={a:Number(t[0])||0, b:Number(t[1])||0};
+    const A=rows[m.a], B=rows[m.b];
     A.p++;B.p++; A.pf+=sc.a;A.pa+=sc.b; B.pf+=sc.b;B.pa+=sc.a;
     if(r==='a'){A.w++;A.pts+=2;B.l++;} else {B.w++;B.pts+=2;A.l++;}
   });
@@ -1307,7 +1349,8 @@ function leagueTable(sportKey){
   ms.forEach(m=>{ const r=resultOf(m); if(!r) return;
     const A=rows[m.a], B=rows[m.b];
     A.p++;B.p++;
-    if(sportKey==='CR'){ const g=carromAgg(m); A.pf+=g.a;A.pa+=g.b;B.pf+=g.b;B.pa+=g.a;
+    if(sportKey==='CR'){ const t=scoreText(m); const g={a:Number(t[0])||0,b:Number(t[1])||0};
+      A.pf+=g.a;A.pa+=g.b;B.pf+=g.b;B.pa+=g.a;
       if(r==='a'){A.w++;B.l++;A.pts+=2;} else if(r==='b'){B.w++;A.l++;B.pts+=2;} else {A.d++;B.d++;A.pts++;B.pts++;} }
     /* v5.0 — Chess pays 2 for a win and 1 each for a draw, matching Carrom and
        the racket group tables. It is exactly double the old 1 / ½ / 0, so every
@@ -2032,8 +2075,10 @@ function viewTeam(t){
   if(shortOfMen(t.id)){
     const third=squadIn(t).filter(p=>needsApproval(t.id,p.id));
     h+='<div class="alert warn"><span>⚠</span><span><b>Short of men · '+menAvailable(t.id)+' available, '+
-      MIN_MEN+' needed</b><br>A Men General B player may take a <b>third sport</b> to cover the gap, '+
-      'with the Sports Committee\'s and the opponent\'s approval. No other man may go past two.'+
+      MIN_MEN+' needed for a full squad ('+MIN_MEN+'M + '+MIN_WOMEN+'W)</b><br>'+
+      'A Men General B player may take a <b>third sport</b> to cover the gap, with the Sports Committee\'s '+
+      'and the opponent\'s approval. No other man may go past two. If that still leaves a sport short, the '+
+      'team may play it with a handicap or forfeit it — set that on the match screen.'+
       (third.length?'<br><b>Playing three: '+third.map(p=>esc(p.name)).join(', ')+
         '</b> — get this signed off before the match.':'')+
       '</span></div>';
@@ -2300,8 +2345,7 @@ function marginGrid(sk,grp,withData){
   const ms=state.matches.filter(m=>m.sport===sk&&(grp?(m.stage==='group'&&m.grp===grp):m.stage==='league'));
   const mar={};
   if(withData) ms.forEach(m=>{ if(!isPlayed(m)) return;
-    const sc=(m.sport==='CR')?carromAgg(m):(SP[m.sport].kind==='racket'?scoreOf(m)
-      :{a:m.result==='a'?1:(m.result==='b'?0:0.5), b:m.result==='b'?1:(m.result==='a'?0:0.5)});
+    const tx=scoreText(m), sc={a:Number(tx[0])||0, b:Number(tx[1])||0};
     mar[m.a+'|'+m.b]=sc.a-sc.b; mar[m.b+'|'+m.a]=sc.b-sc.a; });
   const rank={}, tbl=grp?groupTable(sk,grp):leagueTable(sk);
   tbl.forEach((r,i)=>rank[r.tid]=i+1);
@@ -2707,12 +2751,15 @@ function doPrint(which){
 const RULES=[
  ['What changed in 5.1 and 5.2',
   '<p>The playing format has not moved since 5.0. These are the changes since then, and they are what the app enforces.</p>'+
+  '<h4>Version 5.3</h4>'+
+  '<ul><li><b>The minimum squad is 9 men + 1 woman.</b> Below that a Men General B player may take a third '+
+  'sport, with committee and opponent approval.</li>'+
+  '<li><b>Play short with a handicap:</b> two pairs and the opponent starts at 7, one pair and they start at 14.</li>'+
+  '<li><b>Or forfeit the sport</b> — recorded 25–0 to the opponent.</li></ul>'+
   '<h4>Version 5.2</h4>'+
-  '<ul><li><b>Fewer than 8 men available?</b> A <b>Men General B</b> player — and only a Men General B player — '+
-  'may take a <b>third sport</b>. Eight is the floor because the three racket sports need five men each and every '+
-  'man is capped at two: eight men give sixteen slots for the fifteen required. It is not automatic — it needs the '+
-  '<b>Sports Committee\'s approval and the opposing captain\'s agreement</b>, both before the match. The app lifts '+
-  'the cap only for General B, only while the team is short, and flags anyone actually on three so it can be signed off.</li></ul>'+
+  '<ul><li>The third-sport exception for a <b>Men General B</b> player was introduced here, at a threshold of '+
+  'eight men; 5.3 corrects the floor to <b>9 men + 1 woman</b>. The app lifts the cap only for General B, only '+
+  'while the team is short, and flags anyone actually on three so it can be signed off.</li></ul>'+
   '<h4>Version 5.1</h4>'+
   '<ul><li><b>Chess is scored 2 / 1 / 0</b> — 2 for a win, 1 each for a draw, 0 for a loss. Exactly the old 1 / ½ / 0 '+
   'doubled, so the table order is identical and there are no half points to add up.</li>'+
@@ -2726,7 +2773,7 @@ const RULES=[
   '<li><b>500 points per player who never plays.</b> Any squad member marked available who does not play a single '+
   'sport across the league costs the team 500 Championship Points, per player.</li></ul>'],
  ['Format change · what the referee console adds',
-  '<p>The playing format is unchanged in <b>Rules v5.2</b> — three pairs, rotation when the leading score reaches 7 and 14, first to 25, golden point at 24–24, ends at 14.</p>'+
+  '<p>The playing format is unchanged in <b>Rules v5.3</b> — three pairs, rotation when the leading score reaches 7 and 14, first to 25, golden point at 24–24, ends at 14.</p>'+
   '<p>What is new is how the match is <b>run and recorded</b>. The referee console tracks the things the rulebook leaves to the referee\'s memory:</p>'+
   '<ul><li><b>Serve is tracked live.</b> A ball icon marks the server and the box they must serve from. '+
     'Pickleball and Badminton follow §5.1 / §6.1 — serve from the right when your own score is even, partners swap on every point you win, serve transfers when you lose the rally. '+
@@ -2755,6 +2802,30 @@ const RULES=[
   '<p><b>At least one woman must be in the playing six, every match.</b> Two women can never pair together — each woman plays in a mixed pair.</p>'+
   '<p><b>Serving.</b> In Pickleball and Badminton the server serves from the right when their own score is even and the left when it is odd. <b>Table Tennis is different:</b> the serve is always delivered from the right half, and it passes to a different player every 2 cumulative points. With one team as A and B and the other as C and D, the order runs A → C → B → D and back to A — the receiver always becomes the next server, and each pair\'s two players take alternate turns.</p>'+
   '<p>The team\'s <b>marquee for that sport closes the match in Pair C</b> — the Pickleball marquee finishes Pickleball, the Badminton marquee finishes Badminton, the Table Tennis marquee finishes Table Tennis. The line-up editor holds to this, along with the mixed-pair rule, and will not let the same player be named in two slots.</p>'],
+ ['When a team cannot field six',
+  '<p>Some squads will not be able to put the compulsory six on court for every sport. Rather than lose the '+
+  'tie by default, a team has three routes, in the order a captain should try them.</p>'+
+  '<h4>1 · A third sport for a Men General B player</h4>'+
+  '<p>If the team is below the minimum squad of <b>9 men + 1 woman</b>, a Men General B player — and only a '+
+  'Men General B player — may be nominated for a third sport. This was in the earlier rules, was dropped when '+
+  'substitutions and the per-sport minimum were relaxed, and is <b>re-introduced</b> so that a short team can '+
+  'still field a sport. It needs the <b>Sports Committee\'s approval and the opposing captain\'s agreement</b>, '+
+  'both before the match. Try this first — it keeps a full six on court and no handicap applies.</p>'+
+  '<h4>2 · Play short, with a handicap</h4>'+
+  '<p>A team that still cannot field six, or would rather not use a General B third sport, may play with fewer '+
+  'pairs and give the opponent a head start:</p>'+
+  '<ul><li><b>Two pairs</b> — the opponent starts at <b>7</b>. The short side starts at 0 and its two pairs '+
+  'cover the whole climb to 25.</li>'+
+  '<li><b>One pair</b> — the opponent starts at <b>14</b>, and that single pair covers 0 to 25.</li></ul>'+
+  '<p>Everything else is unchanged: first to 25, golden point at 24–24, at least one woman on court, and no '+
+  'pair of two women. Because the opponent is already past a rotation gate, the short side\'s pairs come on '+
+  'as Pair B and Pair C (two pairs) or Pair C alone (one pair).</p>'+
+  '<h4>3 · Forfeit the sport</h4>'+
+  '<p>If neither route works, the team may forfeit that sport. It is recorded as <b>25–0</b> to the opponent '+
+  'and counts in the table like any other result. The forfeiting team still takes its place in that sport\'s '+
+  'final ranking and the championship points that go with it.</p>'+
+  '<p><b>In the app:</b> open the match and tap <b>Short-handed</b>. Declare it for either team before the '+
+  'match starts — the handicap, the shortened line-up and the table all follow from that one setting.</p>'],
  ['Squads and nominations',
   '<p>Nominate at least the compulsory number for every sport; the extras are depth, not an obligation.</p>'+
   '<ul><li>Pickleball / Badminton / Table Tennis: <b>6 compulsory</b> (5 men + 1 woman), up to 8</li>'+
@@ -2762,10 +2833,10 @@ const RULES=[
   '<li>Chess: <b>1 compulsory</b>, up to 2 · gender-neutral</li></ul>'+
   '<p>Every player may play a maximum of <b>two sports</b>. Two exceptions, both driven by a shortage:</p>'+
   '<ul><li>If a team has just <b>one woman available</b>, she plays all three racket sports.</li>'+
-  '<li>If a team has <b>fewer than 8 men available</b>, a <b>Men General B</b> player may take a third sport. '+
-  'Eight is the floor because the three racket sports need five men each and every man is capped at two — '+
-  'eight men give sixteen slots for fifteen. This needs the <b>Sports Committee\'s and the opposing captain\'s '+
-  'approval</b> before the match.</li></ul>'+
+  '<li>If a team is below the <b>minimum squad of 9 men + 1 woman</b>, a <b>Men General B</b> player may take '+
+  'a third sport. Nine men is the floor because the three racket sports need five men each (fifteen man-slots) '+
+  'plus two for Carrom and one for Chess, and every man is capped at two — nine men give exactly eighteen. '+
+  'This needs the <b>Sports Committee\'s and the opposing captain\'s approval</b> before the match.</li></ul>'+
   '<p>Outside those two cases a third sport is never allowed. Everyone in the squad must play at least one sport across the league.</p>'+
   '<p><b>Live sync.</b> On by default — open the link on any phone and it follows the live results, no setting up. Each device keeps scoring even with no signal; changes queue and go out when the connection returns. Only devices in Scorer mode publish, so a spectator can never change a score.</p>'+
   '<p><b>Nominating only the minimum leaves you with no cover (v5.0).</b> If a team names just the compulsory 6 (or 2 for Carrom, 1 for Chess) and a player is injured or cannot continue, <b>the match is forfeited</b> — no outside substitute is allowed. Naming 7 or 8 is the only protection against that.</p>'+
@@ -2784,7 +2855,7 @@ const RULES=[
   '<p>One 1-minute timeout per team per game, medical timeouts up to 3 minutes. One challenge per phase, per team — a successful challenge is not deducted.</p>'],
 ];
 function viewRules(){
-  let h='<h2 class="sec">Rules</h2><p class="hint">Odyssey Sports League 2026 · Official Rules &amp; Regulations v5.2</p><div class="rules">';
+  let h='<h2 class="sec">Rules</h2><p class="hint">Odyssey Sports League 2026 · Official Rules &amp; Regulations v5.3</p><div class="rules">';
   RULES.forEach((r,i)=>{ h+='<div class="acc'+(i===0?' open':'')+'"><button data-acc="'+i+'">'+
     '<span class="cond" style="font-size:12px;color:var(--gold)">'+String(i+1).padStart(2,'0')+'</span>'+
     esc(r[0])+'<span class="ar">›</span></button><div class="body">'+r[1]+'</div></div>'; });
@@ -2842,6 +2913,7 @@ function viewRacketMatch(m){
     '<button class="btn sm" data-openfinal="'+m.id+'">Final score</button>'+
     (over?'<button class="btn sm" data-sharematch="'+m.id+'">Share</button>':'')+
     '<span class="grow"></span>'+
+    '<button class="btn sm" data-shorthand="'+m.id+'">Short-handed</button>'+
     '<button class="btn sm dan" data-resetsc="'+m.id+'">Reset score</button>'+
     '<button class="btn sm dan" data-resetlu="'+m.id+'">Reset line-up</button></div>';
 
@@ -3282,6 +3354,7 @@ const K_CFG   = () => sync.event+':cfg:access';
 
 function matchPayload(m){
   return { a:m.a||null, b:m.b||null, done:!!m.done,
+           ff:m.ff||null, head:m.head||null,
            log:m.log||null, lineup:m.lineup||null, acked:m.acked||null, pos:m.pos||null,
            startLeft:m.startLeft||null, invert:!!m.invert,
            boards:m.boards||null, pairs:m.pairs||null,
@@ -3293,6 +3366,8 @@ function applyMatch(id,d){
   ['log','lineup','acked','pos','startLeft','boards','pairs','players'].forEach(k=>{
     if(d[k]!==undefined&&d[k]!==null) m[k]=d[k]; });
   if(d.result!==undefined) m.result=d.result;
+  if(d.ff!==undefined) m.ff=d.ff||null;
+  if(d.head!==undefined) m.head=d.head||null;
   m.invert=!!d.invert; m.done=!!d.done;
   return true;
 }
@@ -3525,6 +3600,61 @@ function syncModal(){
   return h;
 }
 
+/* A team that cannot field six declares it here, before the match starts. */
+function shortModal(m){
+  const A=teamById(m.a), B=teamById(m.b);
+  if(!A||!B) return '<h3>Short-handed</h3><p class="hint">Both teams have to be known first.</p>'+
+    '<button class="btn" style="width:100%;margin-top:12px" data-close="1">Close</button>';
+  const h0=headOf(m), started=(m.log||[]).length;
+  const row=(t,key)=>{
+    const pairs=pairsFor(m,key), ff=(m.ff===t.id);
+    const opts=[[3,'Full six','three pairs, no handicap'],
+                [2,'Two pairs','opponent starts at '+GATE1],
+                [1,'One pair','opponent starts at '+GATE2],
+                [0,'Forfeit','opponent takes it '+TARGET+'–0']];
+    return '<div class="card" style="margin:0 0 10px"><div class="row" style="margin-bottom:7px">'+
+      swatch(t)+'<b style="color:'+tcol(t)+'">'+esc(t.name)+'</b></div>'+
+      '<div class="rchips">'+opts.map(o=>{
+        const on = ff ? o[0]===0 : (!m.ff && o[0]===pairs);
+        return '<button class="chip'+(on?' on':'')+'" data-short="'+m.id+'|'+key+'|'+o[0]+'">'+
+          esc(o[1])+'<span class="dim" style="font-weight:500"> · '+esc(o[2])+'</span></button>';
+      }).join('')+'</div></div>';
+  };
+  let h='<h3>Short-handed</h3>'+
+    '<p class="hint" style="margin-bottom:12px">If a team cannot field the compulsory six, it may play '+
+    'short with a handicap or forfeit the sport. Try a Men General B third sport first — that keeps a '+
+    'full six on court.</p>';
+  if(started) h+='<div class="alert warn"><span>⚠</span><span>This match is already under way. Changing '+
+    'the handicap now will move the score.</span></div>';
+  h+=row(A,'a')+row(B,'b');
+  if(h0.a||h0.b){ const sh=shortSide(m), st=teamById(sh==='a'?m.a:m.b);
+    h+='<div class="alert warn"><span>◷</span><span><b>'+esc(st.name)+' plays short</b><br>'+
+      'They start at 0 and still have to reach '+TARGET+'; '+
+      esc(teamById(sh==='a'?m.b:m.a).name)+' starts at '+Math.max(h0.a,h0.b)+'. '+
+      'Their '+pairsFor(m,sh)+' pair'+(pairsFor(m,sh)===1?'':'s')+' come on from '+
+      PAIR_LABEL[3-pairsFor(m,sh)]+'.</span></div>'; }
+  if(m.ff) h+='<div class="alert bad"><span>⚠</span><span><b>'+esc(teamById(m.ff).name)+
+    ' have forfeited</b><br>Recorded as '+TARGET+'–0 to '+esc(teamById(ffWinner(m)==='a'?m.a:m.b).name)+
+    '.</span></div>';
+  return h+'<button class="btn pri" style="width:100%;margin-top:6px" data-close="1">Done</button>';
+}
+
+function setShort(m,key,pairs){
+  m.ff=null; m.head=null;
+  if(pairs===0){ m.ff=(key==='a')?m.a:m.b; m.log=[]; m.acked=[]; m.done=true; }
+  else if(pairs<3){
+    const head=(pairs===2)?GATE1:GATE2;
+    m.head={a:0,b:0}; m.head[otherK(key)]=head;   // the opponent gets the start
+    m.log=[]; m.acked=[]; m.done=false;
+    const lu=(m.lineup||{})[key==='a'?m.a:m.b]||[];
+    if(lu.length){ const keep=lu.filter(Boolean).slice(-pairs*2);
+      const arr=[null,null,null,null,null,null];
+      keep.forEach((p,i)=>arr[(3-pairs)*2+i]=p);
+      m.lineup=Object.assign({},m.lineup); m.lineup[key==='a'?m.a:m.b]=arr; }
+  } else { m.done=false; }
+  syncKnockouts(); save();
+}
+
 /* ============================ SCOPED RESET ============================
    Clearing one match is on the match screen and clearing the whole event is in
    settings. In between is the case that actually comes up on the day: a sport
@@ -3550,7 +3680,7 @@ function scopeRounds(sk){
   return out;
 }
 function clearMatch(m,alsoLineups){
-  m.log=[]; m.acked=[]; m.done=false; m.result=null;
+  m.log=[]; m.acked=[]; m.done=false; m.result=null; m.ff=null; m.head=null;
   if(m.boards) m.boards=[{a:null,b:null},{a:null,b:null}];
   if(alsoLineups){ m.lineup={}; m.pos={}; m.pairs={}; m.players={}; m.invert=false; m.startLeft=null; }
 }
@@ -3914,7 +4044,7 @@ document.addEventListener('click',e=>{
     undoPoint(m); return render(); }
   if((el=g('data-resetsc'))){ const m=state.matches.find(x=>x.id===el.getAttribute('data-resetsc'));
     if(!confirm('Clear the score for this match? The line-ups stay as they are.')) return;
-    m.log=[]; m.acked=[]; m.done=false; m.result=null;
+    m.log=[]; m.acked=[]; m.done=false; m.result=null; m.ff=null; m.head=null;
     if(m.boards) m.boards=[{a:null,b:null},{a:null,b:null}];
     syncKnockouts(); save(); return render(); }
   if((el=g('data-resetlu'))){ const m=state.matches.find(x=>x.id===el.getAttribute('data-resetlu'));
@@ -3969,6 +4099,13 @@ document.addEventListener('click',e=>{
     if(!confirm('Clear every nomination for this team?')) return;
     state.nom[tid]={PB:[],BM:[],TT:[],CR:[],CH:[]}; save(); return render(); }
 
+  if((el=g('data-shorthand'))){ if(!canEdit()) return needScorer();
+    return openModal(shortModal(state.matches.find(x=>x.id===el.getAttribute('data-shorthand')))); }
+  if((el=g('data-short'))){ if(!canEdit()) return needScorer();
+    const [id,key,pairs]=el.getAttribute('data-short').split('|');
+    const m=state.matches.find(x=>x.id===id);
+    if(Number(pairs)===0 && !confirm('Forfeit this match?\n\nIt will be recorded as '+TARGET+'–0 to the opponent.')) return;
+    setShort(m,key,Number(pairs)); return openModal(shortModal(m)); }
   if(g('data-resetscope')){ if(!canManage()) return needAdmin();
     state.resetSport=state.sportFilter!=='all'?state.sportFilter:'all'; state.resetStage='all';
     return openModal(resetScopeModal()); }
