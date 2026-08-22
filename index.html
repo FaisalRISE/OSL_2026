@@ -90,6 +90,8 @@ h2.sec{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:23px;
 .mono{font-variant-numeric:tabular-nums}
 .chipbar{display:flex;gap:6px;overflow-x:auto;padding:2px 0 6px;scrollbar-width:none}
 .chipbar::-webkit-scrollbar{display:none}
+.rchips{display:flex;flex-wrap:wrap;gap:6px}
+.rchips .chip{flex:0 0 auto}
 .chip{flex:0 0 auto;background:var(--surface);border:1px solid var(--line);color:var(--muted);
   border-radius:999px;padding:6px 12px;font-size:11.5px;font-weight:600;cursor:pointer;white-space:nowrap}
 .chip.on{background:var(--raised);color:var(--text);border-color:var(--lineL)}
@@ -138,12 +140,13 @@ label.fl{display:block;font-size:10px;letter-spacing:.12em;text-transform:upperc
 
 /* ---------- championship ledger (signature) ---------- */
 .ledger{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}
-.ldg-hd{display:grid;grid-template-columns:24px minmax(104px,1.5fr) repeat(5,minmax(33px,.44fr)) 56px;
+.ldg{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ldg-hd{display:grid;grid-template-columns:22px minmax(92px,1.35fr) repeat(5,minmax(30px,.4fr)) 62px;
   gap:0;background:var(--ink2);border-bottom:1px solid var(--line)}
 .ldg-hd div{padding:8px 3px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
   font-weight:800;text-align:center}
 .ldg-hd div:nth-child(2){text-align:left;padding-left:8px}
-.ldg-row{display:grid;grid-template-columns:24px minmax(104px,1.5fr) repeat(5,minmax(33px,.44fr)) 56px;
+.ldg-row{display:grid;grid-template-columns:22px minmax(92px,1.35fr) repeat(5,minmax(30px,.4fr)) 62px;
   border-bottom:1px solid var(--line);align-items:stretch}
 .ldg-row:last-child{border-bottom:0}
 .ldg-row.me{background:rgba(244,181,63,.06)}
@@ -159,7 +162,16 @@ label.fl{display:block;font-size:10px;letter-spacing:.12em;text-transform:upperc
 .ldg-cell .pt{font-size:8.5px;color:var(--dim);font-weight:600}
 .ldg-cell.tbd .rk{color:var(--dim);opacity:.45}
 .ldg-tot{display:grid;place-items:center;border-left:1px solid var(--line);background:var(--ink2)}
-.ldg-tot b{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:19px;letter-spacing:-.01em}
+.ldg-tot{padding:0 4px}
+.ldg-tot b{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.02em;
+  white-space:nowrap}
+@media(max-width:420px){
+  .ldg-hd,.ldg-row{grid-template-columns:20px minmax(78px,1.2fr) repeat(5,minmax(27px,.36fr)) 56px}
+  .ldg-cell .rk{font-size:13px}
+  .ldg-cell .pt{font-size:7.5px}
+  .ldg-team .nm{font-size:11px}
+  .ldg-tot b{font-size:15px}
+}
 .ldg-tot .pen{display:block;font-size:9px;font-weight:800;color:var(--redInk);margin-top:1px}
 
 /* ---------- printable team sheets (Save as PDF) ---------- */
@@ -170,9 +182,17 @@ label.fl{display:block;font-size:10px;letter-spacing:.12em;text-transform:upperc
   body>header,body>nav,body>.wrap,body>.toast,body>.ov{display:none!important}
   #printarea{display:block!important;font-size:10pt;line-height:1.35;color:#000}
   #printarea .sheet{page-break-after:always;break-after:page}
+  #printarea table.pgt{width:100%;border-collapse:collapse;border:0}
+  #printarea table.pgt>thead>tr>td.pghd{border:0;padding:0 0 2px}
+  #printarea table.pgt>tbody>tr>td.pgbd{border:0;padding:0}
+  #printarea table.pgt>thead{display:table-header-group}
   #printarea .sheet:last-child{page-break-after:auto;break-after:auto}
   #printarea *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+#printarea table,#printarea tr,#printarea td,#printarea th{display:revert}
+#printarea table.pgt{width:100%;border-collapse:collapse;border:0}
+#printarea table.pgt>thead>tr>td.pghd{border:0;padding:0 0 2px}
+#printarea table.pgt>tbody>tr>td.pgbd{border:0;padding:0}
 #printarea .phd{display:flex;align-items:center;gap:10px;border-bottom:2px solid #111;padding-bottom:7px;margin-bottom:9px}
 #printarea .phd img{height:46px;width:auto}
 #printarea .phd h1{margin:0;font-family:'Barlow Condensed',sans-serif;font-size:20pt;text-transform:uppercase;letter-spacing:.01em}
@@ -185,13 +205,95 @@ label.fl{display:block;font-size:10px;letter-spacing:.12em;text-transform:upperc
 #printarea th{background:#eceff4;font-size:7.4pt;letter-spacing:.07em;text-transform:uppercase}
 #printarea td.c,#printarea th.c{text-align:center;width:26px}
 #printarea .yes{font-weight:700}
+#printarea td.bx{height:19px}
+#printarea td.wn{font-weight:800}
+/* keep a round heading with its own table across a page break, and repeat the
+   column headings if a table does have to run over */
+#printarea .rnd{break-inside:avoid;page-break-inside:avoid;margin-bottom:10px}
+#printarea thead{display:table-header-group}
+#printarea tr{break-inside:avoid;page-break-inside:avoid}
+#printarea table.fxt{table-layout:fixed}
+#printarea table.fxt .u{width:50px;font-size:6.2pt;letter-spacing:.02em}
+#printarea table.fxt .sc{width:46px}
+#printarea table.fxt .rf{width:64px}
+#printarea table.fxt .gap{width:16px;border-top:0;border-bottom:0;background:#fff}
+#printarea table.fxt td.gap{border-left:0;border-right:0}
+#printarea table.fxt .tm{font-size:8.8pt}
+#printarea table.fxt td.sc{font-size:11pt;font-weight:800;text-align:center}
+#printarea .note.tiny{font-size:7pt;color:#666;margin-top:2px}
+/* score margin grid */
+#printarea table.mgrid{table-layout:fixed}
+#printarea table.mgrid th.v{font-size:6pt;line-height:1.2;vertical-align:bottom;padding:3px 2px;
+  white-space:normal;overflow-wrap:normal;word-break:keep-all;hyphens:none;text-align:center;
+  letter-spacing:0;text-transform:none}
+#printarea table.mgrid td.nm{font-size:7.6pt;font-weight:700;white-space:normal;overflow-wrap:anywhere;
+  line-height:1.15;width:82px;vertical-align:middle}
+/* two lines' worth of height on every row, whether the name wraps or not */
+#printarea table.mgrid tbody td{height:26px;vertical-align:middle}
+#printarea table.lu{margin-bottom:7px}
+#printarea table.lu thead tr:first-child th{background:#dfe5ef;font-size:7.4pt;text-align:left}
+#printarea table.lu td.bx{height:21px}
+#printarea table.mgrid th.rowhd{width:82px;white-space:normal}
+#printarea table.mgrid td.dg{background:#e9edf4}
+#printarea table.mgrid td.c,#printarea table.mgrid th.c{width:38px;font-size:6.2pt;letter-spacing:0}
+#printarea table.mgrid td.c{height:20px;font-size:8pt}
+#printarea .seed{display:inline-block;border:1px solid #7c8aa5;background:#fff;border-radius:3px;
+  padding:0 5px;margin-left:4px;font-size:7pt;font-weight:800;letter-spacing:.04em;color:#1a2942;
+  text-transform:none;vertical-align:1px}
 #printarea .no{color:#bbb}
 #printarea .out td{color:#888;text-decoration:line-through}
+#printarea td.plc,#printarea th.plc{text-align:center;font-weight:800;width:44px}
+#printarea td.plc{height:17px}
+#printarea td.plc.na{background:repeating-linear-gradient(135deg,#f1f1f1 0 4px,#fff 4px 8px)}
+#printarea table.squad .w-n{width:22px}
+#printarea table.squad .w-sp{width:26px}
+#printarea table.squad .w-mw{width:32px}
 #printarea .note{font-size:8pt;color:#444;margin:3px 0 0}
 #printarea .warn{border:1px solid #b00;background:#fff0f0;padding:5px 7px;font-size:8.4pt;margin:5px 0}
 #printarea .okbox{border:1px solid #197a4e;background:#f1fbf5;padding:5px 7px;font-size:8.4pt;margin:5px 0}
 #printarea .sign{display:flex;gap:22px;margin-top:16px}
 #printarea .sign div{flex:1;border-top:1px solid #666;padding-top:4px;font-size:8pt;color:#444}
+
+/* ---------- score entry mode ---------- */
+.modebar{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:10px 0 2px}
+.mode{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:9px 10px;cursor:pointer;
+  color:var(--muted);font-weight:700;font-size:12.5px;display:flex;flex-direction:column;gap:2px;text-align:left}
+.mode small{font-size:9.5px;font-weight:600;color:var(--dim);letter-spacing:.02em}
+.mode.on{border-color:var(--gold);color:var(--text);background:color-mix(in srgb,var(--gold) 10%,transparent)}
+.mode.on small{color:var(--gold)}
+.erow{display:flex;align-items:center;gap:7px;padding:8px 9px;border-bottom:1px solid var(--line)}
+.erow:last-child{border-bottom:0}
+.erow.done{background:color-mix(in srgb,var(--teal) 6%,transparent)}
+.erow .eno{width:34px;flex:0 0 auto;font-size:9px;font-weight:800;letter-spacing:.05em;color:var(--dim);
+  text-transform:uppercase;line-height:1.15}
+.eside{flex:1 1 0;min-width:0;display:flex;align-items:center;gap:6px}
+.eside.b{justify-content:flex-end}
+.eside .nm{font-size:12px;line-height:1.2;overflow-wrap:anywhere}
+@media(max-width:430px){
+  .erow{flex-wrap:wrap;padding:9px}
+  .erow .eno{width:100%;order:0;margin-bottom:4px}
+  .eside{flex:1 1 34%}
+  .emid{order:2;flex:1 1 100%;justify-content:center;margin-top:6px}
+  .eopen{order:3;position:absolute;right:8px;top:8px}
+  .erow{position:relative}
+  .esc{width:40px}
+}
+.eside.w .nm{font-weight:800}
+.eside.l .nm{color:var(--muted)}
+.emid{flex:0 0 auto;display:flex;align-items:center;gap:4px}
+.esc{width:44px;text-align:center;padding:6px 2px;font-weight:800;font-size:15px;border-radius:8px;
+  color:var(--text);background:var(--ink2);border:1px solid var(--line);
+  font-family:'Barlow Condensed',sans-serif;-moz-appearance:textfield}
+.esc.sm{width:36px;font-size:12px;padding:4px 2px}
+.esc::-webkit-outer-spin-button,.esc::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.esc.filled{border-color:var(--lineL);background:var(--raised)}
+.esep{color:var(--dim);font-size:11px}
+.ebd{display:flex;flex-direction:column;gap:3px}
+.ebrow{display:flex;align-items:center;gap:3px}
+.ebl{font-size:8px;font-weight:800;color:var(--dim);width:14px}
+.ech{display:flex;gap:4px}
+.eopen{background:none;border:0;color:var(--dim);font-size:19px;cursor:pointer;padding:0 2px;flex:0 0 auto}
+.eopen:hover{color:var(--gold)}
 
 /* ---------- collapsible fixture sections ---------- */
 .fxsec{border:1px solid var(--line);border-radius:var(--r);margin:9px 0;overflow:hidden;background:var(--surface)}
@@ -482,7 +584,7 @@ label.fl{display:block;font-size:10px;letter-spacing:.12em;text-transform:upperc
 <script>
 /* ============================================================================
    ODYSSEY SPORTS LEAGUE 2026 — single file, offline, saves to this browser
-   Data: OSL Rules v4.8 · Auction bidding plans · Live group draws · Day schedule
+   Data: OSL Rules v5.2 · Auction bidding plans · Live group draws · Day schedule
    ========================================================================== */
 
 const LOGO = 'data:image/png;base64,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';
@@ -521,8 +623,11 @@ const CLUTCH_FROM = 20;           // rallies played once either team is on 20+
    when their own team's score is even and from the left when it is odd; if the
    serving side wins the rally its two players swap sides and the same player serves
    on; if the receiving side wins, the serve transfers and nobody swaps.
-   'alt2'    — Table Tennis §7.1: the serve alternates every 2 points, and within a
-   pair the two players take alternate serving turns. */
+   'alt2'    — Table Tennis §7.1: the serve is ALWAYS delivered from the right half,
+   and it passes to a different player every 2 cumulative points in a fixed
+   four-way rotation. With Team 1 as A + B and Team 2 as C + D, and A serving
+   first, the order is A → C → B → D → A: the receiver always becomes the next
+   server, and each pair's two players take alternate turns. */
 const SERVE_MODEL = {PB:'sideout', BM:'sideout', TT:'alt2'};
 
 /* ---------- player categories ---------- */
@@ -667,8 +772,9 @@ const tcol  = t => !t ? 'var(--muted)' : (state.theme==='light' ? t.ink : t.hex)
 const womenOf = t => t.players.filter(p=>p.g==='F');
 
 let state = {
-  v:APP_VER, theme:'dark', tab:'live', scorer:false, pin:'2026',
-  sportFilter:'all', teamFilter:'all', fxOpen:{}, standSport:'overall', openMatch:null, openTeam:null,
+  v:APP_VER, theme:'dark', tab:'live', scorer:false, admin:false, pinHash:null, adminHash:null,
+  sportFilter:'all', teamFilter:'all', fxOpen:{}, entry:'ref', standSport:'overall', openMatch:null, openTeam:null,
+  teamView:'squad', resetSport:null, resetStage:null,
   statSport:'all', statsView:'players', finalFor:null, finalA:undefined, finalB:undefined, finalErr:'',
   matches:[], nom:{}, avail:{}, pen:{}, myTeam:null, print:null
 };
@@ -676,7 +782,8 @@ let state = {
 function blankNom(){ const n={}; TEAMS.forEach(t=>{ n[t.id]={PB:[],BM:[],TT:[],CR:[],CH:[]}; }); return n; }
 
 function save(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify({
-  v:APP_VER, theme:state.theme, scorer:state.scorer, pin:state.pin, myTeam:state.myTeam,
+  v:APP_VER, theme:state.theme, scorer:state.scorer, admin:state.admin,
+  pinHash:state.pinHash, adminHash:state.adminHash, myTeam:state.myTeam,
   matches:state.matches, nom:state.nom, avail:state.avail, pen:state.pen })); }catch(e){}
   if(typeof syncScan==='function') syncScan(); }
 
@@ -689,8 +796,11 @@ function load(){
   if(raw){
     state.theme  = raw.theme  || 'dark';
     state.scorer = raw.scorer || false;
-    state.pin    = raw.pin    || '2026';
+    state.pinHash= raw.pinHash|| null;
+    state.adminHash=raw.adminHash|| null;
+    state.admin  = !!raw.admin;
     state.myTeam = raw.myTeam || null;
+    state.entry  = raw.entry  || 'ref';
     if(Array.isArray(raw.matches)){                       // merge saved results onto fresh fixtures
       const byId={}; raw.matches.forEach(m=>byId[m.id]=m);
       state.matches = state.matches.map(f=>{
@@ -720,8 +830,15 @@ function load(){
    is left out of every count, quota and warning until they are marked back in. */
 const isOut  = (tid,pid) => !!(state.avail[tid] && state.avail[tid][pid]===false);
 const isIn   = (tid,pid) => !isOut(tid,pid);
-const squadIn  = t => t.players.filter(p=>isIn(t.id,p.id));
-const squadOut = t => t.players.filter(p=>isOut(t.id,p.id));
+/* Squad listing order: the men by grade, then the women together with the
+   Women Marquee at the head of them. On the auction sheet the Women Marquee sat
+   between the men's marquees and General A, which split the women across the
+   list and made "who can cover this sport" harder to read on paper. */
+const SQUAD_ORDER = {MPB:0, MTT:1, MBM:2, GA:3, GB:4, WM:5, WG:6};
+const bySquadOrder = list => list.slice().sort((x,y)=>
+  (SQUAD_ORDER[x.cat]-SQUAD_ORDER[y.cat]) || (list.indexOf(x)-list.indexOf(y)));
+const squadIn  = t => bySquadOrder(t.players.filter(p=>isIn(t.id,p.id)));
+const squadOut = t => bySquadOrder(t.players.filter(p=>isOut(t.id,p.id)));
 const rosterOrder = t => squadIn(t).concat(squadOut(t));
 
 function setAvail(tid,pid,ok){
@@ -736,7 +853,26 @@ const nomOf = (tid,sk) => (state.nom[tid] && state.nom[tid][sk]) || [];
 const sportsOfPlayer = (tid,pid) => SPORT_ORDER.filter(k=>nomOf(tid,k).includes(pid));
 /* §3.1 — the sole-woman exception counts women who are actually available. */
 const soleWoman = tid => squadIn(teamById(tid)).filter(p=>p.g==='F').length<=1;
-const capFor = (tid,pid) => { const p=pOf(pid); return (p && p.g==='F' && soleWoman(tid)) ? 3 : 2; };
+
+/* Three racket sports need 5 men each, and every man is capped at two sports,
+   so 8 available men (16 slots for 15) is the floor at which a squad can still
+   field them all. Below that the team is short, and a Men General B player may
+   take a third sport — with the Sports Committee's and the opponent's approval.
+   The cap on every other man stays absolute. */
+const MIN_MEN = 8;
+const menAvailable = tid => squadIn(teamById(tid)).filter(p=>p.g==='M').length;
+const shortOfMen   = tid => menAvailable(tid) < MIN_MEN;
+const thirdSportAllowed = (tid,pid) => { const p=pOf(pid);
+  if(!p) return false;
+  if(p.g==='F') return soleWoman(tid);
+  return p.cat==='GB' && shortOfMen(tid);
+};
+const capFor = (tid,pid) => thirdSportAllowed(tid,pid) ? 3 : 2;
+/* A third sport taken under the shortage rule has to be signed off, so it is
+   flagged wherever the squad is checked rather than passing silently. */
+const needsApproval = (tid,pid) => { const p=pOf(pid);
+  return !!(p && p.g==='M' && p.cat==='GB' && shortOfMen(tid)
+            && sportsOfPlayer(tid,pid).length>2); };
 const nomBy = (tid,sk,g) => nomOf(tid,sk).filter(pid=>pOf(pid).g===g).length;
 
 /* §3.1 quotas — racket sports take 5 men + 1 woman compulsory and may add
@@ -938,7 +1074,7 @@ function participation(tid){
 }
 
 /* ---------- penalties ---------- */
-const PEN_PER_PLAYER = 100;                 // suggested deduction per player who never played
+const PEN_PER_PLAYER = 500;                 // v5.0 §3.1 — per available player who never took the court
 const penOf  = tid => (state.pen[tid]&&Number(state.pen[tid].pts))||0;
 const penNote= tid => (state.pen[tid]&&state.pen[tid].note)||'';
 function setPen(tid,pts,note){
@@ -1002,21 +1138,25 @@ function walkMatch(m,cb){
   const setPhase=p=>{ ph=p; [m.a,m.b].forEach(t=>{ const r=rightOf(m,t,p); slot[t]={R:r,L:1-r}; }); };
   setPhase(0);
   let serving=first; const score={a:0,b:0};
+  /* Table tennis: the box is always the right one; the four-way rotation is
+     driven by turn = every 2 cumulative points. Turn 0 A, 1 C, 2 B, 3 D. */
+  const ttTurn=()=>Math.floor((score.a+score.b)/2)%4;
   const servePos=()=>{ const c=score.a+score.b;
-    return model==='alt2' ? ((Math.floor(c/4)%2===0)?'R':'L')
-                          : ((score[serving]%2===0)?'R':'L'); };
-  const settle=()=>{ if(model==='alt2'){ const c=score.a+score.b;
-    serving=(Math.floor(c/2)%2===0)?first:otherK(first); } };
+    return model==='alt2' ? 'R' : ((score[serving]%2===0)?'R':'L'); };
+  /* Which of the serving pair delivers it — for table tennis the first server's
+     partner takes over on turn 2, and the receiver's partner on turn 3. */
+  const serveWhich=()=>model==='alt2' ? (ttTurn()<2?'R':'L') : servePos();
+  const settle=()=>{ if(model==='alt2') serving=(ttTurn()%2===0)?first:otherK(first); };
   settle();
   (m.log||[]).forEach(w=>{
     settle();
-    const pos=servePos(), servTid=serving==='a'?m.a:m.b;
+    const pos=servePos(), which=serveWhich(), servTid=serving==='a'?m.a:m.b;
     if(cb){
       const onCourt={};
       [m.a,m.b].forEach(t=>{ const L=(m.lineup||{})[t];
         onCourt[t]= L ? [L[slotAt(ph,slot[t].R)],L[slotAt(ph,slot[t].L)]] : [null,null]; });
-      cb({w:w, phase:ph, servingKey:serving, servingPos:pos, onCourt:onCourt,
-          serverPid: ready ? m.lineup[servTid][slotAt(ph,slot[servTid][pos])] : null,
+      cb({w:w, phase:ph, servingKey:serving, servingPos:pos, servingWhich:which, onCourt:onCourt,
+          serverPid: ready ? m.lineup[servTid][slotAt(ph,slot[servTid][which])] : null,
           lead:Math.max(score.a,score.b)});
     }
     const wasServing=(serving===w);
@@ -1029,7 +1169,8 @@ function walkMatch(m,cb){
     if(np!==ph) setPhase(np);
   });
   settle();
-  return {slot:slot, phase:ph, serving:serving, pos:servePos(), score:score};
+  return {slot:slot, phase:ph, serving:serving, pos:servePos(), which:serveWhich(),
+          turn:ttTurn(), score:score, model:model};
 }
 const courtState = m => walkMatch(m,null);
 
@@ -1114,7 +1255,7 @@ function scoreText(m){
   if(s.kind==='racket'){ const x=scoreOf(m); return (m.log&&m.log.length)?[x.a,x.b]:['','']; }
   if(m.sport==='CR'){ const g=carromAgg(m); return carromPlayed(m)?[g.a,g.b]:['',''] ; }
   const r=m.result; if(!r) return ['',''];
-  return r==='d'?['½','½']:(r==='a'?['1','0']:['0','1']);
+  return r==='d'?['1','1']:(r==='a'?['2','0']:['0','2']);
 }
 const isLive = m => { const s=SP[m.sport];
   if(s.kind==='racket') return !!(m.log&&m.log.length) && !overOf(m);
@@ -1168,8 +1309,11 @@ function leagueTable(sportKey){
     A.p++;B.p++;
     if(sportKey==='CR'){ const g=carromAgg(m); A.pf+=g.a;A.pa+=g.b;B.pf+=g.b;B.pa+=g.a;
       if(r==='a'){A.w++;B.l++;A.pts+=2;} else if(r==='b'){B.w++;A.l++;B.pts+=2;} else {A.d++;B.d++;A.pts++;B.pts++;} }
-    else { if(r==='a'){A.w++;B.l++;A.pts+=1;} else if(r==='b'){B.w++;A.l++;B.pts+=1;}
-           else {A.d++;B.d++;A.pts+=.5;B.pts+=.5;} }
+    /* v5.0 — Chess pays 2 for a win and 1 each for a draw, matching Carrom and
+       the racket group tables. It is exactly double the old 1 / ½ / 0, so every
+       standing and tie-break is unchanged; only the numbers on the table differ. */
+    else { if(r==='a'){A.w++;B.l++;A.pts+=2;} else if(r==='b'){B.w++;A.l++;B.pts+=2;}
+           else {A.d++;B.d++;A.pts+=1;B.pts+=1;} }
   });
   return sortTable(Object.values(rows), ms);
 }
@@ -1197,11 +1341,17 @@ function syncKnockouts(){
     if(gDone && A.length>1 && B.length>1){
       if(!sf1.log.length){ sf1.a=A[0].tid; sf1.b=B[1].tid; }
       if(!sf2.log.length){ sf2.a=B[0].tid; sf2.b=A[1].tid; }
+    } else {
+      /* the group stage has been reopened — a semi-final that has not started
+         must let go of the teams it was holding, or it would keep a pairing the
+         table no longer supports */
+      [sf1,sf2].forEach(m=>{ if(!m.log.length){ m.a=null; m.b=null; } });
     }
     const w=m=>{const r=racketWinner(m); return r?(r==='a'?m.a:m.b):null;};
     const l=m=>{const r=racketWinner(m); return r?(r==='a'?m.b:m.a):null;};
     if(w(sf1)&&w(sf2)){ if(!fi.log.length){ fi.a=w(sf1); fi.b=w(sf2); }
                         if(!th.log.length){ th.a=l(sf1); th.b=l(sf2); } }
+    else [fi,th].forEach(m=>{ if(!m.log.length){ m.a=null; m.b=null; } });
   });
 }
 
@@ -1234,7 +1384,12 @@ function sportRanking(sportKey){
   return {order:order, prov:!(racketWinner(fi)&&racketWinner(th))};
 }
 
-const sportStarted = sk => state.matches.some(m=>m.sport===sk && isPlayed(m));
+const sportStarted  = sk => state.matches.some(m=>m.sport===sk && isPlayed(m));
+/* A sport contributes championship points only when every one of its matches is
+   done. Until then its ranking is a projection — teams that have not played a
+   single match in that sport must not be sitting on points because of it. */
+const sportComplete = sk => state.matches.filter(m=>m.sport===sk).every(isPlayed);
+const teamPlayedIn  = (sk,tid) => state.matches.some(m=>m.sport===sk&&isPlayed(m)&&(m.a===tid||m.b===tid));
 
 function championship(){
   const rankBy={}, provBy={}, onBy={};
@@ -1243,9 +1398,12 @@ function championship(){
   const rows=TEAMS.map(t=>{
     const cells={}; let total=0;
     SPORT_ORDER.forEach(sk=>{
+      const done=sportComplete(sk);
       const i=onBy[sk]?rankBy[sk].indexOf(t.id):-1, rk=i<0?null:i+1;
-      const pts=rk?SP[sk].pts[rk-1]:0;
-      cells[sk]={rank:rk, pts:pts, prov:provBy[sk]}; total+=pts;
+      const would=rk?SP[sk].pts[rk-1]:0;
+      const pts=done?would:0;                    // nothing banked until the sport is finished
+      cells[sk]={rank:rk, pts:pts, would:would, prov:provBy[sk], done:done};
+      total+=pts;
     });
     const firsts=SPORT_ORDER.filter(sk=>cells[sk].rank===1).length;
     const seconds=SPORT_ORDER.filter(sk=>cells[sk].rank===2).length;
@@ -1272,8 +1430,15 @@ function toast(msg){ const el=$('#toast'); el.textContent=msg; el.classList.add(
 const stageName = m => m.stage==='group' ? 'Group '+m.grp
   : m.stage==='league' ? 'Round '+m.round
   : (m.label||({sf:'Semi-Final',third:'3rd Place',final:'Final'}[m.stage]||''));
-const canEdit = () => state.scorer;
-function needScorer(){ toast('Turn on Scorer mode to record results'); }
+/* Two levels of access.
+   REFEREE records results — scores, line-ups, the console — and nothing else.
+   ADMIN does everything: nominations, availability, penalties, printing,
+   resets and access itself. Anyone without a password can only watch. */
+const canEdit   = () => !!state.scorer;    // may record a result
+const canManage = () => !!state.admin;     // may change the event itself
+const roleName  = () => state.admin?'ADMIN':(state.scorer?'REFEREE':'VIEW 🔒');
+function needScorer(){ toast('Referee mode is needed to record a result'); }
+function needAdmin(){ toast('Admin only — sign in as admin to change this'); }
 
 /* ============================ FIXTURE ROW ============================ */
 const UNIT_SHORT = {Courts:'Ct', Boards:'Bd', Tables:'Tb'};
@@ -1349,6 +1514,59 @@ function fxOpen(sk){
   return state.matches.some(m=>m.sport===sk&&isLive(m));
 }
 
+/* ---------- score entry mode ----------
+   The referee console is the full thing: line-ups, tap scoring, rotations. This
+   is the other way round — the match was scored on paper and someone is typing
+   the finished results in. One row per match, two boxes, no line-ups needed. */
+function entryRow(m){
+  const A=teamById(m.a), B=teamById(m.b), r=resultOf(m), sc=scoreText(m);
+  const dis=canEdit()?'':' disabled';
+  if(!A||!B) return '<div class="erow"><div class="eno">'+esc(metaLine(m))+'</div>'+
+    '<div class="dim" style="flex:1;font-size:12px">Waiting on the groups</div></div>';
+
+  let mid;
+  if(SP[m.sport].kind==='racket'){
+    mid='<input class="esc'+(sc[0]!==''?' filled':'')+'" inputmode="numeric" maxlength="2"'+
+        ' value="'+esc(sc[0])+'"'+dis+' data-esc="'+m.id+'|a">'+
+        '<span class="esep">–</span>'+
+        '<input class="esc'+(sc[1]!==''?' filled':'')+'" inputmode="numeric" maxlength="2"'+
+        ' value="'+esc(sc[1])+'"'+dis+' data-esc="'+m.id+'|b">';
+  } else if(m.sport==='CR'){
+    const bd=m.boards||[{},{}];
+    mid='<span class="ebd">'+[0,1].map(i=>
+      '<span class="ebrow"><span class="ebl">B'+(i+1)+'</span>'+
+      '<input class="esc sm'+(bd[i].a!=null?' filled':'')+'" inputmode="numeric" maxlength="3"'+
+        ' value="'+(bd[i].a==null?'':bd[i].a)+'"'+dis+' data-ecb="'+m.id+'|'+i+'|a">'+
+      '<span class="esep">–</span>'+
+      '<input class="esc sm'+(bd[i].b!=null?' filled':'')+'" inputmode="numeric" maxlength="3"'+
+        ' value="'+(bd[i].b==null?'':bd[i].b)+'"'+dis+' data-ecb="'+m.id+'|'+i+'|b">'+
+      '</span>').join('')+'</span>';
+  } else {
+    mid='<span class="ech">'+[['a','2–0'],['d','1–1'],['b','0–2']].map(x=>
+      '<button class="btn sm'+(m.result===x[0]?' pri':'')+'"'+
+      (canEdit()?' data-ech="'+m.id+'|'+(m.result===x[0]?'':x[0])+'"':' data-noedit="1"')+
+      '>'+x[1]+'</button>').join('')+'</span>';
+  }
+  return '<div class="erow'+(r?' done':'')+'">'+
+    '<div class="eno">'+esc(metaLine(m))+'</div>'+
+    '<div class="eside'+(r==='a'?' w':(r==='b'?' l':''))+'">'+swatch(A)+'<span class="nm">'+esc(A.name)+'</span></div>'+
+    '<div class="emid">'+mid+'</div>'+
+    '<div class="eside b'+(r==='b'?' w':(r==='a'?' l':''))+'"><span class="nm">'+esc(B.name)+'</span>'+swatch(B)+'</div>'+
+    '<button class="eopen" tabindex="-1" data-open="'+m.id+'" title="Open the referee console">›</button></div>';
+}
+
+/* Turn a typed final score into a rally log so every table, tie-break and
+   share sheet downstream keeps working off one representation. */
+function setFinal(m,side,val){
+  const sc=scoreOf(m); const now={a:sc.a,b:sc.b};
+  now[side]=val===''?0:Math.max(0,Math.min(TARGET,parseInt(val,10)||0));
+  const log=[]; let x=now.a,y=now.b;
+  while(x>0||y>0){ if(x>0){log.push('a');x--;} if(y>0){log.push('b');y--;} }
+  m.log=log; m.acked=[GATE1,GATE2];
+  m.done=(now.a>=TARGET||now.b>=TARGET);
+  syncKnockouts(); save();
+}
+
 function viewFixtures(){
   let h='<h2 class="sec">Fixtures</h2>';
   h+='<div class="chipbar"><button class="chip'+(state.sportFilter==='all'?' on':'')+'" data-sf="all">All sports</button>'+
@@ -1363,8 +1581,15 @@ function viewFixtures(){
   const order=state.sportFilter==='all'?DAY_ORDER:[state.sportFilter];
   const shown=order.filter(sk=>ms.some(m=>m.sport===sk));
   const anyOpen=shown.some(sk=>fxOpen(sk));
-  h+='<div class="row" style="margin:10px 2px 4px"><span class="eyebrow">'+ms.length+' matches</span>'+
+  h+='<div class="modebar">'+
+     '<button class="mode'+(state.entry==='ref'?' on':'')+'" data-entry="ref">Referee mode<small>line-ups · tap scoring</small></button>'+
+     '<button class="mode'+(state.entry==='score'?' on':'')+'" data-entry="score">Score entry<small>final scores only</small></button>'+
+     '</div>';
+  h+='<div class="row" style="margin:10px 2px 4px;flex-wrap:wrap;gap:7px"><span class="eyebrow">'+ms.length+' matches</span>'+
      '<span class="grow"></span>'+
+     (canManage()?'<button class="btn sm" data-print="fx">Print fixtures</button>'+
+                  '<button class="btn sm" data-print="lu">Print line-ups</button>'+
+                  '<button class="btn sm dan" data-resetscope="1">Clear scores</button>':'')+
      '<button class="btn sm" data-fxall="'+(anyOpen?'close':'open')+'">'+
      (anyOpen?'Collapse all':'Expand all')+'</button></div>';
 
@@ -1387,7 +1612,8 @@ function viewFixtures(){
         const lbl=grp[0].stage==='group'?'Group round '+grp[0].round
           :grp[0].stage==='league'?'Round '+grp[0].round:'Knockout';
         h+='<div class="eyebrow" style="margin:12px 2px 5px">'+esc(lbl)+' · '+t12(grp[0].time)+'</div>';
-        h+='<div class="card flat" style="margin:0">'+grp.map(fxRow).join('')+'</div>';
+        h+='<div class="card flat" style="margin:0">'+
+          grp.map(state.entry==='score'?entryRow:fxRow).join('')+'</div>';
       });
       h+='</div>';
     }
@@ -1411,19 +1637,25 @@ function ledger(){
       '<div class="ldg-pos">'+(i+1)+'</div>'+
       '<div class="ldg-team"><span class="nm">'+swatch(t)+' '+esc(t.name)+'</span><span class="ldg-bar">'+bar+'</span></div>'+
       SPORT_ORDER.map(k=>{ const c=r.cells[k];
-        return '<div class="ldg-cell'+(c.prov?' tbd':'')+'" data-sp="'+k+'">'+
-          '<span class="rk">'+(c.rank||'–')+'</span><span class="pt">'+c.pts+'</span></div>'; }).join('')+
+        return '<div class="ldg-cell'+(c.done?'':' tbd')+'" data-sp="'+k+'">'+
+          '<span class="rk">'+(c.rank||'–')+'</span>'+
+          '<span class="pt">'+(c.done?c.pts:(c.rank?'('+c.would+')':'–'))+'</span></div>'; }).join('')+
       '<div class="ldg-tot"><b>'+r.total+'</b>'+
         (r.pen?'<span class="pen">−'+r.pen+'</span>':'')+'</div></div>';
   });
   h+='</div>';
-  h+='<div class="row" style="margin-top:10px"><button class="btn sm" data-sharetable="1">Share the board</button></div>';
+  h+='<div class="row" style="margin-top:10px;gap:7px;flex-wrap:wrap">'+
+     '<button class="btn sm pri" data-shareimg="1">Share as image</button>'+
+     '<button class="btn sm" data-sharetable="1">Share as text</button></div>';
   const pens=ch.rows.filter(r=>r.pen);
   const started=SPORT_ORDER.filter(sportStarted).length;
+  const doneN=SPORT_ORDER.filter(sportComplete).length;
   h+='<p class="hint">Rank in each sport, then the points that rank earns. '+
      (started===0?'Nothing is played yet — the board fills in as results come in.'
-      :ch.prov?'Greyed ranks are projections and firm up as the knockouts are played.'
-      :'All five sports are complete.')+
+      :doneN===5?'All five sports are complete.'
+      :'<b>'+doneN+' of 5 sports finished.</b> A sport pays out only when all of its matches are done, '+
+       'so a greyed cell shows the rank as things stand and, in brackets, the points it would be worth. '+
+       'Nothing is added to the total until that sport finishes.')+
      ' Top all five and you finish on 4,600.</p>';
   if(pens.length) h+='<div class="alert warn"><span>⚠</span><span><b>Penalties applied</b><br>'+
     pens.map(r=>esc(teamById(r.tid).name)+' −'+r.pen+(penNote(r.tid)?' · '+esc(penNote(r.tid)):'')).join('<br>')+
@@ -1465,16 +1697,23 @@ function bracketBlock(sk){
 function rankBlock(sk){
   if(!sportStarted(sk)) return '<div class="empty"><b>'+esc(SP[sk].name)+' has not started</b>'+
     'Placings and championship points appear as soon as the first result is in.</div>';
-  const r=sportRanking(sk);
-  let h='<div class="eyebrow" style="margin:14px 2px 5px">Final placing &amp; championship points</div>'+
-    '<div class="card flat" style="margin:0"><div class="tw"><table><tr><th style="width:22px"></th><th>Team</th><th class="right">Points</th></tr>';
-  r.order.forEach((tid,i)=>{ const t=teamById(tid);
-    h+='<tr><td class="cond" style="font-size:15px;color:'+(i===0?'var(--gold)':'var(--dim)')+'">'+(i+1)+'</td>'+
-      '<td><span class="row">'+swatch(t)+'<span class="tname">'+esc(t.name)+'</span></span></td>'+
-      '<td class="right mono"><b>'+SP[sk].pts[i]+'</b></td></tr>'; });
-  h+='</table></div></div>';
-  if(r.prov) h+='<p class="hint">Projected — these firm up once the remaining matches are played.</p>';
-  return h;
+  const r=sportRanking(sk), done=sportComplete(sk);
+  const total=state.matches.filter(m=>m.sport===sk).length;
+  const played=state.matches.filter(m=>m.sport===sk&&isPlayed(m)).length;
+  let h='<div class="eyebrow" style="margin:14px 2px 5px">'+
+    (done?'Final placing &amp; championship points':'Placing as it stands')+'</div>';
+  if(!done) h+='<div class="alert warn"><span>◷</span><span><b>'+played+' of '+total+' '+
+    esc(SP[sk].name)+' matches played</b><br>Nothing is banked until the sport finishes. '+
+    'Teams that have not played yet are shown in their drawn order, not on merit.</span></div>';
+  h+='<div class="card flat" style="margin:0"><div class="tw"><table><tr><th style="width:22px"></th>'+
+    '<th>Team</th><th class="right">'+(done?'Points':'Would earn')+'</th></tr>';
+  r.order.forEach((tid,i)=>{ const t=teamById(tid), on=teamPlayedIn(sk,tid);
+    h+='<tr'+(on?'':' style="opacity:.5"')+'><td class="cond" style="font-size:15px;color:'+
+        (i===0&&done?'var(--gold)':'var(--dim)')+'">'+(i+1)+'</td>'+
+      '<td><span class="row">'+swatch(t)+'<span class="tname">'+esc(t.name)+'</span>'+
+        (on?'':'<span class="dim" style="font-size:10px">not started</span>')+'</span></td>'+
+      '<td class="right mono">'+(done?'<b>'+SP[sk].pts[i]+'</b>':'('+SP[sk].pts[i]+')')+'</td></tr>'; });
+  return h+'</table></div></div>';
 }
 
 function viewStandings(){
@@ -1613,6 +1852,72 @@ function statsText(){
 }
 
 /* ============================ TEAMS ============================ */
+/* The squad list answers "what does this player cover?". Turning it on its head
+   answers the question a captain actually asks on the day — "who have I got for
+   Pickleball, and is that line-up legal?" — so both views are available. */
+function sportView(t,sk){
+  const s=SP[sk], nom=nomOf(t.id,sk).filter(p=>isIn(t.id,p));
+  const men=nom.filter(p=>pOf(p).g==='M'), wom=nom.filter(p=>pOf(p).g==='F');
+  const compulsory = s.kind==='racket' ? (men.length>=s.minM&&wom.length>=s.minF) : nom.length>=s.min;
+  const rank={MPB:0,MTT:1,MBM:2,GA:3,GB:4,WM:5,WG:6};
+  const ordered=nom.slice().sort((x,y)=>rank[pOf(x).cat]-rank[pOf(y).cat]);
+  const mq=marqueeOf(t.id,sk);
+
+  let h='<div class="card" style="margin:9px 0"><div class="row" style="margin-bottom:6px">'+
+    '<span class="sptag" data-sp="'+sk+'">'+esc(s.short)+'</span>'+
+    '<b class="grow" style="font-size:14px">'+esc(s.name)+'</b>'+
+    '<b class="cond" style="font-size:19px">'+nom.length+'</b>'+
+    '<span class="dim" style="font-size:11px">/ '+s.max+'</span></div>';
+  h+='<div class="row" style="gap:12px;font-size:11.5px" class="muted">'+
+     '<span>Men <b>'+men.length+'</b>'+(s.kind==='racket'?'<span class="dim"> / '+s.minM+' needed</span>':'')+'</span>'+
+     '<span>Women <b>'+wom.length+'</b>'+(s.kind==='racket'?'<span class="dim"> / '+s.minF+' needed</span>':'')+'</span>'+
+     '<span class="grow"></span>'+
+     (compulsory?'<span class="pill done">Legal</span>':'<span class="pill live">Short</span>')+'</div>';
+  if(nom.length<=s.min && nom.length)
+    h+='<p class="hint" style="margin:7px 0 0">No cover — one injury forfeits the match (v5.0).</p>';
+  h+='</div>';
+
+  if(!nom.length) return h+'<div class="empty"><b>Nobody named yet</b>Tap the sport tags in the squad view, '+
+    'or use Auto-fill nominations.</div>';
+
+  h+='<div class="card flat" style="margin:0"><div class="roster">';
+  ordered.forEach(pid=>{
+    const p=pOf(pid), others=sportsOfPlayer(t.id,pid).filter(k=>k!==sk), pl=playedSports(t.id,pid);
+    h+='<div class="rp2">'+
+      '<span class="who"><b>'+esc(p.name)+'</b>'+(p.owner?' <span class="owner">Owner</span>':'')+
+        (pid===mq?' <span class="owner" style="background:rgba(46,196,160,.16);color:var(--tealInk)">Marquee</span>':'')+
+        '<span class="meta2"><span class="cat '+(p.g==='F'?'w':'m')+'">'+esc(CATS[p.cat].label)+'</span>'+
+        '<span class="gsym '+(p.g==='F'?'f':'m')+'">'+(p.g==='F'?'Woman':'Man')+'</span>'+
+        (others.length?'<span class="dim" style="font-size:10px">also '+others.join(', ')+'</span>'
+                      :'<span class="dim" style="font-size:10px">this sport only</span>')+
+        (pl.indexOf(sk)>=0?'<span class="gsym m" style="background:rgba(46,196,160,.14);color:var(--tealInk)">played</span>':'')+
+        '</span></span>'+
+      (canManage()?'<button class="availb out" data-nom="'+t.id+'|'+sk+'|'+pid+'">Drop</button>':'')+
+      '</div>';
+  });
+  h+='</div></div>';
+
+  const spare=squadIn(t).filter(p=>nom.indexOf(p.id)<0);
+  if(canManage()&&spare.length){
+    h+='<div class="eyebrow" style="margin:16px 2px 5px">Add to '+esc(s.name)+'</div>';
+    h+='<div class="card flat" style="margin:0"><div class="roster">';
+    spare.forEach(p=>{
+      const why=nomBlock(t.id,sk,p.id), mine=sportsOfPlayer(t.id,p.id);
+      h+='<div class="rp2'+(why?' out':'')+'">'+
+        '<span class="who"><b>'+esc(p.name)+'</b><span class="meta2">'+
+        '<span class="cat '+(p.g==='F'?'w':'m')+'">'+esc(CATS[p.cat].short)+'</span>'+
+        '<span class="gsym '+(p.g==='F'?'f':'m')+'">'+(p.g==='F'?'W':'M')+'</span>'+
+        '<span class="dim" style="font-size:10px">'+(mine.length?mine.join(', '):'no sport yet')+'</span>'+
+        '</span></span>'+
+        (why?'<span class="availb out">'+esc(why)+'</span>'
+            :'<button class="availb" data-nom="'+t.id+'|'+sk+'|'+p.id+'">Add</button>')+
+        '</div>';
+    });
+    h+='</div></div>';
+  }
+  return h;
+}
+
 function viewTeams(){
   if(state.openTeam) return viewTeam(teamById(state.openTeam));
   let h='<h2 class="sec">Teams</h2><p class="hint">Eight squads · 118 players · built at the ₹50 lakh auction</p>';
@@ -1664,11 +1969,13 @@ function participationBlock(t){
 
   /* penalty */
   const suggest=pr.breach.length*PEN_PER_PLAYER;
+  if(suggest) h+='<div class="alert bad"><span>−</span><span><b>Rules set this at '+suggest+' points</b><br>'+
+    PEN_PER_PLAYER+' per available player who never took the court (v5.0).</span></div>';
   h+='<div class="eyebrow" style="margin:16px 2px 5px">Penalty</div>';
   if(pen) h+='<div class="alert bad"><span>−</span><span><b>'+pen+' championship points deducted</b>'+
     (penNote(t.id)?'<br>'+esc(penNote(t.id)):'')+'</span></div>';
   else h+='<p class="hint" style="margin:0 2px 7px">No penalty on this team.</p>';
-  if(canEdit()){
+  if(canManage()){
     h+='<div class="card" style="margin:0"><label class="fl">Deduction (championship points)</label>'+
       '<div class="row"><input type="number" id="penpts_'+t.id+'" value="'+(pen||'')+'" placeholder="0" style="width:110px">'+
       '<input type="text" id="pennote_'+t.id+'" value="'+esc(penNote(t.id))+'" placeholder="Reason — e.g. §3.1, two players unused" class="grow"></div>'+
@@ -1677,7 +1984,8 @@ function participationBlock(t){
       (suggest?'<button class="btn sm" data-pensuggest="'+t.id+'|'+suggest+'">Use suggested '+suggest+'</button>':'')+
       (pen?'<button class="btn sm dan" data-penclear="'+t.id+'">Remove penalty</button>':'')+'</div>'+
       '<p class="hint">Deducted from the team\'s championship total. The rules set no fixed figure, so '+
-      PEN_PER_PLAYER+' points per unused player is only a suggestion — the Sports Committee decides.</p></div>';
+      PEN_PER_PLAYER+' points per unused player is the figure set in the rules (v5.0); '+
+      'the Sports Committee may still apply a different amount here.</p></div>';
   }
   return h;
 }
@@ -1693,6 +2001,7 @@ function viewTeam(t){
   /* --- Sports coverage & assignment --- */
   h+='<h2 class="sec" style="font-size:19px;margin-top:18px">Sports coverage</h2>';
   h+='<p class="hint">Each player may cover two sports'+(soleWoman(t.id)?', and the team\'s only woman may play all three racket sports':'')+
+     (shortOfMen(t.id)?'. With fewer than '+MIN_MEN+' men available, a Men General B player may take a third — subject to approval':'')+
      '. Tap a sport to name a player or drop them.</p>';
 
   h+='<div class="covrow">'+SPORT_ORDER.map(sk=>{ const s=SP[sk], n=nomOf(t.id,sk).length;
@@ -1718,7 +2027,24 @@ function viewTeam(t){
   if(issues.length) h+='<div class="alert bad"><span>⚠</span><span>'+issues.map(esc).join('<br>')+'</span></div>';
   else h+='<div class="alert ok"><span>✓</span><span>Squad is legal for all five sports.</span></div>';
 
-  if(canEdit()) h+='<div class="row" style="margin:10px 0"><button class="btn sm grow" data-auto="'+t.id+'">Auto-fill nominations</button>'+
+  /* v5.0 — a sport named at the bare minimum has no bench, and one injury
+     forfeits the match. Worth saying out loud while there is still time to fix it. */
+  if(shortOfMen(t.id)){
+    const third=squadIn(t).filter(p=>needsApproval(t.id,p.id));
+    h+='<div class="alert warn"><span>⚠</span><span><b>Short of men · '+menAvailable(t.id)+' available, '+
+      MIN_MEN+' needed</b><br>A Men General B player may take a <b>third sport</b> to cover the gap, '+
+      'with the Sports Committee\'s and the opponent\'s approval. No other man may go past two.'+
+      (third.length?'<br><b>Playing three: '+third.map(p=>esc(p.name)).join(', ')+
+        '</b> — get this signed off before the match.':'')+
+      '</span></div>';
+  }
+  const bare=SPORT_ORDER.filter(sk=>nomOf(t.id,sk).length<=SP[sk].min);
+  if(bare.length) h+='<div class="alert warn"><span>⚠</span><span><b>No cover in '+
+    bare.map(sk=>esc(SP[sk].name)).join(', ')+'</b><br>'+
+    'Named at the compulsory minimum, so if a player cannot continue the match is forfeited (v5.0). '+
+    'Add the optional players wherever the two-sport cap allows.</span></div>';
+
+  if(canManage()) h+='<div class="row" style="margin:10px 0"><button class="btn sm grow" data-auto="'+t.id+'">Auto-fill nominations</button>'+
     '<button class="btn sm grow" data-clearnom="'+t.id+'">Clear all</button></div>';
 
 
@@ -1735,13 +2061,30 @@ function viewTeam(t){
        '</span></span>';
     x+='<span class="spx">'+SPORT_ORDER.map(sk=>{
       const on=mine.includes(sk), blocked=nomBlock(t.id,sk,p.id);
-      return '<span class="spb'+(on?' on':'')+(blocked?' lock':'')+(canEdit()&&!out?' tap':'')+'" data-sp="'+sk+'" '+
-        (canEdit()&&!out?'data-nom="'+t.id+'|'+sk+'|'+p.id+'"':'')+' title="'+esc(blocked||SP[sk].name)+'">'+
+      return '<span class="spb'+(on?' on':'')+(blocked?' lock':'')+(canManage()&&!out?' tap':'')+'" data-sp="'+sk+'" '+
+        (canManage()&&!out?'data-nom="'+t.id+'|'+sk+'|'+p.id+'"':'')+' title="'+esc(blocked||SP[sk].name)+'">'+
         '<span class="lg">'+esc(SP[sk].name)+'</span><span class="sh">'+sk+'</span></span>'; }).join('')+'</span>';
-    if(canEdit()) x+='<button class="availb'+(out?' out':'')+'" data-avail="'+t.id+'|'+p.id+'|'+(out?'in':'out')+'">'+
+    if(canManage()) x+='<button class="availb'+(out?' out':'')+'" data-avail="'+t.id+'|'+p.id+'|'+(out?'in':'out')+'">'+
       (out?'Mark available':'Unavailable')+'</button>';
     return x+'</div>';
   };
+
+  h+='<div class="chipbar" style="margin-top:16px">'+
+     '<button class="chip'+(state.teamView==='squad'?' on':'')+'" data-tv="squad">Squad</button>'+
+     SPORT_ORDER.map(sk=>'<button class="chip'+(state.teamView===sk?' on':'')+'" data-tv="'+sk+'" data-sp="'+sk+'">'+
+       esc(SP[sk].name)+'</button>').join('')+'</div>';
+
+  if(state.teamView!=='squad'){
+    h+=sportView(t,state.teamView);
+    if(canManage()){
+      h+='<div class="row" style="margin:14px 0 4px;gap:7px;flex-wrap:wrap">'+
+         '<button class="btn sm grow" data-doprint="sq:blank:'+t.id+'">Print this sport</button>'+
+         '<button class="btn sm grow" data-doprint="sq:blank:all">All eight teams</button></div>';
+      h+='<p class="hint">One page per team for '+esc(SP[state.teamView].name)+' — who is named, and the '+
+         'boxes to write the line-up in.</p>';
+    }
+    return h;
+  }
 
   h+='<div class="eyebrow" style="margin:18px 2px 5px">Squad · '+inSquad.length+' available</div>';
   h+='<div class="card flat" style="margin:0"><div class="roster">'+inSquad.map(row).join('')+'</div></div>';
@@ -1752,8 +2095,18 @@ function viewTeam(t){
   }
 
   h+=participationBlock(t);
-  h+='<div class="row" style="margin:14px 0 4px"><button class="btn sm grow" data-pdf="'+t.id+'">'+
-     'Export this team sheet</button><button class="btn sm grow" data-pdf="all">Export all eight</button></div>';
+  if(canManage()){
+  h+='<div class="eyebrow" style="margin:18px 2px 5px">Print</div>';
+  h+='<div class="row" style="margin:4px 0;gap:7px;flex-wrap:wrap">'+
+     '<button class="btn sm grow" data-pdf="'+t.id+'">Team sheet</button>'+
+     '<button class="btn sm grow" data-pdf="all">Team sheet · all eight</button></div>';
+  h+='<div class="row" style="margin:4px 0 0;gap:7px;flex-wrap:wrap">'+
+     '<button class="btn sm pri grow" data-doprint="tf:blank:'+t.id+'">Captain\'s line-up form</button>'+
+     '<button class="btn sm grow" data-doprint="tf:blank:all">Form · all eight</button></div>';
+  h+='<p class="hint">The captain\'s form is this team only — every sport it plays, with nothing about the '+
+     'opponent\'s pairs on it. Captains fill it in and hand it to the desk, which copies it onto the '+
+     'official line-up sheet from the fixtures page.</p>';
+  }
   return h;
 }
 
@@ -1764,10 +2117,10 @@ function teamSheet(t){
   const pr=participation(t.id), issues=nomIssues(t.id), inSq=squadIn(t), outSq=squadOut(t);
   const d=new Date(), stamp=d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+
     ' · '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
-  let h='<div class="sheet">';
-  h+='<div class="phd"><img src="'+LOGO+'" alt=""><div><h1>'+esc(t.name)+'</h1>'+
+  const head='<div class="phd"><img src="'+LOGO+'" alt=""><div><h1>'+esc(t.name)+'</h1>'+
      '<div class="sub">Odyssey Sports League 2026 · Team Sheet</div></div>'+
      '<div class="rt">'+esc(t.owners)+'<br>Printed '+esc(stamp)+'</div></div>';
+  let h='';
 
   h+='<h2>Nominations by sport</h2><table><tr><th>Sport</th><th class="c">Req</th><th class="c">M</th>'+
      '<th class="c">W</th><th>Players nominated</th></tr>';
@@ -1779,22 +2132,37 @@ function teamSheet(t){
       '<td>'+names+'</td></tr>';
   });
   h+='</table><p class="note">Racket sports: 6 compulsory (5 men + 1 woman), up to 8. Carrom 2–4, Chess 1–2, both gender-neutral. '+
-     'Maximum two sports per player; a team\'s only available woman may play all three racket sports.</p>';
+     'Maximum two sports per player; a team\'s only available woman may play all three racket sports, and '+
+     'with fewer than '+MIN_MEN+' men available a Men General B player may take a third with committee and '+
+     'opponent approval.</p>'+
+     (shortOfMen(t.id)?'<p class="note"><b>Short of men: '+menAvailable(t.id)+' available, '+MIN_MEN+
+       ' needed.</b> Any Men General B player listed with three sports below is playing a third under that '+
+       'exception and needs sign-off.</p>':'');
 
   h+='<h2>Squad · '+inSq.length+' available'+(outSq.length?' · '+outSq.length+' unavailable':'')+'</h2>';
-  h+='<table><tr><th>#</th><th>Player</th><th>Category</th><th class="c">M/W</th>'+
-     SPORT_ORDER.map(k=>'<th class="c">'+k+'</th>').join('')+'<th class="c">Sports</th><th class="c">Played</th></tr>';
+  /* One "played" box per sport the player may take, so a sheet printed before
+     the first match can be filled in with a pen and still matches what the app
+     writes if the day is scored on the console instead. */
+  const maxPlay=Math.max.apply(null,squadIn(t).map(p=>capFor(t.id,p.id)).concat([2]));
+  h+='<table class="squad"><thead><tr><th class="c w-n">#</th><th>Player</th><th>Category</th>'+
+     '<th class="c w-mw">M/W</th>'+
+     SPORT_ORDER.map(k=>'<th class="c w-sp">'+k+'</th>').join('')+'<th class="c w-sp">Sports</th>'+
+     Array.apply(null,{length:maxPlay}).map((x,i)=>'<th class="c plc">Played '+(i+1)+'</th>').join('')+
+     '</tr></thead><tbody>';
   const line=(p,i,out)=>{
-    const mine=sportsOfPlayer(t.id,p.id), pl=playedSports(t.id,p.id);
-    return '<tr'+(out?' class="out"':'')+'><td class="c">'+i+'</td>'+
+    const mine=sportsOfPlayer(t.id,p.id), pl=playedSports(t.id,p.id), cap=capFor(t.id,p.id);
+    return '<tr'+(out?' class="out"':'')+'><td class="c w-n">'+i+'</td>'+
       '<td>'+esc(p.name)+(p.owner?' <b>(Owner)</b>':'')+(out?' — unavailable':'')+'</td>'+
-      '<td>'+esc(CATS[p.cat].label)+'</td><td class="c">'+(p.g==='F'?'W':'M')+'</td>'+
-      SPORT_ORDER.map(k=>'<td class="c '+(mine.indexOf(k)>=0?'yes':'no')+'">'+(mine.indexOf(k)>=0?'●':'·')+'</td>').join('')+
-      '<td class="c">'+mine.length+'</td><td class="c">'+(pl.length?pl.join(' '):'—')+'</td></tr>';
+      '<td>'+esc(CATS[p.cat].label)+'</td><td class="c w-mw">'+(p.g==='F'?'W':'M')+'</td>'+
+      SPORT_ORDER.map(k=>'<td class="c w-sp '+(mine.indexOf(k)>=0?'yes':'no')+'">'+(mine.indexOf(k)>=0?'●':'·')+'</td>').join('')+
+      '<td class="c w-sp">'+mine.length+'</td>'+
+      Array.apply(null,{length:maxPlay}).map((x,i2)=>
+        '<td class="c plc'+(i2>=cap?' na':'')+'">'+(i2<cap?esc(pl[i2]||''):'')+'</td>').join('')+
+      '</tr>';
   };
   inSq.forEach((p,i)=>h+=line(p,i+1,false));
   outSq.forEach((p,i)=>h+=line(p,inSq.length+i+1,true));
-  h+='</table>';
+  h+='</tbody></table>';
 
   h+='<h2>Compliance</h2>';
   if(issues.length) h+='<div class="warn"><b>Nomination issues</b><br>'+issues.map(esc).join('<br>')+'</div>';
@@ -1809,13 +2177,523 @@ function teamSheet(t){
 
   h+='<div class="sign"><div>Team Captain — name &amp; signature</div>'+
      '<div>Sports Committee — name &amp; signature</div></div>';
-  return h+'</div>';
+  return sheet(head,h);
+}
+
+/* ---------- board as an image ----------
+   A picture pastes into WhatsApp intact; text loses its columns the moment
+   anyone's font changes. Drawn straight onto a canvas so the file stays
+   self-contained — no library, works with no signal. */
+function boardCanvas(){
+  const ch=championship(), S=2;                       // draw at 2× for a crisp result
+  const W=760, rowH=44, headH=112, footH=44;
+  const H=headH+rowH*(ch.rows.length+1)+footH;
+  const c=document.createElement('canvas');
+  c.width=W*S; c.height=H*S;
+  const x=c.getContext('2d'); x.scale(S,S);
+  const F=(w,sz,fam)=>w+' '+sz+'px '+(fam||'"IBM Plex Sans",system-ui,sans-serif');
+  const COND='"Barlow Condensed",system-ui,sans-serif';
+
+  x.fillStyle='#0b1220'; x.fillRect(0,0,W,H);
+  x.fillStyle='#16223a'; x.fillRect(0,0,W,headH-18);
+  x.fillStyle='#f4b53f'; x.font=F('800',30,COND);
+  x.fillText('ODYSSEY SPORTS LEAGUE 2026',22,44);
+  x.fillStyle='#93a4c6'; x.font=F('600',13);
+  const doneN=SPORT_ORDER.filter(sportComplete).length;
+  x.fillText('Championship board · '+doneN+' of 5 sports complete · '+
+    new Date().toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}),22,68);
+
+  const colX=[22,64,300,360,420,480,540,600], totX=712;
+  x.fillStyle='#63739a'; x.font=F('800',11);
+  x.fillText('TEAM',colX[1],headH-6);
+  SPORT_ORDER.forEach((k,i)=>{ x.textAlign='center'; x.fillText(k,colX[2+i]+22,headH-6); });
+  x.textAlign='right'; x.fillText('TOTAL',totX,headH-6); x.textAlign='left';
+
+  ch.rows.forEach((r,i)=>{
+    const y=headH+rowH*i, t=teamById(r.tid);
+    if(i%2) { x.fillStyle='rgba(255,255,255,.03)'; x.fillRect(0,y,W,rowH); }
+    x.strokeStyle='#27395e'; x.lineWidth=1;
+    x.beginPath(); x.moveTo(0,y+rowH); x.lineTo(W,y+rowH); x.stroke();
+    x.fillStyle=(i===0?'#f4b53f':'#63739a'); x.font=F('800',22,COND);
+    x.fillText(String(i+1),colX[0],y+30);
+    x.fillStyle=t.hex; x.beginPath(); x.arc(colX[1]-8,y+25,5,0,7); x.fill();
+    x.fillStyle='#eaf0fb'; x.font=F('600',15);
+    let nm=t.name; while(x.measureText(nm).width>210 && nm.length>4) nm=nm.slice(0,-2);
+    x.fillText(nm,colX[1]+4,y+30);
+    SPORT_ORDER.forEach((k,j)=>{
+      const cell=r.cells[k]; x.textAlign='center';
+      x.fillStyle=cell.done?'#eaf0fb':'#63739a'; x.font=F('800',19,COND);
+      x.fillText(cell.rank?String(cell.rank):'–',colX[2+j]+22,y+26);
+      x.fillStyle='#63739a'; x.font=F('600',9);
+      x.fillText(cell.done?String(cell.pts):(cell.rank?'('+cell.would+')':'–'),colX[2+j]+22,y+38);
+      x.textAlign='left';
+    });
+    x.textAlign='right'; x.fillStyle='#eaf0fb'; x.font=F('800',26,COND);
+    x.fillText(String(r.total),totX,y+30);
+    if(r.pen){ x.fillStyle='#ff7d8d'; x.font=F('800',10); x.fillText('−'+r.pen,totX,y+41); }
+    x.textAlign='left';
+  });
+  x.fillStyle='#63739a'; x.font=F('600',11);
+  x.fillText('A sport pays out only when all of its matches are done. '+
+    'Bracketed figures are what that rank would earn.',22,H-26);
+  return c;
+}
+
+function shareBoardImage(){
+  let c; try{ c=boardCanvas(); }catch(e){ return toast('Could not draw the board'); }
+  c.toBlob(async blob=>{
+    if(!blob) return toast('Could not create the image');
+    const file=new File([blob],'osl-championship.png',{type:'image/png'});
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      try{ await navigator.share({files:[file],title:'Odyssey Sports League 2026'}); return; }catch(e){}
+    }
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob); a.download='osl-championship.png'; a.click();
+    toast('Image saved');
+  },'image/png');
+}
+
+/* ---------- fixture sheets ---------- */
+function sheetHead(title,sub){
+  const d=new Date(), stamp=d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+
+    ' · '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  return '<div class="phd"><img src="'+LOGO+'" alt=""><div><h1>'+esc(title)+'</h1>'+
+    '<div class="sub">Odyssey Sports League 2026 · '+esc(sub)+'</div></div>'+
+    '<div class="rt">Printed '+esc(stamp)+'</div></div>';
+}
+
+/* A sheet that runs to a second page must say which sport it belongs to at the
+   top of that page too. A table header group is the one thing browsers reliably
+   repeat across a page break, so the whole sheet is wrapped in a single-column
+   table with the masthead sitting in its <thead>. */
+function sheet(headHTML,bodyHTML){
+  return '<div class="sheet"><table class="pgt"><thead><tr><td class="pghd">'+headHTML+
+    '</td></tr></thead><tbody><tr><td class="pgbd">'+bodyHTML+'</td></tr></tbody></table></div>';
+}
+
+/* What fills a knockout slot before the groups resolve, so a blank sheet still
+   tells the referee who is due on court. */
+const KO_SEED={sf1:['A1','B2'], sf2:['B1','A2'],
+               third:['SF1 loser','SF2 loser'], final:['SF1 winner','SF2 winner']};
+const KO_TIE ={sf1:'A1 v B2', sf2:'B1 v A2',
+               third:'SF1 loser v SF2 loser', final:'SF1 winner v SF2 winner'};
+/* A knockout tie is labelled once, in the column heading — "Team · A1" — so the
+   cell underneath stays completely clear for the referee to write the team in. */
+function seedTag(ms,side){
+  if(ms.length!==1) return '';
+  const m=ms[0], seed=KO_SEED[m.id.split('-').pop()];
+  if(!seed) return '';
+  if(side===0?m.a:m.b) return '';            // already decided — no need for the tag
+  return ' <span class="seed">'+esc(seed[side])+'</span>';
+}
+function slotLabels(m){
+  const A=teamById(m.a), B=teamById(m.b);
+  return [A?esc(A.name):'', B?esc(B.name):''];
+}
+
+/* Score margin grid — the reference sheet the committee already works from.
+   Each cell is that row team's margin against the column team, so a 25–20 win
+   reads +5 for the winner and −5 for the loser. Count the pluses for wins;
+   add the column up for points difference, which is what breaks a tie. */
+function marginGrid(sk,grp,withData){
+  const ids=(grp?groupTable(sk,grp):leagueTable(sk)).map(r=>r.tid);
+  const ms=state.matches.filter(m=>m.sport===sk&&(grp?(m.stage==='group'&&m.grp===grp):m.stage==='league'));
+  const mar={};
+  if(withData) ms.forEach(m=>{ if(!isPlayed(m)) return;
+    const sc=(m.sport==='CR')?carromAgg(m):(SP[m.sport].kind==='racket'?scoreOf(m)
+      :{a:m.result==='a'?1:(m.result==='b'?0:0.5), b:m.result==='b'?1:(m.result==='a'?0:0.5)});
+    mar[m.a+'|'+m.b]=sc.a-sc.b; mar[m.b+'|'+m.a]=sc.b-sc.a; });
+  const rank={}, tbl=grp?groupTable(sk,grp):leagueTable(sk);
+  tbl.forEach((r,i)=>rank[r.tid]=i+1);
+
+  let h='<div class="rnd"><h2>Score margin'+(grp?' · Group '+grp:'')+'</h2>'+
+    '<table class="mgrid"><thead><tr><th class="rowhd">'+(grp?'Group '+grp:esc(SP[sk].name))+'</th>'+
+    ids.map(t=>'<th class="v">'+esc(teamById(t).name)+'</th>').join('')+
+    '<th class="c">Wins</th><th class="c">Diff</th><th class="c">Rank</th><th class="c">H2H</th></tr></thead><tbody>';
+  ids.forEach(r=>{
+    let wins=0, diff=0, any=false;
+    const cells=ids.map(c=>{
+      if(r===c) return '<td class="dg"></td>';
+      const v=withData?mar[r+'|'+c]:undefined;
+      if(v!==undefined){ any=true; if(v>0) wins++; diff+=v; }
+      return '<td class="c bx">'+(v===undefined?'':(v>0?'+':'')+v)+'</td>';
+    }).join('');
+    h+='<tr><td class="nm">'+esc(teamById(r).name)+'</td>'+cells+
+      '<td class="c bx">'+(any?wins:'')+'</td>'+
+      '<td class="c bx">'+(any?(diff>0?'+':'')+diff:'')+'</td>'+
+      '<td class="c bx">'+(withData&&any?rank[r]:'')+'</td><td class="c bx"></td></tr>';
+  });
+  return h+'</tbody></table><p class="note">Row team\'s margin against the column team. '+
+    'A 25–20 win is <b>+5</b> for the winner and <b>−5</b> for the loser. Count the pluses for wins; '+
+    'the row total is the points difference used to separate teams level on wins.</p></div>';
+}
+
+function fixtureSheet(sk,withData){
+  const s=SP[sk], list=state.matches.filter(m=>m.sport===sk);
+  const head=sheetHead(s.name,(withData?'Results':'Score sheet — to be filled in')+
+    ' · '+t12(s.start)+' · '+s.courts+' '+s.unit.toLowerCase());
+  let h='';
+
+  /* Group and league rounds go four to a table; every knockout tie gets its own,
+     so the two semi-finals read as two separate matches rather than one block. */
+  const blocks=[];
+  const rounds=[...new Set(list.filter(m=>m.stage==='group'||m.stage==='league')
+                               .map(m=>m.stage+'|'+m.round))];
+  rounds.forEach(key=>{
+    const grp=list.filter(m=>m.stage+'|'+m.round===key);
+    blocks.push({label:(grp[0].stage==='group'?'Group round ':'Round ')+grp[0].round,
+                 time:grp[0].time, ms:grp});
+  });
+  list.filter(m=>['sf','third','final'].indexOf(m.stage)>=0).forEach(m=>{
+    const id=m.id.split('-').pop();
+    const nm={sf1:'Semi-Final 1', sf2:'Semi-Final 2',
+              third:'3rd Place Play-off', final:'Final'}[id]||'Knockout';
+    blocks.push({label:nm+(KO_TIE[id]?' · '+KO_TIE[id]:''), time:m.time, ms:[m]});
+  });
+
+  blocks.forEach(bk=>{
+    h+='<div class="rnd"><h2>'+esc(bk.label)+' · '+t12(bk.time)+'</h2>';
+    h+='<table class="fxt"><thead><tr><th class="c u">'+
+       esc({Courts:'Court',Tables:'Table',Boards:'Board'}[s.unit]||'No')+'</th>'+
+       '<th class="tm">Team'+seedTag(bk.ms,0)+'</th><th class="c sc">Score</th><th class="gap"></th>'+
+       '<th class="c sc">Score</th><th class="tm">Team'+seedTag(bk.ms,1)+'</th>'+
+       (withData?'':'<th class="c rf">Referee</th>')+'</tr></thead><tbody>';
+    bk.ms.forEach(m=>{
+      const r=withData?resultOf(m):null, sc=withData?scoreText(m):['',''];
+      const nm=slotLabels(m);
+      h+='<tr><td class="c u">'+m.court+'</td>'+
+        '<td class="tm'+(r==='a'?' wn':'')+'">'+nm[0]+'</td>'+
+        '<td class="c sc bx">'+esc(sc[0])+'</td><td class="gap"></td>'+
+        '<td class="c sc bx">'+esc(sc[1])+'</td>'+
+        '<td class="tm'+(r==='b'?' wn':'')+'">'+nm[1]+'</td>'+
+        (withData?'':'<td class="c rf bx"></td>')+'</tr>';
+    });
+    h+='</tbody></table>';
+    h+='<p class="note tiny">Left score box belongs to the team on the left, right box to the team on the right. '+
+       'The higher score wins — no separate winner column.</p></div>';
+  });
+
+  if(s.kind==='racket'){ h+=marginGrid(sk,'A',withData)+marginGrid(sk,'B',withData); }
+  else h+=marginGrid(sk,null,withData);
+  if(s.kind==='racket') h+='<p class="note">One continuous game to '+TARGET+'. Pair A to 7, Pair B to 14, '+
+    'Pair C to the finish. Golden point at 24–24. Ends change at 14.</p>';
+  if(sk==='CR') h+='<p class="note">Two boards inside a 20-minute match limit; the higher combined score wins. '+
+    'Each carromman, black or white, is worth 1 point; the queen is worth 5. If time runs out, the points standing on the board at that moment count.</p>';
+  if(sk==='CH') h+='<p class="note">Rapid, 15 minutes each. Win 2, draw 1 each, loss 0.</p>';
+  return sheet(head,h);
+}
+
+/* ---------- line-up sheets ---------- */
+function lineupSheet(m,withData){
+  const s=SP[m.sport], A=teamById(m.a), B=teamById(m.b);
+  const head=sheetHead(s.name+' · '+stageName(m),
+    s.unit.slice(0,-1)+' '+m.court+' · '+t12(m.time)+' · '+(withData?'Line-ups':'Line-up sheet — to be filled in'));
+  let h='';
+
+  const side=t=>{
+    const l=withData&&t?((m.lineup||{})[t.id]||[]):[];
+    const mq=t?marqueeOf(t.id,m.sport):null;
+    let x='<h2>'+(t?esc(t.name):'Team')+(t?' <span style="font-weight:400;font-size:8pt">'+esc(t.owners)+'</span>':'')+'</h2>';
+    x+='<table><thead><tr><th style="width:58px">Pair</th><th>Right court</th><th>Left court</th>'+
+      '<th class="c" style="width:36px">M/W</th></tr></thead><tbody>';
+    [0,1,2].forEach(pi=>{
+      const rIdx=withData?rightOf(m,t.id,pi):0;
+      const rp=l.length?l[pi*2+rIdx]:null, lp=l.length?l[pi*2+(1-rIdx)]:null;
+      const wcount=[rp,lp].filter(p=>p&&pOf(p)&&pOf(p).g==='F').length;
+      x+='<tr><td><b>Pair '+'ABC'[pi]+'</b><br><span style="font-size:7pt;color:#666">'+
+        (pi===0?'0 to 7':pi===1?'7 to 14':'14 to '+TARGET)+'</span></td>'+
+        '<td class="bx">'+(rp?esc(pName(rp)):'')+'</td>'+
+        '<td class="bx">'+(lp?esc(pName(lp)):'')+'</td>'+
+        '<td class="c bx">'+(l.length?(wcount?'W':'M'):'')+'</td></tr>';
+    });
+    x+='</tbody></table>';
+    if(s.kind==='racket') x+='<p class="note">M/W — mark the pair holding a woman. At least one woman must be in the six, '+
+      'and no pair may be two women.'+
+      (mq?' '+esc(pName(mq))+' is the '+esc(s.name)+' marquee and closes in Pair C.':'')+'</p>';
+    if(!withData && t){
+      const nom=nomOf(t.id,m.sport).filter(p=>isIn(t.id,p));
+      x+='<p class="note"><b>Nominated:</b> '+(nom.length?nom.map(p=>esc(pName(p))+(pOf(p).g==='F'?' (W)':'')).join(' · ')
+        :'nobody nominated yet')+'</p>';
+    }
+    return x;
+  };
+  h+=side(A)+side(B);
+  h+='<h2>Result</h2><table><tr><th>'+(A?esc(A.name):'Team A')+'</th><th class="c">Score</th>'+
+     '<th>'+(B?esc(B.name):'Team B')+'</th><th class="c">Score</th><th class="c">Golden point?</th></tr>'+
+     '<tr><td class="bx">&nbsp;</td><td class="c bx">'+(withData?esc(scoreText(m)[0]):'')+'</td>'+
+     '<td class="bx">&nbsp;</td><td class="c bx">'+(withData?esc(scoreText(m)[1]):'')+'</td>'+
+     '<td class="c bx"></td></tr></table>';
+  h+='<div class="sign"><div>'+(A?esc(A.name):'Team A')+' captain</div>'+
+     '<div>'+(B?esc(B.name):'Team B')+' captain</div><div>Referee</div></div>';
+  return sheet(head,h);
+}
+
+/* Carrom and Chess run four boards at a time, so the referee wants the whole
+   round on one page rather than a sheet per match. */
+function roundSheet(sk,round,withData){
+  const s=SP[sk], ms=state.matches.filter(m=>m.sport===sk&&m.round===round);
+  if(!ms.length) return '';
+  const head=sheetHead(s.name+' · Round '+round,
+    t12(ms[0].time)+' · '+(withData?'as recorded':'to be filled in')+' · referee copy');
+  let h='';
+
+  ms.forEach(m=>{
+    const A=teamById(m.a), B=teamById(m.b);
+    h+='<div class="rnd"><h2>Board '+m.court+' · '+esc(A.name)+' v '+esc(B.name)+'</h2>';
+    if(sk==='CR'){
+      h+='<table><thead><tr><th style="width:52px">Board</th><th>'+esc(A.name)+' — pair</th>'+
+         '<th class="c" style="width:64px">Points</th><th>'+esc(B.name)+' — pair</th>'+
+         '<th class="c" style="width:64px">Points</th></tr></thead><tbody>';
+      [0,1].forEach(bi=>{
+        const pr=t=>{ const p=((m.pairs||{})[t]||{})['b'+(bi+1)]||[];
+          return withData&&p.length?esc([p[0],p[1]].filter(Boolean).map(pName).join(' & ')):''; };
+        const bd=(m.boards||[{},{}])[bi]||{};
+        h+='<tr><td class="c"><b>'+(bi+1)+'</b></td>'+
+          '<td class="bx">'+pr(m.a)+'</td><td class="c bx">'+(withData&&bd.a!=null?bd.a:'')+'</td>'+
+          '<td class="bx">'+pr(m.b)+'</td><td class="c bx">'+(withData&&bd.b!=null?bd.b:'')+'</td></tr>';
+      });
+      const g=carromAgg(m);
+      h+='<tr><td class="c"><b>Total</b></td><td></td><td class="c bx">'+(withData&&carromPlayed(m)?g.a:'')+'</td>'+
+         '<td></td><td class="c bx">'+(withData&&carromPlayed(m)?g.b:'')+'</td></tr>';
+      h+='</tbody></table><p class="note tiny">Two boards inside 20 minutes. Higher combined total wins; equal is a draw. '+
+         'Each carromman, black or white, is worth 1 point; the queen is worth 5. '+
+         'Nominated: '+esc(nomOf(m.a,'CR').filter(p=>isIn(m.a,p)).map(pName).join(', ')||'—')+' · '+
+         esc(nomOf(m.b,'CR').filter(p=>isIn(m.b,p)).map(pName).join(', ')||'—')+'</p>';
+    } else {
+      const who=t=>{ const pid=((m.players||{})[t]); return withData&&pid?esc(pName(pid)):''; };
+      h+='<table><thead><tr><th>'+esc(A.name)+' — player</th><th class="c" style="width:70px">Result</th>'+
+         '<th>'+esc(B.name)+' — player</th><th class="c" style="width:70px">Result</th>'+
+         '</tr></thead><tbody>'+
+         '<tr><td class="bx">'+who(m.a)+'</td>'+
+         '<td class="c bx">'+(withData&&m.result?(m.result==='a'?'2':(m.result==='d'?'1':'0')):'')+'</td>'+
+         '<td class="bx">'+who(m.b)+'</td>'+
+         '<td class="c bx">'+(withData&&m.result?(m.result==='b'?'2':(m.result==='d'?'1':'0')):'')+'</td>'+
+         '</tr></tbody></table>'+
+         '<p class="note tiny">Rapid, 15 minutes each. Win 2, draw 1 each, loss 0. '+
+         'Nominated: '+esc(nomOf(m.a,'CH').filter(p=>isIn(m.a,p)).map(pName).join(', ')||'—')+' · '+
+         esc(nomOf(m.b,'CH').filter(p=>isIn(m.b,p)).map(pName).join(', ')||'—')+'</p>';
+    }
+    h+='</div>';
+  });
+  h+='<div class="sign"><div>Referee — name &amp; signature</div><div>Sports Committee</div></div>';
+  return sheet(head,h);
+}
+
+/* ---------- captain's line-up form ----------
+   The fixture line-up sheet is the officials' copy and shows both teams side by
+   side. This is the captain's copy: one team only, every sport it plays, with
+   nothing about the opponent's pairs on it. Captains fill it in, hand it to the
+   desk, and the desk copies it onto the official sheet. */
+function teamFormSheet(t,withData){
+  const head=sheetHead(t.name+' — Line-up form',
+    (withData?'As recorded':'To be filled in by the captain and handed to the desk')+
+    ' · '+t.owners);
+  let h='';
+
+  /* Each sport's squad sits with that sport, not in one block at the top — the
+     captain is filling one sport at a time and should not have to page back. */
+  const nomLine=sk=>{
+    const nom=nomOf(t.id,sk).filter(p=>isIn(t.id,p));
+    const men=nom.filter(p=>pOf(p).g==='M').length, wom=nom.length-men;
+    return '<p class="note"><b>Your '+esc(SP[sk].name)+' squad ('+nom.length+'):</b> '+
+      (nom.length?nom.map(p=>esc(pName(p))+(pOf(p).g==='F'?' (W)':'')).join(' · ')
+                 :'<i>nobody nominated yet</i>')+
+      ' <span style="color:#666">— '+men+(men===1?' man':' men')+', '+wom+(wom===1?' woman':' women')+'; '+
+      (SP[sk].kind==='racket'?'5 men + 1 woman must take the court':SP[sk].min+' compulsory')+'.</span></p>';
+  };
+
+  h+='<div class="rnd"><h2>Squad available · '+squadIn(t).length+'</h2><p class="note">'+
+     squadIn(t).map(p=>esc(p.name)+(p.g==='F'?' (W)':'')).join(' · ')+'</p>'+
+     (shortOfMen(t.id)?'<p class="note"><b>Short of men ('+menAvailable(t.id)+' of '+MIN_MEN+').</b> '+
+       'A Men General B player may take a third sport, subject to the Sports Committee\'s and the '+
+       'opponent\'s approval. Mark any such player clearly below.</p>':'')+
+     '</div>';
+
+  ['PB','TT','BM'].forEach(sk=>{
+    const ms=state.matches.filter(m=>SP[m.sport]?m.sport===sk&&(m.a===t.id||m.b===t.id):false);
+    const mq=marqueeOf(t.id,sk);
+    h+='<div class="rnd"><h2>'+esc(SP[sk].name)+'</h2>';
+    h+=nomLine(sk);
+    h+='<p class="note tiny">Three pairs, in the order they take the court: Pair A to 7, Pair B to 14, '+
+       'Pair C to the finish. At least one woman in the six; no pair may be two women'+
+       (mq?'; '+esc(pName(mq))+' is your '+esc(SP[sk].name)+' marquee and closes in Pair C':'')+'.</p>';
+    ms.forEach(m=>{
+      const opp=teamById(m.a===t.id?m.b:m.a);
+      const l=withData?((m.lineup||{})[t.id]||[]):[];
+      h+='<table class="lu"><thead><tr>'+
+        '<th colspan="4">'+esc(stageName(m))+' · '+t12(m.time)+' · '+
+          esc(SP[sk].unit.slice(0,-1))+' '+m.court+' · v '+(opp?esc(opp.name):'TBD')+'</th></tr>'+
+        '<tr><th style="width:56px">Pair</th><th>Right court</th><th>Left court</th>'+
+        '<th class="c" style="width:36px">M/W</th></tr></thead><tbody>';
+      [0,1,2].forEach(pi=>{
+        const rIdx=withData?rightOf(m,t.id,pi):0;
+        const rp=l.length?l[pi*2+rIdx]:null, lp=l.length?l[pi*2+(1-rIdx)]:null;
+        const w=[rp,lp].filter(x=>x&&pOf(x)&&pOf(x).g==='F').length;
+        h+='<tr><td><b>Pair '+'ABC'[pi]+'</b></td>'+
+          '<td class="bx">'+(rp?esc(pName(rp)):'')+'</td>'+
+          '<td class="bx">'+(lp?esc(pName(lp)):'')+'</td>'+
+          '<td class="c bx">'+(l.length?(w?'W':'M'):'')+'</td></tr>';
+      });
+      h+='</tbody></table>';
+    });
+    h+='</div>';
+  });
+
+  const crM=state.matches.filter(m=>m.sport==='CR'&&(m.a===t.id||m.b===t.id));
+  h+='<div class="rnd"><h2>Carrom</h2>'+nomLine('CR')+'<p class="note tiny">Two boards per match inside 20 minutes. '+
+     'Name the pair on each board — the same pair may play both.</p>'+
+     '<table class="fxt"><thead><tr><th class="c" style="width:52px">Round</th><th style="width:96px">Opponent</th>'+
+     '<th>Board 1 — pair</th><th>Board 2 — pair</th></tr></thead><tbody>';
+  crM.forEach(m=>{ const opp=teamById(m.a===t.id?m.b:m.a);
+    const pr=k=>{ const p=((m.pairs||{})[t.id]||{})[k]||[];
+      return withData&&p.length?esc([p[0],p[1]].filter(Boolean).map(pName).join(' & ')):''; };
+    h+='<tr><td class="c">'+m.round+'</td><td>'+(opp?esc(opp.name):'')+'</td>'+
+      '<td class="bx">'+pr('b1')+'</td><td class="bx">'+pr('b2')+'</td></tr>'; });
+  h+='</tbody></table></div>';
+
+  const chM=state.matches.filter(m=>m.sport==='CH'&&(m.a===t.id||m.b===t.id));
+  h+='<div class="rnd"><h2>Chess</h2>'+nomLine('CH')+'<p class="note tiny">One player per round; the player may change '+
+     'between rounds. Rapid, 15 minutes each.</p>'+
+     '<table class="fxt"><thead><tr><th class="c" style="width:52px">Round</th><th style="width:96px">Opponent</th>'+
+     '<th>Player</th></tr></thead><tbody>';
+  chM.forEach(m=>{ const opp=teamById(m.a===t.id?m.b:m.a), pid=((m.players||{})[t.id]);
+    h+='<tr><td class="c">'+m.round+'</td><td>'+(opp?esc(opp.name):'')+'</td>'+
+      '<td class="bx">'+(withData&&pid?esc(pName(pid)):'')+'</td></tr>'; });
+  h+='</tbody></table></div>';
+
+  h+='<div class="sign"><div>Captain — name &amp; signature</div>'+
+     '<div>Handed in at (time)</div><div>Received by (desk official)</div></div>';
+  return sheet(head,h);
+}
+
+/* One sport, one team: who is named, and boxes for the line-up of each match
+   that team plays in it. The captain's form covers all five sports at once;
+   this is the single-sport version for handing out at the court. */
+function sportSheet(t,sk,withData){
+  const s=SP[sk], nom=nomOf(t.id,sk).filter(p=>isIn(t.id,p));
+  const men=nom.filter(p=>pOf(p).g==='M'), wom=nom.filter(p=>pOf(p).g==='F');
+  const mq=marqueeOf(t.id,sk);
+  const head=sheetHead(t.name+' — '+s.name,
+    (withData?'As recorded':'Nominations and line-ups')+' · '+t12(s.start)+' · '+esc(t.owners));
+  let h='';
+
+  h+='<div class="rnd"><h2>Nominated · '+nom.length+' of '+s.max+'</h2>';
+  h+='<table class="fxt"><thead><tr><th class="c" style="width:34px">#</th><th>Player</th>'+
+     '<th style="width:150px">Category</th><th class="c" style="width:34px">M/W</th>'+
+     '<th class="c" style="width:70px">Other</th>'+
+     '<th class="c" style="width:52px">Played</th></tr></thead><tbody>';
+  const rank={MPB:0,MTT:1,MBM:2,GA:3,GB:4,WM:5,WG:6};
+  nom.slice().sort((x,y)=>rank[pOf(x).cat]-rank[pOf(y).cat]).forEach((pid,i)=>{
+    const p=pOf(pid), others=sportsOfPlayer(t.id,pid).filter(k=>k!==sk);
+    h+='<tr><td class="c">'+(i+1)+'</td>'+
+      '<td>'+esc(p.name)+(p.owner?' <b>(Owner)</b>':'')+(pid===mq?' <b>· marquee</b>':'')+'</td>'+
+      '<td>'+esc(CATS[p.cat].label)+'</td><td class="c">'+(p.g==='F'?'W':'M')+'</td>'+
+      '<td class="c">'+(others.join(' ')||'—')+'</td>'+
+      '<td class="c bx">'+(withData&&playedSports(t.id,pid).indexOf(sk)>=0?'&#10003;':'')+'</td></tr>';
+  });
+  h+='</tbody></table>';
+  h+='<p class="note">'+men.length+' men · '+wom.length+' women'+
+     (s.kind==='racket'?' — 5 men and 1 woman must take the court, up to 6 men and 2 women may be named'
+                       :' — '+s.min+' compulsory, up to '+s.max+', gender-neutral')+'. '+
+     (nom.length<=s.min?'<b>Named at the minimum: no cover, and one injury forfeits the match (v5.0).</b>':'')+'</p></div>';
+
+  const ms=state.matches.filter(m=>m.sport===sk&&(m.a===t.id||m.b===t.id));
+  if(s.kind==='racket'){
+    h+='<div class="rnd"><h2>Line-ups</h2><p class="note tiny">Pair A to 7, Pair B to 14, Pair C to the '+
+       'finish. At least one woman in the six; no pair may be two women'+
+       (mq?'; '+esc(pName(mq))+' closes in Pair C':'')+'.</p></div>';
+    ms.forEach(m=>{
+      const opp=teamById(m.a===t.id?m.b:m.a), l=withData?((m.lineup||{})[t.id]||[]):[];
+      h+='<table class="lu"><thead><tr><th colspan="4">'+esc(stageName(m))+' · '+t12(m.time)+' · '+
+        esc(s.unit.slice(0,-1))+' '+m.court+' · v '+(opp?esc(opp.name):'TBD')+'</th></tr>'+
+        '<tr><th style="width:56px">Pair</th><th>Right court</th><th>Left court</th>'+
+        '<th class="c" style="width:36px">M/W</th></tr></thead><tbody>';
+      [0,1,2].forEach(pi=>{
+        const rIdx=withData?rightOf(m,t.id,pi):0;
+        const rp=l.length?l[pi*2+rIdx]:null, lp=l.length?l[pi*2+(1-rIdx)]:null;
+        const w=[rp,lp].filter(x=>x&&pOf(x)&&pOf(x).g==='F').length;
+        h+='<tr><td><b>Pair '+'ABC'[pi]+'</b></td><td class="bx">'+(rp?esc(pName(rp)):'')+'</td>'+
+          '<td class="bx">'+(lp?esc(pName(lp)):'')+'</td>'+
+          '<td class="c bx">'+(l.length?(w?'W':'M'):'')+'</td></tr>';
+      });
+      h+='</tbody></table>';
+    });
+  } else {
+    h+='<div class="rnd"><h2>'+(sk==='CR'?'Boards':'Rounds')+'</h2>'+
+       '<table class="fxt"><thead><tr><th class="c" style="width:52px">Round</th>'+
+       '<th style="width:110px">Opponent</th>'+
+       (sk==='CR'?'<th>Board 1 — pair</th><th>Board 2 — pair</th>':'<th>Player</th>')+
+       '</tr></thead><tbody>';
+    ms.forEach(m=>{ const opp=teamById(m.a===t.id?m.b:m.a);
+      h+='<tr><td class="c">'+m.round+'</td><td>'+(opp?esc(opp.name):'')+'</td>';
+      if(sk==='CR'){ const pr=k=>{ const p=((m.pairs||{})[t.id]||{})[k]||[];
+          return withData&&p.length?esc([p[0],p[1]].filter(Boolean).map(pName).join(' & ')):''; };
+        h+='<td class="bx">'+pr('b1')+'</td><td class="bx">'+pr('b2')+'</td>'; }
+      else { const pid=((m.players||{})[t.id]);
+        h+='<td class="bx">'+(withData&&pid?esc(pName(pid)):'')+'</td>'; }
+      h+='</tr>'; });
+    h+='</tbody></table></div>';
+  }
+
+  h+='<div class="sign"><div>Captain — name &amp; signature</div><div>Sports Committee</div></div>';
+  return sheet(head,h);
 }
 
 function printSheets(){
-  if(!state.print) return '';
-  const list=state.print==='all'?TEAMS:[teamById(state.print)].filter(Boolean);
-  return list.map(teamSheet).join('');
+  const pr=state.print; if(!pr) return '';
+  if(pr==='all') return TEAMS.map(teamSheet).join('');
+  if(typeof pr==='string' && pr.indexOf(':')<0) return (teamById(pr)?teamSheet(teamById(pr)):'');
+  const [kind,mode,scope]=pr.split(':');
+  const withData=(mode==='filled');
+  if(kind==='sq'){
+    const sk=state.teamView; if(!SP[sk]) return '';
+    const list=(scope==='all')?TEAMS:[teamById(scope)].filter(Boolean);
+    return list.map(t=>sportSheet(t,sk,withData)).join('');
+  }
+  if(kind==='tf'){
+    const list=(scope==='all')?TEAMS:[teamById(scope)].filter(Boolean);
+    return list.map(t=>teamFormSheet(t,withData)).join('');
+  }
+  const sports=(scope==='all')?DAY_ORDER:[scope];
+  if(kind==='fx') return sports.map(sk=>fixtureSheet(sk,withData)).join('');
+  if(kind==='lu'){
+    let out='';
+    sports.forEach(sp=>{
+      if(SP[sp].kind==='racket'){
+        let ms=state.matches.filter(m=>m.sport===sp);
+        if(state.teamFilter!=='all') ms=ms.filter(m=>m.a===state.teamFilter||m.b===state.teamFilter);
+        if(withData) ms=ms.filter(m=>((m.lineup||{})[m.a]||[]).length||((m.lineup||{})[m.b]||[]).length);
+        out+=ms.map(m=>lineupSheet(m,withData)).join('');
+      } else {                                   // one page per round, all four boards
+        const rounds=[...new Set(state.matches.filter(m=>m.sport===sp).map(m=>m.round))];
+        out+=rounds.map(r=>roundSheet(sp,r,withData)).join('');
+      }
+    });
+    if(!out) return sheet(sheetHead('Line-ups','Nothing to print'),
+      '<p class="note">No line-ups have been set for this selection yet.</p>');
+    return out;
+  }
+  return '';
+}
+
+/* Blank or filled, and for one sport or the whole day. */
+function printChooser(kind){
+  const scope=(state.sportFilter==='all')?'all':state.sportFilter;
+  const what=kind==='fx'?'Fixture sheets':'Line-up sheets';
+  const where=scope==='all'?'all five sports':SP[scope].name;
+  let h='<h3>'+esc(what)+'</h3><p class="hint" style="margin-bottom:12px">'+
+    (kind==='fx'?'One sheet per sport, every match listed with boxes for the scores.'
+               :'One sheet per match, three pairs per team with the right and left court named.')+
+    '<br>Printing <b>'+esc(where)+'</b>'+
+    (kind==='lu'&&state.teamFilter!=='all'?' · <b>'+esc(teamById(state.teamFilter).name)+'</b> only':'')+
+    ' — change the filters on the fixtures page to narrow it.</p>';
+  if(kind==='lu') h+='<p class="hint" style="margin-bottom:12px">Racket sports print one page per match. '+
+    'Carrom and Chess print one page per round — all four boards together, which is what the referee on the floor wants.</p>';
+  h+='<div class="row" style="gap:8px;flex-wrap:wrap">'+
+     '<button class="btn pri grow" data-doprint="'+kind+':blank:'+scope+'">Blank — to fill in by hand</button>'+
+     '<button class="btn grow" data-doprint="'+kind+':filled:'+scope+'">Filled — as recorded</button></div>'+
+     '<button class="btn" style="width:100%;margin-top:10px" data-close="1">Cancel</button>';
+  return h;
 }
 /* Paint the sheets, let the browser lay them out, then open the print dialog —
    "Save as PDF" on desktop, Share → Print on a phone. */
@@ -1827,16 +2705,38 @@ function doPrint(which){
 
 /* ============================ RULES ============================ */
 const RULES=[
+ ['What changed in 5.1 and 5.2',
+  '<p>The playing format has not moved since 5.0. These are the changes since then, and they are what the app enforces.</p>'+
+  '<h4>Version 5.2</h4>'+
+  '<ul><li><b>Fewer than 8 men available?</b> A <b>Men General B</b> player — and only a Men General B player — '+
+  'may take a <b>third sport</b>. Eight is the floor because the three racket sports need five men each and every '+
+  'man is capped at two: eight men give sixteen slots for the fifteen required. It is not automatic — it needs the '+
+  '<b>Sports Committee\'s approval and the opposing captain\'s agreement</b>, both before the match. The app lifts '+
+  'the cap only for General B, only while the team is short, and flags anyone actually on three so it can be signed off.</li></ul>'+
+  '<h4>Version 5.1</h4>'+
+  '<ul><li><b>Chess is scored 2 / 1 / 0</b> — 2 for a win, 1 each for a draw, 0 for a loss. Exactly the old 1 / ½ / 0 '+
+  'doubled, so the table order is identical and there are no half points to add up.</li>'+
+  '<li><b>Carrom point values stated:</b> every carromman, black or white, is <b>1 point</b>; the <b>queen is 5</b>, '+
+  'counted inside that board\'s score.</li></ul>'+
+  '<h4>Version 5.0</h4>'+
+  '<ul><li><b>Chess 15 minutes</b> per player (was 10).</li>'+
+  '<li><b>Carrom 20-minute match limit</b> for both boards. If time runs out, the points standing on the board count.</li>'+
+  '<li><b>Nominating only the minimum means no cover.</b> If a team names just the compulsory 6 (or 2 for Carrom, '+
+  '1 for Chess) and a player cannot continue, <b>the match is forfeited</b> — no outside substitute.</li>'+
+  '<li><b>500 points per player who never plays.</b> Any squad member marked available who does not play a single '+
+  'sport across the league costs the team 500 Championship Points, per player.</li></ul>'],
  ['Format change · what the referee console adds',
-  '<p>The playing format is unchanged from <b>Rules v4.8</b> — three pairs, rotation when the leading score reaches 7 and 14, first to 25, golden point at 24–24, ends at 14. Every rule below is the v4.8 text.</p>'+
-  '<p>What is new is how the match is <b>run and recorded</b>. The referee console now tracks the things v4.8 leaves to the referee\'s memory:</p>'+
+  '<p>The playing format is unchanged in <b>Rules v5.2</b> — three pairs, rotation when the leading score reaches 7 and 14, first to 25, golden point at 24–24, ends at 14.</p>'+
+  '<p>What is new is how the match is <b>run and recorded</b>. The referee console tracks the things the rulebook leaves to the referee\'s memory:</p>'+
   '<ul><li><b>Serve is tracked live.</b> A ball icon marks the server and the box they must serve from. '+
     'Pickleball and Badminton follow §5.1 / §6.1 — serve from the right when your own score is even, partners swap on every point you win, serve transfers when you lose the rally. '+
     'Table Tennis follows §7.1 — the serve alternates every 2 points and the two players in the pair take alternate serving turns.</li>'+
   '<li><b>Rotations are blocking.</b> At 7 and at 14 scoring locks until the referee confirms the new pair is on court, with a 30-second countdown per §3.4. At 14 the same confirmation covers the change of ends (§5.6), so the app can never drift out of step with the players.</li>'+
   '<li><b>The incoming pair picks its starting server</b> (§5.1) — set on the confirmation card, and for Pair A before the first rally.</li>'+
   '<li><b>Rally stats.</b> Every point is credited to the two players actually on court, giving rally +/−, partnership records, serve-hold and clutch numbers to support the §12 Sport MVP vote.</li>'+
-  '<li><b>Final score entry</b> records a result for a match that could not be scored rally by rally — it counts for the tables but not for the stats.</li></ul>'+
+  '<li><b>Final score entry</b> records a result for a match that could not be scored rally by rally — it counts for the tables but not for the stats.</li>'+
+  '<li><b>Two ways to run a sport.</b> <b>Referee mode</b> is the full console — line-ups, tap scoring, rotation confirmations. <b>Score entry</b> is one row per match with two boxes, for results that were kept on paper. Switch between them on the fixtures page; the tables are the same either way.</li>'+
+  '<li><b>Printing.</b> Fixture sheets and line-up sheets both print blank, to be filled in by hand, or filled with what the app already holds.</li></ul>'+
   '<p class="dim">Nothing here changes a playing rule. If the Sports Committee later ratifies any of it, it belongs in §3 of the rule book.</p>'],
  ['How the champion is decided',
   '<p>Every team is ranked 1st–8th in <b>all five sports</b> and every rank scores. Add the five numbers up; highest total is the Odyssey champion.</p>'+
@@ -1853,28 +2753,38 @@ const RULES=[
   '<li><b>Pair C</b> finishes it — first to <b>25</b> wins</li></ul>'+
   '<p>The score is <b>never reset</b> — it is one continuous rally-scored game. At 24–24 a single <b>golden point</b> decides the match. Ends change at 14, at the same moment Pair C comes on. Pairs have 30 seconds to take position at each switch.</p>'+
   '<p><b>At least one woman must be in the playing six, every match.</b> Two women can never pair together — each woman plays in a mixed pair.</p>'+
+  '<p><b>Serving.</b> In Pickleball and Badminton the server serves from the right when their own score is even and the left when it is odd. <b>Table Tennis is different:</b> the serve is always delivered from the right half, and it passes to a different player every 2 cumulative points. With one team as A and B and the other as C and D, the order runs A → C → B → D and back to A — the receiver always becomes the next server, and each pair\'s two players take alternate turns.</p>'+
   '<p>The team\'s <b>marquee for that sport closes the match in Pair C</b> — the Pickleball marquee finishes Pickleball, the Badminton marquee finishes Badminton, the Table Tennis marquee finishes Table Tennis. The line-up editor holds to this, along with the mixed-pair rule, and will not let the same player be named in two slots.</p>'],
  ['Squads and nominations',
   '<p>Nominate at least the compulsory number for every sport; the extras are depth, not an obligation.</p>'+
   '<ul><li>Pickleball / Badminton / Table Tennis: <b>6 compulsory</b> (5 men + 1 woman), up to 8</li>'+
   '<li>Carrom: <b>2 compulsory</b>, up to 4 · gender-neutral</li>'+
   '<li>Chess: <b>1 compulsory</b>, up to 2 · gender-neutral</li></ul>'+
-  '<p>Every player may play a maximum of <b>two sports</b>. The only exception: if a team has just one woman available she plays all three racket sports. A third sport is never allowed for a male player. Everyone in the squad must play at least one sport across the league.</p>'+
+  '<p>Every player may play a maximum of <b>two sports</b>. Two exceptions, both driven by a shortage:</p>'+
+  '<ul><li>If a team has just <b>one woman available</b>, she plays all three racket sports.</li>'+
+  '<li>If a team has <b>fewer than 8 men available</b>, a <b>Men General B</b> player may take a third sport. '+
+  'Eight is the floor because the three racket sports need five men each and every man is capped at two — '+
+  'eight men give sixteen slots for fifteen. This needs the <b>Sports Committee\'s and the opposing captain\'s '+
+  'approval</b> before the match.</li></ul>'+
+  '<p>Outside those two cases a third sport is never allowed. Everyone in the squad must play at least one sport across the league.</p>'+
   '<p><b>Live sync.</b> On by default — open the link on any phone and it follows the live results, no setting up. Each device keeps scoring even with no signal; changes queue and go out when the connection returns. Only devices in Scorer mode publish, so a spectator can never change a score.</p>'+
+  '<p><b>Nominating only the minimum leaves you with no cover (v5.0).</b> If a team names just the compulsory 6 (or 2 for Carrom, 1 for Chess) and a player is injured or cannot continue, <b>the match is forfeited</b> — no outside substitute is allowed. Naming 7 or 8 is the only protection against that.</p>'+
+  '<p><b>Not playing costs 500 points (v5.0).</b> Any squad player marked available who does not play a single sport across the whole league costs the team <b>500 Championship Points, per player</b>. Nominating them is not enough — they have to take the court.</p>'+
   '<p><b>Match-day availability.</b> Mark anyone who cannot make it as unavailable on the team page. They drop out of every nomination and every count, so the quotas above are checked against the players who are actually there — and the sole-woman exception applies to the women available on the day.</p>'],
  ['Carrom',
-  '<p>A pure league — each team plays all seven others. Every match is <b>two boards</b>; the higher combined score across both boards wins the match, and equal aggregate is a draw.</p>'+
+  '<p>A pure league — each team plays all seven others. Every match is <b>two boards played inside a 20-minute limit</b>; the higher combined score across both boards wins, and equal aggregate is a draw. If the 20 minutes run out, the points standing on the boards at that moment count.</p>'+
+  '<p><b>What a point is worth (v5.1):</b> every carromman, black or white, counts <b>1 point</b>; the <b>queen is 5</b>. Add them up for each side to get that board\'s score.</p>'+
   '<p>Teams nominate 2–4 and staff the two boards however they like. The queen may be pocketed after your first coin and must be covered on the next shot or it returns to the centre. Queen bonus of 5 points is tracked for tie-breakers.</p>'],
  ['Chess',
-  '<p>A pure league of seven rounds, one player per team per round, and the player may change between rounds. Rapid: <b>10 minutes each</b> for the whole game — first flag to fall loses.</p>'+
-  '<p>Win 1, draw ½, loss 0. Points across the seven rounds build the table, and the final rank earns the championship points. Every nominated chess player must play at least one round. Touch-move applies; a second illegal move loses the game.</p>'],
+  '<p>A pure league of seven rounds, one player per team per round, and the player may change between rounds. Rapid: <b>15 minutes each</b> for the whole game (v5.0, up from 10) — first flag to fall loses.</p>'+
+  '<p><b>Win 2, draw 1 each, loss 0</b> (v5.1 — the old 1 / ½ / 0 doubled, so the table order is identical and there are no halves to add up). Points across the seven rounds build the table, and the final rank earns the championship points. Every nominated chess player must play at least one round. Touch-move applies; a second illegal move loses the game.</p>'],
  ['Conduct, kit and disputes',
   '<p><b>Non-marking shoes are compulsory</b> for all three racket sports — a GSC venue requirement. Carry them in and change inside; shoes worn in from outside will be refused on court. Jewellery comes off or gets taped.</p>'+
   '<p>Be at the court 10 minutes early; after a 5-minute grace period the match may be awarded to the opponent. Only the captain raises a protest. The referee decides in-game matters and that decision is final; off-field appeals go to the Sports Committee within 30 minutes.</p>'+
   '<p>One 1-minute timeout per team per game, medical timeouts up to 3 minutes. One challenge per phase, per team — a successful challenge is not deducted.</p>'],
 ];
 function viewRules(){
-  let h='<h2 class="sec">Rules</h2><p class="hint">Odyssey Sports League 2026 · Official Rules &amp; Regulations v4.8</p><div class="rules">';
+  let h='<h2 class="sec">Rules</h2><p class="hint">Odyssey Sports League 2026 · Official Rules &amp; Regulations v5.2</p><div class="rules">';
   RULES.forEach((r,i)=>{ h+='<div class="acc'+(i===0?' open':'')+'"><button data-acc="'+i+'">'+
     '<span class="cond" style="font-size:12px;color:var(--gold)">'+String(i+1).padStart(2,'0')+'</span>'+
     esc(r[0])+'<span class="ar">›</span></button><div class="body">'+r[1]+'</div></div>'; });
@@ -1901,16 +2811,20 @@ const SWAP='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="
 function boxHTML(m,tid,pos,cs,locked,fresh){
   const idx=cs.slot[tid][pos], pid=(m.lineup[tid]||[])[slotAt(cs.phase,idx)];
   const key=(tid===m.a)?'a':'b', p=pOf(pid);
-  const isServer=(cs.serving===key)&&(cs.pos===pos)&&!overOf(m);
+  const isServer=(cs.serving===key)&&(cs.which===pos)&&!overOf(m);
   const dead=(!canEdit()||overOf(m)||locked);
   return '<div class="box'+(dead?' locked':'')+(fresh?' justin':'')+
       '" '+(dead?(canEdit()?'':'data-noedit="1"'):'data-tap="'+m.id+'|'+tid+'"')+'>'+
-    '<div class="posTag">'+(pos==='R'?'Right / even':'Left / odd')+'</div>'+
+    '<div class="posTag">'+(cs.model==='alt2'
+      ? (pos==='R'?'Right half':'Left half')
+      : (pos==='R'?'Right / even':'Left / odd'))+'</div>'+
     '<div class="pSlot">'+(isServer?'<span class="ball">'+BALL+'</span>':'')+
       '<span class="sl">'+PAIR_LABEL[cs.phase].slice(-1)+(idx+1)+'</span>'+
       '<span class="pn">'+esc(pName(pid))+'</span>'+
       (p?'<span class="pTag">'+esc(CATS[p.cat].short)+'</span>':'')+'</div>'+
-    (isServer?'<div class="servetag">serving from the '+(pos==='R'?'right':'left')+'</div>':'')+'</div>';
+    (isServer?'<div class="servetag">'+(cs.model==='alt2'
+       ? 'serves from the right'
+       : 'serving from the '+(pos==='R'?'right':'left'))+'</div>':'')+'</div>';
 }
 
 function viewRacketMatch(m){
@@ -1927,14 +2841,16 @@ function viewRacketMatch(m){
     '<button class="btn sm" data-lineup="'+m.id+'">Line-ups</button>'+
     '<button class="btn sm" data-openfinal="'+m.id+'">Final score</button>'+
     (over?'<button class="btn sm" data-sharematch="'+m.id+'">Share</button>':'')+
-    '<span class="grow"></span><button class="btn sm dan" data-reset="'+m.id+'">Reset</button></div>';
+    '<span class="grow"></span>'+
+    '<button class="btn sm dan" data-resetsc="'+m.id+'">Reset score</button>'+
+    '<button class="btn sm dan" data-resetlu="'+m.id+'">Reset line-up</button></div>';
 
   if(!ready){
     h+='<div class="alert warn"><span>⚠</span><span>Set both line-ups before scoring — three pairs each, '+
       'at least one woman in the six, and no two women paired (§3.1, §3.2).</span></div>';
     if(iss.length) h+='<div class="alert bad"><span>⚠</span><span>'+iss.map(esc).join('<br>')+'</span></div>';
     if(canEdit()) h+='<button class="btn pri" style="width:100%" data-lineup="'+m.id+'">Set the line-ups</button>';
-    else h+='<p class="hint">Turn on Scorer mode in settings to set line-ups and score this match.</p>';
+    else h+='<p class="hint">Sign in with the referee PIN to set line-ups and score this match.</p>';
     return h+finalOv;
   }
 
@@ -2009,7 +2925,7 @@ function viewRacketMatch(m){
         ' style="background:'+t.hex+'">+</button></div>'; }).join('')+'</div>';
     if((m.log||[]).length) h+='<div class="row" style="gap:7px;margin-bottom:10px">'+
       '<button class="btn sm" data-undo="'+m.id+'">Undo last point</button></div>';
-  } else h+='<p class="hint" style="margin-bottom:10px">Turn on Scorer mode in settings to record points.</p>';
+  } else h+='<p class="hint" style="margin-bottom:10px">Sign in with the referee PIN to record points.</p>';
 
   /* rotation ladder — the leading score is the clock (§3.2) */
   const lo=[0,GATE1,GATE2], hi=[GATE1,GATE2,TARGET];
@@ -2160,7 +3076,7 @@ function viewCarromMatch(m){
     });
     h+='</div>';
   });
-  if(!canEdit()) h+='<p class="hint">Turn on Scorer mode in settings to enter scores.</p>';
+  if(!canEdit()) h+='<p class="hint">Sign in with the referee PIN to enter scores.</p>';
   return h;
 }
 
@@ -2171,7 +3087,7 @@ function viewChessMatch(m){
     const sel=((m.players||{})[x[0].id])||'', nom=nomOf(x[0].id,'CH');
     return '<div class="bside"><div class="who"><div class="nm" style="color:'+tcol(x[0])+'">'+esc(x[0].name)+'</div>'+
       '<div class="pr">'+(sel?'<b>'+esc(pName(sel))+'</b>':'no player named')+'</div></div>'+
-      '<div class="bnum">'+(r?(r==='d'?'½':(r===x[1]?'1':'0')):'–')+'</div></div>'; }).join('')+'</div>';
+      '<div class="bnum">'+(r?(r==='d'?'1':(r===x[1]?'2':'0')):'–')+'</div></div>'; }).join('')+'</div>';
   h+='<div class="eyebrow" style="margin:16px 2px 5px">Who played</div><div class="card" style="margin:0">'+
     [[A,'a'],[B,'b']].map(x=>{ const sel=((m.players||{})[x[0].id])||'';
       return '<div class="row" style="margin:6px 0"><span class="sw" style="background:'+x[0].hex+'"></span>'+
@@ -2179,12 +3095,12 @@ function viewChessMatch(m){
         '<option value="">Name the player</option>'+
         nomOf(x[0].id,'CH').map(pid=>'<option value="'+pid+'"'+(sel===pid?' selected':'')+'>'+esc(pName(pid))+'</option>').join('')+
         '</select></div>'; }).join('')+'</div>';
-  h+='<div class="eyebrow" style="margin:16px 2px 5px">Result · rapid, 10 minutes each</div>';
-  h+='<div class="row" style="gap:7px">'+[['a',A.name+' win'],['d','Draw'],['b',B.name+' win']].map(x=>
+  h+='<div class="eyebrow" style="margin:16px 2px 5px">Result · rapid, 15 minutes each</div>';
+  h+='<div class="row" style="gap:7px">'+[['a',A.name+' win · 2'],['d','Draw · 1 each'],['b',B.name+' win · 2']].map(x=>
     '<button class="btn grow'+(r===x[0]?' pri':'')+'" style="font-size:11.5px" '+
     (canEdit()?'data-cres="'+m.id+'|'+x[0]+'"':'data-noedit="1"')+'>'+esc(x[1])+'</button>').join('')+'</div>';
   if(r&&canEdit()) h+='<button class="btn sm dan" style="margin-top:10px" data-cres="'+m.id+'|">Clear result</button>';
-  if(!canEdit()) h+='<p class="hint">Turn on Scorer mode in settings to record the result.</p>';
+  if(!canEdit()) h+='<p class="hint">Sign in with the referee PIN to record the result.</p>';
   return h;
 }
 
@@ -2252,12 +3168,22 @@ function lineupModal(m){
 
 function settingsModal(){
   let h='<h3>Settings</h3>';
-  h+='<div style="margin:14px 0"><label class="fl">Scorer mode</label>'+
-    '<p class="hint" style="margin:0 0 7px">Off by default so results cannot be changed by accident.</p>'+
+  h+='<div style="margin:14px 0"><label class="fl">Access</label>'+
+    '<p class="hint" style="margin:0 0 7px">Watching needs nothing. Recording results needs the referee PIN. '+
+    'Running the event needs the admin password.</p>'+
     (state.scorer
-      ? '<button class="btn" data-scorer="off">Turn scorer mode off</button>'
-      : '<div class="row"><input type="password" id="pinin" placeholder="PIN" style="width:110px">'+
-        '<button class="btn pri" data-scorer="on">Unlock</button></div>')+'</div>';
+      ? '<div class="row" style="gap:7px;flex-wrap:wrap">'+
+        '<button class="btn" data-scorer="off">Sign out</button>'+
+        (canManage()?'<button class="btn sm" data-pinchange="1">'+(pinIsSet()?'Change referee PIN':'Set referee PIN')+'</button>'+
+          '<button class="btn sm" data-adminchange="1">Change admin password</button>':'')+'</div>'
+      : '<button class="btn pri" data-scorer="on">Sign in</button>')+
+      '<p class="hint">'+(state.admin
+        ? 'Signed in as <b>admin</b> — teams, penalties, printing and resets, as well as scoring.'
+        : state.scorer
+        ? 'Signed in as <b>referee</b> — you can record results. Teams, printing and resets are admin only.'
+        : 'Watching. Recording results needs the referee PIN; running the event needs the admin password.')+
+      '<br>'+(pinIsSet()?'A referee PIN is set for this event.':'<b>No referee PIN set yet</b> — an admin sets it here.')+
+      '</p></div>';
   h+='<div style="margin:14px 0"><label class="fl">Follow a team</label>'+
     '<select data-myteam="1"><option value="">No team</option>'+
     TEAMS.map(t=>'<option value="'+t.id+'"'+(state.myTeam===t.id?' selected':'')+'>'+esc(t.name)+'</option>').join('')+'</select></div>';
@@ -2274,7 +3200,9 @@ function settingsModal(){
     '<button class="btn sm" data-export="1">Export backup</button>'+
     '<button class="btn sm" data-import="1">Import backup</button>'+
     '<button class="btn sm" data-csv="1">Results CSV</button>'+
-    '<button class="btn sm dan" data-wipe="1">Reset everything</button></div>'+
+    '<button class="btn sm dan" data-resetscope="1">Clear scores by sport…</button>'+
+    '<button class="btn sm dan" data-wipe="1">Reset this device</button>'+
+    (state.scorer?'<button class="btn sm dan" data-wipeall="1">Reset the whole event</button>':'')+'</div>'+
     '<p class="hint">Everything is stored in this browser only. Export before you switch device.</p></div>';
   h+='<button class="btn pri" style="width:100%;margin-top:8px" data-close="1">Close</button>';
   return h;
@@ -2350,6 +3278,7 @@ const K_MATCH = id  => sync.event+':m:'+id;
 const K_NOM   = tid => sync.event+':nom:'+tid;
 const K_AV    = tid => sync.event+':av:'+tid;
 const K_PEN   = tid => sync.event+':pen:'+tid;
+const K_CFG   = () => sync.event+':cfg:access';
 
 function matchPayload(m){
   return { a:m.a||null, b:m.b||null, done:!!m.done,
@@ -2375,6 +3304,7 @@ function syncSnapshot(){
   TEAMS.forEach(t=>{ o[K_NOM(t.id)]=state.nom[t.id]||{};
                      o[K_AV(t.id)]=state.avail[t.id]||{};
                      o[K_PEN(t.id)]=state.pen[t.id]||{}; });
+  o[K_CFG()]={pinHash:state.pinHash||null, adminHash:state.adminHash||null};
   return o;
 }
 
@@ -2480,6 +3410,11 @@ async function syncPull(force){
       if(kind==='m')   hit=applyMatch(id,r.data);
       if(kind==='nom' && teamById(id)){ state.nom[id]=r.data||state.nom[id]; hit=true; }
       if(kind==='av'  && teamById(id)){ state.avail[id]=r.data||{}; hit=true; }
+      if(kind==='cfg'){ const d=r.data||{};
+        /* the event's password, learned from whoever set it */
+        if(d.pinHash!==undefined && d.pinHash!==state.pinHash){ state.pinHash=d.pinHash||null; }
+        if(d.adminHash!==undefined && d.adminHash!==state.adminHash){ state.adminHash=d.adminHash||null; }
+        hit=true; }
       if(kind==='pen' && teamById(id)){ const d=r.data||{};
         if(d && d.pts) state.pen[id]=d; else delete state.pen[id]; hit=true; }
       if(!hit) return;
@@ -2489,7 +3424,8 @@ async function syncPull(force){
     if(changed){
       syncKnockouts();
       try{ localStorage.setItem(STORE_KEY, JSON.stringify({ v:APP_VER, theme:state.theme,
-        scorer:state.scorer, pin:state.pin, myTeam:state.myTeam,
+        scorer:state.scorer, admin:state.admin,
+        pinHash:state.pinHash, adminHash:state.adminHash, myTeam:state.myTeam,
         matches:state.matches, nom:state.nom, avail:state.avail, pen:state.pen })); }catch(e){}
       const snap=syncSnapshot();                                // adopt as our baseline
       Object.keys(snap).forEach(k=>{ if(!sync.dirty[k]) sync.sent[k]=JSON.stringify(snap[k]); });
@@ -2514,7 +3450,7 @@ function syncStop(){ sync.on=false; clearInterval(pullTimer); pullTimer=null;
    device that is seeding the event, or recovering after a wipe elsewhere. */
 async function syncPublishAll(){
   if(!sync.on) return toast('Turn live sync on first');
-  if(!state.scorer) return toast('Scorer mode only');
+  if(!canManage()) return needAdmin();
   const snap=syncSnapshot();
   Object.keys(snap).forEach(k=>{ sync.rev[k]=(sync.rev[k]||0)+1; sync.dirty[k]=JSON.stringify(snap[k]); });
   sync.pending=Object.keys(sync.dirty).length;
@@ -2532,6 +3468,23 @@ function syncAlertHTML(){
     (sync.on?'<br>Last exchange '+esc(ago)+
       (sync.pending?' · '+sync.pending+' change'+(sync.pending>1?'s':'')+' waiting to send':''):'')+
     (sync.note?'<br><span style="font-weight:400;font-size:11px">'+esc(sync.note)+'</span>':'')+'</span>';
+}
+
+/* Put the event back to its starting point and push that emptiness out, so the
+   other devices reset with it instead of feeding the old scores back. */
+async function resetEvent(){
+  state.matches=buildFixtures(TEAMS);
+  state.nom=blankNom(); state.avail={}; state.pen={};
+  TEAMS.forEach(t=>autoNominate(t.id));
+  syncKnockouts(); save();
+  if(sync.on){
+    const snap=syncSnapshot();
+    Object.keys(snap).forEach(k=>{ sync.rev[k]=(sync.rev[k]||0)+1; sync.dirty[k]=JSON.stringify(snap[k]); });
+    sync.pending=Object.keys(sync.dirty).length; syncSave();
+    toast('Reset — clearing the other devices…');
+    while(Object.keys(sync.dirty).length && sync.on){ await syncPush(); await new Promise(r=>setTimeout(r,120)); }
+  }
+  toast('Event reset'); state.openMatch=null; state.openTeam=null; render();
 }
 
 function syncModal(){
@@ -2557,19 +3510,226 @@ function syncModal(){
      (sync.on?'<button class="btn" data-syncoff="1">Turn sync off</button>'
              :'<button class="btn pri" data-syncon="1">Turn sync on</button>')+
      '<button class="btn sm" data-syncpull="1">Check now</button>'+
-     (state.scorer?'<button class="btn sm" data-syncpush="1">Re-send everything</button>':'')+'</div>';
+     (canManage()?'<button class="btn sm" data-syncpush="1">Re-send everything</button>':'')+'</div>';
   h+='<p class="hint"><b>Check now</b> just does early what the app already does every few seconds — '+
      'it is only there for reassurance.'+
-     (state.scorer?' <b>Re-send everything</b> pushes this whole device up as the shared copy; '+
+     (canManage()?' <b>Re-send everything</b> pushes this whole device up as the shared copy; '+
        'use it once to seed the event, or to recover if a device was wiped. Not during a match.':'')+'</p>';
   h+='<div class="alert '+(state.scorer?'warn':'ok')+'" style="margin-top:4px"><span>'+(state.scorer?'✎':'👁')+'</span><span><b>'+
      (state.scorer?'This device publishes':'This device only receives')+'</b><br>'+
      (state.scorer?'Scorer mode is on, so every point recorded here goes out to the other devices.'
                   :'Scorer mode is off. It reads the live results and can never change them.')+'</span></div>';
-  if(state.scorer) h+='<p class="hint"><b>Publish this device</b> overwrites the shared copy with everything on '+
+  if(canManage()) h+='<p class="hint"><b>Publish this device</b> overwrites the shared copy with everything on '+
      'this screen — use it once to seed the event from the master device, not mid-match.</p>';
   h+='<button class="btn pri" style="width:100%;margin-top:10px" data-close="1">Close</button>';
   return h;
+}
+
+/* ============================ SCOPED RESET ============================
+   Clearing one match is on the match screen and clearing the whole event is in
+   settings. In between is the case that actually comes up on the day: a sport
+   was entered against the wrong fixtures, or a round has to be replayed. */
+function matchesInScope(sk,stage){
+  return state.matches.filter(m=>{
+    if(sk!=='all' && m.sport!==sk) return false;
+    if(stage==='all') return true;
+    if(stage==='group') return m.stage==='group'||m.stage==='league';
+    if(stage==='ko') return ['sf','third','final'].indexOf(m.stage)>=0;
+    return m.stage+'|'+m.round===stage;                 // a single round
+  });
+}
+function scopeRounds(sk){
+  const out=[];
+  matchesInScope(sk,'all').forEach(m=>{
+    if(m.stage!=='group'&&m.stage!=='league') return;
+    const key=m.stage+'|'+m.round;
+    if(!out.some(r=>r.key===key))
+      out.push({key:key, label:(sk==='all'?SP[m.sport].short+' · ':'')+
+        (m.stage==='group'?'Group round ':'Round ')+m.round});
+  });
+  return out;
+}
+function clearMatch(m,alsoLineups){
+  m.log=[]; m.acked=[]; m.done=false; m.result=null;
+  if(m.boards) m.boards=[{a:null,b:null},{a:null,b:null}];
+  if(alsoLineups){ m.lineup={}; m.pos={}; m.pairs={}; m.players={}; m.invert=false; m.startLeft=null; }
+}
+function resetScope(sk,stage,alsoLineups){
+  const list=matchesInScope(sk,stage);
+  list.forEach(m=>clearMatch(m,alsoLineups));
+  syncKnockouts(); save(); render();
+  toast('Cleared '+list.length+' match'+(list.length===1?'':'es'));
+}
+
+function resetScopeModal(){
+  const sk=state.resetSport||(state.sportFilter!=='all'?state.sportFilter:'all');
+  const stage=state.resetStage||'all';
+  const list=matchesInScope(sk,stage), played=list.filter(isPlayed).length;
+  const rounds=scopeRounds(sk);
+  const hasKO=matchesInScope(sk,'ko').length>0;
+
+  let h='<h3>Clear scores</h3>'+
+    '<p class="hint" style="margin-bottom:12px">Pick how much to clear. Nominations, availability and '+
+    'penalties are never touched by this.</p>';
+
+  h+='<label class="fl">Sport</label><div class="rchips">'+
+     '<button class="chip'+(sk==='all'?' on':'')+'" data-rsport="all">Every sport</button>'+
+     DAY_ORDER.map(k=>'<button class="chip'+(sk===k?' on':'')+'" data-rsport="'+k+'" data-sp="'+k+'">'+
+       esc(SP[k].short)+'</button>').join('')+'</div>';
+
+  h+='<label class="fl" style="margin-top:12px">How much</label><div class="rchips">'+
+     '<button class="chip'+(stage==='all'?' on':'')+'" data-rstage="all">Everything</button>'+
+     '<button class="chip'+(stage==='group'?' on':'')+'" data-rstage="group">Group / league only</button>'+
+     (hasKO?'<button class="chip'+(stage==='ko'?' on':'')+'" data-rstage="ko">Knockouts only</button>':'')+
+     rounds.map(r=>'<button class="chip'+(stage===r.key?' on':'')+'" data-rstage="'+esc(r.key)+'">'+
+       esc(r.label)+'</button>').join('')+'</div>';
+  h+='<div style="height:10px"></div>';
+
+  h+='<div class="alert '+(played?'bad':'warn')+'"><span>'+(played?'⚠':'○')+'</span><span><b>'+
+     list.length+' match'+(list.length===1?'':'es')+' in scope · '+played+' with a score</b><br>'+
+     (played?'Those '+played+' will be wiped and the tables will change.':'Nothing here has been scored yet.')+
+     '</span></div>';
+
+  h+='<div class="row" style="margin-top:14px;gap:7px;flex-wrap:wrap">'+
+     '<button class="btn dan grow" data-rgo="0">Clear scores</button>'+
+     '<button class="btn dan grow" data-rgo="1">Clear scores and line-ups</button></div>'+
+     '<button class="btn" style="width:100%;margin-top:9px" data-close="1">Cancel</button>'+
+     '<p class="hint">A semi-final or final that has not been played releases its teams when the group '+
+     'stage it depends on is reopened.</p>';
+  return h;
+}
+
+/* ============================ ACCESS ============================
+   Two levels, and they answer different questions.
+
+   ADMIN is the organiser. It sets up the event, edits teams, applies penalties,
+   prints and resets. Its password ships with the app and can only be changed by
+   someone who already knows it.
+
+   REFEREE is the courts. A PIN the admin sets, handed to whoever is scoring.
+   It records results and nothing else — no team edits, no printing, no resets.
+
+   Everyone else just watches.
+
+   Both are held as salted hashes and travel with the live sync, so a device
+   that has never been used still knows the event's passwords and cannot make
+   itself an editor. Be clear-eyed about what this is: a lock on the front door,
+   not a vault. It all runs in the browser against a public key, so someone
+   determined can get past it. It stops the realistic case at a tournament — a
+   player picking up a stray phone, a spectator poking at the link. */
+const ADMIN_DEFAULT = 'Hello43556';
+
+async function hashPin(p,kind){
+  const salted='osl2026|'+(kind||'ref')+'|'+(sync.event||'')+'|'+p;
+  try{
+    if(window.crypto&&crypto.subtle&&crypto.subtle.digest){
+      const d=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(salted));
+      return [].slice.call(new Uint8Array(d)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    }
+  }catch(e){}
+  let h=5381;                                     // only if SHA-256 is unavailable
+  for(let i=0;i<salted.length;i++){ h=((h*33)^salted.charCodeAt(i))>>>0; }
+  return 'x'+h.toString(16);
+}
+const pinIsSet = () => !!(state.pinHash&&state.pinHash.length);
+
+/* The shipped admin password is the starting point for every event; changing it
+   replaces the hash, and the new one syncs to the other devices. */
+async function adminHashNow(){
+  if(state.adminHash) return state.adminHash;
+  return await hashPin(ADMIN_DEFAULT,'admin');
+}
+
+function accessModal(msg){
+  return '<h3>Sign in</h3>'+
+    '<p class="hint" style="margin-bottom:12px">Watching needs nothing at all. '+
+    'Recording results needs the referee PIN; changing the event needs the admin password.</p>'+
+    (msg?'<div class="alert bad" style="margin:0 0 12px"><span>⚠</span><span>'+esc(msg)+'</span></div>':'')+
+    '<div class="card" style="margin:0 0 12px"><label class="fl">Referee — record results</label>'+
+    (pinIsSet()
+      ? '<div class="row"><input type="password" id="pin1" placeholder="Referee PIN" autocomplete="current-password">'+
+        '<button class="btn pri" data-refunlock="1">Enter</button></div>'+
+        '<p class="hint">Scores, line-ups and the match console. Nothing else.</p>'
+      : '<p class="hint">No referee PIN has been set yet. The admin sets it from Settings.</p>')+
+    '</div>'+
+    '<div class="card" style="margin:0"><label class="fl">Admin — run the event</label>'+
+    '<div class="row"><input type="password" id="apw" placeholder="Admin password" autocomplete="current-password">'+
+    '<button class="btn" data-adminunlock="1">Enter</button></div>'+
+    '<p class="hint">Everything a referee can do, plus teams, penalties, printing and resets.</p></div>'+
+    '<button class="btn" style="width:100%;margin-top:12px" data-close="1">Close</button>';
+}
+
+async function askScorer(){
+  if(state.scorer||state.admin){
+    state.scorer=false; state.admin=false; save(); render();
+    return toast('Signed out — view only');
+  }
+  /* Never judge access from a stale copy: pull the whole table first so this
+     device knows the event's real passwords. */
+  if(sync.on && !state.pinHash){
+    openModal('<h3>Checking the event…</h3><p class="hint">Fetching the event\'s access settings.</p>');
+    await syncPull(true);
+    if(!modal) return;
+  }
+  openModal(accessModal());
+}
+
+async function refUnlock(){
+  const v=(($('#pin1')||{}).value)||'';
+  if(!pinIsSet()) return openModal(accessModal('No referee PIN has been set yet.'));
+  if((await hashPin(v,'ref'))!==state.pinHash)
+    return openModal(accessModal('That referee PIN does not match.'));
+  state.scorer=true; state.admin=false; save();
+  if(sync.on) syncPull(true);
+  closeModal(); toast('Referee mode — you can record results'); render();
+}
+async function adminUnlock(){
+  const v=(($('#apw')||{}).value)||'';
+  if((await hashPin(v,'admin'))!==(await adminHashNow()))
+    return openModal(accessModal('That admin password does not match.'));
+  state.admin=true; state.scorer=true; save();
+  if(sync.on) syncPull(true);
+  closeModal(); toast('Admin mode'); render();
+}
+
+function pinSetModal(){
+  return '<h3>'+(pinIsSet()?'Change the referee PIN':'Set the referee PIN')+'</h3>'+
+    '<p class="hint">Hand this to whoever is scoring on each court. It lets them record results — '+
+    'it does not let them change teams, print, or reset anything.</p>'+
+    '<label class="fl">Referee PIN</label>'+
+    '<input type="password" id="pin1" placeholder="At least 4 characters" autocomplete="new-password">'+
+    '<label class="fl">Type it again</label><input type="password" id="pin2" autocomplete="new-password">'+
+    '<div class="row" style="margin-top:14px"><button class="btn pri grow" data-pinset="1">'+
+    (pinIsSet()?'Change it':'Set it')+'</button><button class="btn" data-close="1">Cancel</button></div>';
+}
+async function pinSave(){
+  if(!canManage()) return needAdmin();
+  const a=(($('#pin1')||{}).value)||'', b=(($('#pin2')||{}).value)||'';
+  if(a.length<4) return toast('At least 4 characters');
+  if(a!==b) return toast('The two do not match');
+  state.pinHash=await hashPin(a,'ref'); save(); closeModal();
+  toast('Referee PIN set'); render();
+}
+
+function adminChangeModal(){
+  return '<h3>Change the admin password</h3>'+
+    '<p class="hint">The current password is required. The new one syncs to every device, '+
+    'so make sure you have it written down somewhere.</p>'+
+    '<label class="fl">Current password</label><input type="password" id="apwold" autocomplete="current-password">'+
+    '<label class="fl">New password</label>'+
+    '<input type="password" id="apw1" placeholder="At least 6 characters" autocomplete="new-password">'+
+    '<label class="fl">Type it again</label><input type="password" id="apw2" autocomplete="new-password">'+
+    '<div class="row" style="margin-top:14px"><button class="btn pri grow" data-adminset="1">Change it</button>'+
+    '<button class="btn" data-close="1">Cancel</button></div>';
+}
+async function adminSave(){
+  if(!canManage()) return needAdmin();
+  const cur=(($('#apwold')||{}).value)||'', a=(($('#apw1')||{}).value)||'', b=(($('#apw2')||{}).value)||'';
+  if((await hashPin(cur,'admin'))!==(await adminHashNow())) return toast('Current password is wrong');
+  if(a.length<6) return toast('At least 6 characters');
+  if(a!==b) return toast('The two do not match');
+  state.adminHash=await hashPin(a,'admin'); save(); closeModal();
+  toast('Admin password changed'); render();
 }
 
 /* ============================ RENDER ============================ */
@@ -2596,7 +3756,44 @@ function startSwitchTimer(){
   },1000);
 }
 
+/* ===================== score entry focus =====================
+   The Tab bug came from repainting while the browser was still moving focus:
+   the box Tab was travelling to had already been replaced, so the rest of the
+   number went nowhere or into the next match. Suppressing the repaint fixed the
+   typing but left the standings, the knockout wiring and the champion stale
+   until the caret left the box.
+
+   So the repaint stays, and instead the caret is put back exactly where it was.
+   No input event fires while Tab is in flight, so there is no race to lose, and
+   a repaint becomes invisible to whoever is typing. */
+function focusedEntry(){
+  const a=document.activeElement;
+  if(!a||!a.classList||!a.classList.contains('esc')) return null;
+  return a.getAttribute('data-esc')||a.getAttribute('data-ecb')||null;
+}
+function grabFocus(){
+  const a=document.activeElement;
+  if(!a||!a.classList||!a.classList.contains('esc')) return null;
+  const k=a.getAttribute('data-esc')?'data-esc':'data-ecb';
+  let s=null,e=null; try{ s=a.selectionStart; e=a.selectionEnd; }catch(x){}
+  return {attr:k, val:a.getAttribute(k), s:s, e:e};
+}
+function putFocus(f){
+  if(!f||!f.val) return;
+  const el=document.querySelector('input.esc['+f.attr+'="'+f.val+'"]');
+  if(!el||el.disabled) return;
+  el.focus();
+  if(f.s!=null){ try{ el.setSelectionRange(f.s,f.e); }catch(x){ } }
+  else { const v=el.value; el.value=''; el.value=v; }   // caret to the end
+}
+
 function render(){
+  const keep=grabFocus();
+  paint();
+  putFocus(keep);
+}
+
+function paint(){
   document.documentElement.setAttribute('data-theme',state.theme);
   const body=state.openMatch?viewMatch()
     :state.tab==='live'?viewLive()
@@ -2611,7 +3808,7 @@ function render(){
      '<div><h1>Odyssey Sports League</h1><div class="sub">BNI Odyssey · 2026</div></div>'+
      '<div class="sp"></div>'+
      '<button class="ibtn sync '+sync.status+'" id="syncpill" data-syncmodal="1">'+syncPillHTML()+'</button>'+
-     '<button class="ibtn'+(state.scorer?' on':'')+'" data-settings="1">'+(state.scorer?'SCORER':'VIEW')+'</button>'+
+     '<button class="ibtn'+(state.scorer?' on':'')+'" data-settings="1">'+roleName()+'</button>'+
      '<button class="ibtn" data-themetog="1">'+(state.theme==='dark'?'☾':'☀')+'</button>'+
    '</div></header>'+
    '<div class="wrap">'+body+'</div>'+
@@ -2650,11 +3847,15 @@ document.addEventListener('click',e=>{
     state.tab=el.getAttribute('data-back'); scrollTo(0,0); return render(); }
   if((el=g('data-open'))){ state.openMatch=el.getAttribute('data-open'); scrollTo(0,0); return render(); }
   if((el=g('data-team'))){ state.openTeam=el.getAttribute('data-team'); scrollTo(0,0); return render(); }
+  if((el=g('data-tv'))){ state.teamView=el.getAttribute('data-tv'); return render(); }
 
   if((el=g('data-fxsec'))){ const sk=el.getAttribute('data-fxsec');
     state.fxOpen[sk]=!fxOpen(sk); return render(); }
   if((el=g('data-fxall'))){ const to=el.getAttribute('data-fxall')==='open';
     DAY_ORDER.forEach(sk=>state.fxOpen[sk]=to); return render(); }
+  if((el=g('data-entry'))){ state.entry=el.getAttribute('data-entry'); return render(); }
+  if((el=g('data-ech'))){ const [id,r]=el.getAttribute('data-ech').split('|');
+    const m=state.matches.find(x=>x.id===id); m.result=r||null; m.done=!!r; save(); return render(); }
   if((el=g('data-sf'))){ state.sportFilter=el.getAttribute('data-sf'); return render(); }
   if((el=g('data-tf'))){ state.teamFilter=el.getAttribute('data-tf'); return render(); }
   if((el=g('data-ss'))){ state.standSport=el.getAttribute('data-ss'); return render(); }
@@ -2706,10 +3907,20 @@ document.addEventListener('click',e=>{
   if((el=g('data-sharematch'))){ const m=state.matches.find(x=>x.id===el.getAttribute('data-sharematch'));
     return shareText(matchText(m)); }
   if(g('data-sharestats')) return shareText(statsText());
+  if(g('data-shareimg')) return shareBoardImage();
   if(g('data-sharetable')) return shareText(ledgerText());
 
   if((el=g('data-undo'))){ const m=state.matches.find(x=>x.id===el.getAttribute('data-undo'));
     undoPoint(m); return render(); }
+  if((el=g('data-resetsc'))){ const m=state.matches.find(x=>x.id===el.getAttribute('data-resetsc'));
+    if(!confirm('Clear the score for this match? The line-ups stay as they are.')) return;
+    m.log=[]; m.acked=[]; m.done=false; m.result=null;
+    if(m.boards) m.boards=[{a:null,b:null},{a:null,b:null}];
+    syncKnockouts(); save(); return render(); }
+  if((el=g('data-resetlu'))){ const m=state.matches.find(x=>x.id===el.getAttribute('data-resetlu'));
+    if((m.log||[]).length && !confirm('This match already has a score. Clear the line-ups anyway?')) return;
+    else if(!(m.log||[]).length && !confirm('Clear the line-ups for this match?')) return;
+    m.lineup={}; m.pos={}; m.acked=[]; m.pairs={}; m.players={}; save(); return render(); }
   if((el=g('data-reset'))){ const m=state.matches.find(x=>x.id===el.getAttribute('data-reset'));
     if(!confirm('Clear the score for this match? Line-ups are kept.')) return;
     m.log=[]; m.acked=[]; m.done=false; syncKnockouts(); save(); return render(); }
@@ -2723,37 +3934,65 @@ document.addEventListener('click',e=>{
   if((el=g('data-cres'))){ const [id,r]=el.getAttribute('data-cres').split('|');
     const m=state.matches.find(x=>x.id===id); m.result=r||null; m.done=!!r; save(); return render(); }
 
-  if((el=g('data-nom'))){ const [tid,sk,pid]=el.getAttribute('data-nom').split('|');
+  if((el=g('data-nom'))){ if(!canManage()) return needAdmin();
+    const [tid,sk,pid]=el.getAttribute('data-nom').split('|');
     const err=toggleNom(tid,sk,pid); if(err) toast(err); save(); return render(); }
-  if((el=g('data-avail'))){ const [tid,pid,to]=el.getAttribute('data-avail').split('|');
+  if((el=g('data-avail'))){ if(!canManage()) return needAdmin();
+    const [tid,pid,to]=el.getAttribute('data-avail').split('|');
     setAvail(tid,pid,to==='in'); save();
     toast(to==='in'?pName(pid)+' is back in':pName(pid)+' is out — nominations cleared');
     return render(); }
-  if((el=g('data-pdf'))){ const w=el.getAttribute('data-pdf');
+  if((el=g('data-print'))){ if(!canManage()) return needAdmin();
+    return openModal(printChooser(el.getAttribute('data-print'))); }
+  if((el=g('data-doprint'))){ if(!canManage()) return needAdmin();
+    const w=el.getAttribute('data-doprint');
+    modal=null; toast('Preparing the sheets…'); return doPrint(w); }
+  if((el=g('data-pdf'))){ if(!canManage()) return needAdmin();
+    const w=el.getAttribute('data-pdf');
     toast(w==='all'?'Preparing all eight team sheets…':'Preparing the team sheet…');
     return doPrint(w); }
-  if((el=g('data-pensave'))){ const tid=el.getAttribute('data-pensave');
+  if((el=g('data-pensave'))){ if(!canManage()) return needAdmin();
+    const tid=el.getAttribute('data-pensave');
     const pts=($('#penpts_'+tid)||{}).value, note=($('#pennote_'+tid)||{}).value;
     setPen(tid,pts,note); toast(Number(pts)>0?'Penalty applied':'Penalty removed'); return render(); }
-  if((el=g('data-pensuggest'))){ const [tid,pts]=el.getAttribute('data-pensuggest').split('|');
+  if((el=g('data-pensuggest'))){ if(!canManage()) return needAdmin();
+    const [tid,pts]=el.getAttribute('data-pensuggest').split('|');
     const pr=participation(tid);
     setPen(tid,pts,'§3.1 — '+pr.breach.length+' player'+(pr.breach.length>1?'s':'')+' did not play');
     toast('Suggested penalty applied'); return render(); }
-  if((el=g('data-penclear'))){ setPen(el.getAttribute('data-penclear'),0,''); toast('Penalty removed'); return render(); }
-  if((el=g('data-auto'))){ autoNominate(el.getAttribute('data-auto')); save(); toast('Nominations filled'); return render(); }
-  if((el=g('data-clearnom'))){ const tid=el.getAttribute('data-clearnom');
+  if((el=g('data-penclear'))){ if(!canManage()) return needAdmin();
+    setPen(el.getAttribute('data-penclear'),0,''); toast('Penalty removed'); return render(); }
+  if((el=g('data-auto'))){ if(!canManage()) return needAdmin();
+    autoNominate(el.getAttribute('data-auto')); save(); toast('Nominations filled'); return render(); }
+  if((el=g('data-clearnom'))){ if(!canManage()) return needAdmin();
+    const tid=el.getAttribute('data-clearnom');
     if(!confirm('Clear every nomination for this team?')) return;
     state.nom[tid]={PB:[],BM:[],TT:[],CR:[],CH:[]}; save(); return render(); }
 
+  if(g('data-resetscope')){ if(!canManage()) return needAdmin();
+    state.resetSport=state.sportFilter!=='all'?state.sportFilter:'all'; state.resetStage='all';
+    return openModal(resetScopeModal()); }
+  if((el=g('data-rsport'))){ state.resetSport=el.getAttribute('data-rsport'); state.resetStage='all';
+    return openModal(resetScopeModal()); }
+  if((el=g('data-rstage'))){ state.resetStage=el.getAttribute('data-rstage');
+    return openModal(resetScopeModal()); }
+  if((el=g('data-rgo'))){ if(!canManage()) return needAdmin();
+    const also=el.getAttribute('data-rgo')==='1';
+    const sk=state.resetSport||'all', stage=state.resetStage||'all';
+    const list=matchesInScope(sk,stage), played=list.filter(isPlayed).length;
+    if(played && !confirm('Clear '+played+' recorded result'+(played===1?'':'s')+
+      (also?' and the line-ups':'')+'?\n\nThis cannot be undone.')) return;
+    closeModal(); return resetScope(sk,stage,also); }
+  if(g('data-refunlock')) return refUnlock();
+  if(g('data-adminunlock')) return adminUnlock();
+  if(g('data-pinset')) return pinSave();
+  if(g('data-adminset')) return adminSave();
+  if(g('data-pinchange')){ if(!canManage()) return needAdmin(); return openModal(pinSetModal()); }
+  if(g('data-adminchange')){ if(!canManage()) return needAdmin(); return openModal(adminChangeModal()); }
   if((el=g('data-scorer'))){
-    if(el.getAttribute('data-scorer')==='off'){ state.scorer=false; save(); return openModal(settingsModal()); }
-    const v=($('#pinin')||{}).value;
-    if(v===state.pin){ state.scorer=true; save();
-      if(sync.on){ toast('Scorer mode on — fetching the latest results');
-        syncPull(true).then(()=>{ if(modal) openModal(settingsModal()); }); }
-      else toast('Scorer mode on');
-      return openModal(settingsModal()); }
-    toast('Wrong PIN'); return;
+    if(el.getAttribute('data-scorer')==='off'){ state.scorer=false; state.admin=false; save();
+      toast('Signed out — view only'); return openModal(settingsModal()); }
+    return askScorer();
   }
   if(g('data-export')){
     const blob=new Blob([JSON.stringify({v:APP_VER,matches:state.matches,nom:state.nom,avail:state.avail},null,1)],{type:'application/json'});
@@ -2774,13 +4013,74 @@ document.addEventListener('click',e=>{
     const i=document.createElement('input'); i.type='file'; i.accept='.json';
     i.onchange=()=>{ const f=i.files[0]; if(!f) return; const rd=new FileReader();
       rd.onload=()=>{ try{ const d=JSON.parse(rd.result);
-          localStorage.setItem(STORE_KEY,JSON.stringify(Object.assign({},d,{theme:state.theme,pin:state.pin})));
+          localStorage.setItem(STORE_KEY,JSON.stringify(Object.assign({},d,
+            {theme:state.theme,pinHash:state.pinHash,adminHash:state.adminHash})));
           location.reload(); }catch(err){ toast('That file could not be read'); } };
       rd.readAsText(f); };
     i.click(); return;
   }
-  if(g('data-wipe')){ if(!confirm('Delete every score and nomination on this device?')) return;
-    localStorage.removeItem(STORE_KEY); location.reload(); }
+  /* Clearing the device alone was not enough once sync was on: the next poll
+     simply pulled every score back from the shared copy. A full reset has to
+     clear the shared copy too, which only a scorer may do. */
+  if(g('data-wipe')){ if(!canManage()) return needAdmin();
+    if(!confirm('Clear every score, line-up, nomination and penalty on THIS DEVICE?\n\n'+
+      (sync.on?'The shared copy is untouched, so anything still on the other devices will come back on the next check.':'')))
+      return;
+    localStorage.removeItem(STORE_KEY); localStorage.removeItem(SYNC_KEY); location.reload(); }
+
+  if(g('data-wipeall')){
+    if(!canManage()) return needAdmin();
+    if(!confirm('Reset the WHOLE EVENT on every device?\n\nAll scores, line-ups, nominations and penalties '+
+      'go back to the starting point, everywhere. This cannot be undone.')) return;
+    if(!confirm('Last check — every result recorded so far will be gone. Continue?')) return;
+    resetEvent(); }
+});
+
+/* Tab and Enter both walk the score boxes in reading order — left score, right
+   score, next match. The chevron that opens the referee console is skipped, and
+   the scroll wheel is ignored so a stray scroll cannot nudge a number. */
+function entryBoxes(){ return [].slice.call(document.querySelectorAll('.erow .esc:not([disabled])')); }
+function stepEntry(el,dir){
+  const all=entryBoxes(), i=all.indexOf(el);
+  if(i<0) return false;
+  const next=all[i+dir];
+  if(!next) return false;
+  next.focus(); if(next.select) next.select();
+  return true;
+}
+document.addEventListener('keydown',e=>{
+  const el=e.target;
+  if(!el||!el.classList||!el.classList.contains('esc')) return;
+  if(e.key==='Enter'){ e.preventDefault(); if(!stepEntry(el,1)) el.blur(); return; }
+  if(e.key==='ArrowUp'||e.key==='ArrowDown'){ e.preventDefault();
+    stepEntry(el,e.key==='ArrowDown'?1:-1); }
+});
+document.addEventListener('wheel',e=>{
+  if(e.target&&e.target.classList&&e.target.classList.contains('esc')&&document.activeElement===e.target)
+    e.target.blur();
+},{passive:true});
+/* Restyle just this row while typing: winner in bold, the section's played
+   tally, the done tint. Cheap enough to run on every keystroke. */
+function markEntryRow(el,m){
+  const row=el.closest('.erow');
+  if(row){
+    const r=resultOf(m);
+    row.classList.toggle('done',!!r);
+    const sides=row.querySelectorAll('.eside');
+    if(sides[0]){ sides[0].classList.toggle('w',r==='a'); sides[0].classList.toggle('l',r==='b'); }
+    if(sides[1]){ sides[1].classList.toggle('w',r==='b'); sides[1].classList.toggle('l',r==='a'); }
+  }
+  const cnt=(el.closest('.fxsec')||document).querySelector('.fxhd .cnt');
+  if(cnt){ const list=state.matches.filter(x=>x.sport===m.sport);
+    cnt.textContent=list.filter(isPlayed).length+'/'+list.length; }
+}
+/* Leaving the boxes — by tapping away, or Tab off the last one — is the moment
+   everything downstream is brought up to date. Tab between boxes keeps focus
+   inside the entry list, so nothing is repainted mid-round. */
+document.addEventListener('focusout',e=>{
+  const el=e.target;
+  if(!el||!el.classList||!el.classList.contains('esc')) return;
+  setTimeout(()=>{ if(!focusedEntry()) render(); },0);
 });
 
 document.addEventListener('input',e=>{
@@ -2790,8 +4090,56 @@ document.addEventListener('input',e=>{
   }
 });
 
+/* Score entry keeps up with the keyboard: each keystroke updates the match, but
+   the page is not rebuilt until the box is left, or the caret would jump away
+   mid-number. Only the row's own styling is refreshed as you type. */
+document.addEventListener('input',e=>{
+  const el=e.target;
+  if(el.tagName==='INPUT' && el.hasAttribute('data-final')){
+    if(el.getAttribute('data-final')==='a') state.finalA=el.value; else state.finalB=el.value;
+  }
+});
+
+/* Score entry keeps up with the keyboard: each keystroke updates the match, but
+   the page is not rebuilt until the box is left, or the caret would jump away
+   mid-number. Only the row's own styling is refreshed as you type. */
+function markEntryRow(el,m){
+  const row=el.closest('.erow');
+  if(row){
+    const r=resultOf(m);
+    row.classList.toggle('done',!!r);
+    const sides=row.querySelectorAll('.eside');
+    if(sides[0]){ sides[0].classList.toggle('w',r==='a'); sides[0].classList.toggle('l',r==='b'); }
+    if(sides[1]){ sides[1].classList.toggle('w',r==='b'); sides[1].classList.toggle('l',r==='a'); }
+  }
+  /* keep this sport's played tally honest without rebuilding the page */
+  const sec=(el.closest('.fxsec')||document).querySelector('.fxhd .cnt');
+  if(sec){ const list=state.matches.filter(x=>x.sport===m.sport);
+    sec.textContent=list.filter(isPlayed).length+'/'+list.length; }
+}
+document.addEventListener('input',e=>{
+  const el=e.target; let a;
+  if((a=el.getAttribute('data-esc'))){ const [id,side]=a.split('|');
+    const m=state.matches.find(x=>x.id===id); if(!m) return;
+    const clean=el.value.replace(/[^0-9]/g,'').slice(0,2);
+    if(clean!==el.value) el.value=clean;
+    if(Number(clean)>TARGET) el.value=String(TARGET);
+    setFinal(m,side,el.value);
+    el.classList.toggle('filled',el.value!=='');
+    markEntryRow(el,m); return; }
+  if((a=el.getAttribute('data-ecb'))){ const [id,bi,side]=a.split('|');
+    const m=state.matches.find(x=>x.id===id); if(!m) return;
+    const clean=el.value.replace(/[^0-9]/g,'').slice(0,3);
+    if(clean!==el.value) el.value=clean;
+    m.boards[+bi][side]=el.value===''?null:Number(el.value);
+    m.done=carromPlayed(m); save();
+    el.classList.toggle('filled',el.value!=='');
+    markEntryRow(el,m); return; }
+});
+
 document.addEventListener('change',e=>{
   const el=e.target; let a;
+
   if((a=el.getAttribute('data-lp'))){ const [id,tid,slot]=a.split('|');
     const m=state.matches.find(x=>x.id===id);
     m.lineup=Object.assign({},m.lineup); const arr=(m.lineup[tid]||[]).slice();
