@@ -1328,16 +1328,28 @@ function h2h(rows,ms){                      // mini-table between the tied teams
     if(r==='a')sub[m.a].w++; else if(r==='b')sub[m.b].w++; });
   return sub;
 }
-/* Teams level on match points are separated by a mini-league between exactly
-   those teams (§2.8), then goal/point difference, then points scored, then lots. */
+/* Order within a sport (§2.8, revised): wins first — which is what the table
+   points measure, since every team in a group plays the same number of matches —
+   then point difference, then the head-to-head result between the teams still
+   level, then points scored, then lots.
+   Difference sits ahead of head-to-head deliberately: it rewards the margin a
+   team built across the whole group rather than one result on the day. */
 function sortTable(rows,ms){
   const buckets={}; rows.forEach(r=>{ (buckets[r.pts]=buckets[r.pts]||[]).push(r); });
   let out=[];
   Object.keys(buckets).map(Number).sort((a,b)=>b-a).forEach(k=>{
     const g=buckets[k];
-    if(g.length>1){ const sub=h2h(g,ms);
-      g.sort((x,y)=> (sub[y.tid].w-sub[x.tid].w) || (sub[y.tid].diff-sub[x.tid].diff)
-        || ((y.pf-y.pa)-(x.pf-x.pa)) || (y.pf-x.pf) || (teamById(x.tid).pos-teamById(y.tid).pos)); }
+    if(g.length>1){
+      g.sort((x,y)=>{
+        const dx=x.pf-x.pa, dy=y.pf-y.pa;
+        if(dy!==dx) return dy-dx;                       // 2 · point difference
+        const sub=h2h([x,y],ms);                        // 3 · head-to-head
+        if(sub[y.tid].w!==sub[x.tid].w) return sub[y.tid].w-sub[x.tid].w;
+        if(sub[y.tid].diff!==sub[x.tid].diff) return sub[y.tid].diff-sub[x.tid].diff;
+        if(y.pf!==x.pf) return y.pf-x.pf;               // 4 · points scored
+        return teamById(x.tid).pos-teamById(y.tid).pos; // 5 · drawn order, pending lots
+      });
+    }
     out=out.concat(g);
   });
   return out;
@@ -2369,7 +2381,8 @@ function marginGrid(sk,grp,withData){
   });
   return h+'</tbody></table><p class="note">Row team\'s margin against the column team. '+
     'A 25–20 win is <b>+5</b> for the winner and <b>−5</b> for the loser. Count the pluses for wins; '+
-    'the row total is the points difference used to separate teams level on wins.</p></div>';
+    'the row total is the points difference, which separates teams level on wins — head-to-head only '+
+    'comes into it if the difference is level too.</p></div>';
 }
 
 function fixtureSheet(sk,withData){
@@ -2789,7 +2802,8 @@ const RULES=[
   '<p>Every team is ranked 1st–8th in <b>all five sports</b> and every rank scores. Add the five numbers up; highest total is the Odyssey champion.</p>'+
   '<ul><li>Pickleball, Badminton, Table Tennis: <b>1000 · 900 · 800 · 700 · 600 · 500 · 400 · 300</b></li>'+
   '<li>Carrom and Chess: <b>800 · 700 · 600 · 500 · 400 · 300 · 200 · 100</b></li></ul>'+
-  '<p>Top all five and you finish on <b>4,600</b>. Level on points is broken by most 1st places, then most 2nds and on down, then head-to-head, then lots.</p>'],
+  '<p>Top all five and you finish on <b>4,600</b>. Level on the overall total is broken by most 1st places, then most 2nds and on down, then head-to-head, then lots.</p>'+
+  '<p><b>Within a single sport</b> — a group table or a Carrom/Chess league — teams level on table points are separated in this order: <b>wins, then point difference, then the head-to-head result between them, then points scored, then drawing of lots.</b> Every team in a group plays the same number of matches, so the table points and the wins say the same thing; difference is what usually settles it.</p>'],
  ['Racket sports — the format',
   '<p>Two groups of four play a round robin. The top two in each group go to the semi-finals (A1 v B2, B1 v A2). The final decides 1st and 2nd; the play-off between the beaten semi-finalists decides 3rd and 4th.</p>'+
   '<p>The four teams that miss the semis are ranked 5th–8th on their group record — the two third-placed teams take 5th and 6th, the two fourth-placed take 7th and 8th, separated by wins, then point difference, then points scored.</p>'],
