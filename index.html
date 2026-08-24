@@ -584,7 +584,7 @@ label.fl{display:block;font-size:10px;letter-spacing:.12em;text-transform:upperc
 <script>
 /* ============================================================================
    ODYSSEY SPORTS LEAGUE 2026 — single file, offline, saves to this browser
-   Data: OSL Rules v5.3 · Auction bidding plans · Live group draws · Day schedule
+   Data: OSL Rules v5.5 · Auction bidding plans · Live group draws · Day schedule
    ========================================================================== */
 
 const LOGO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAADICAMAAAC+n9FsAAAC91BMVEWfYRbbpFWnKw7dmxzTXAjiLSTYXFr13VgTFSUdHTUgJCLZnJoYYp1tUh6llFMfYBhWHhz+5CaqihwMDyteYGReb4jz76diYV3m598QI1SpYFCWmpdzc3Wurq8lkBLbJAB0i6OwHgBlmFyZm57nHwBVV1yuYAP8cQBOnDLgJAAfImOpyqLSYQB0DwCrTwIHecOSlJlgYA1pyjiZrsOh22H//wC3ztbVVgDa3N1KPUhppM45O0IqcXF5fYdxqKicNgKent08PkQ7QUc+QUQ6W199goe6UAL4P0D9foD/qgDpvsH//6oAAP84g7MBgMVCPkZVVap9foN+gIR///+WLQe9vsH//3/CxcUAAAACBS34AQH5+vrMAQEBABgOFTXq6OixAQPS19gvOE8MJk9ud4kCGEkDN3FOWGvGycyxtrqQAQkAKWimqa4BR4mSmaT4ZwB5hJNlaXb5eAEiehcBVpYySGmPlJpXY3dOBBD8hgH2WAEmhRtFSFjZ5Of+52wmK0U4Q1mzu8OYpK5uAhWHipNSFgT52Nf7lgK6xMotBg5UaIYtBCT7twT///9qGwH7xwMDZqn8pwEmJjcZaRD3GAsqiyL7SAD6NwD42WcIRHj6KAD91QgYIjYxFRL0l5b++I1vcnsXNFfzp6f0yMf+9HL1h4f0trYAAAEZdQ/Y3eGQJQEtkyZTNhNuJAHNFxb2V1fyd3c4VHRFTGIAAFUAPINVVVX811fNV1f/AAD0Z2gBAylOKBCzJyfONzcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABw1QvfAAAAvnRSTlP+/v7++fr+/lkV+P7+/v7+/v7+lqX8/uv6/v7fCQP+HvoO/qydagYE/l8U/qYNZP5nA//3/gH+bK3+/mUDTAdWBJ9jlv5QhP//A/8DAf//QQOzpQKptgJQAP7+/v7+/v7+/v7+/v7+/v39/v78/v3+/v79/v7+/P7+/v7+/v7+/v7+/f78/v7+/v7+/v4C/v7+/v7+/f7+/v7+/v7+/v7+/f7+/v7+/i7+/v7//v7+/v7+/gP+A/7+Af7S/v7+FNA27wAALwdJREFUeNrtnfdD21i2+A0GA6aTECBlUqa3ne31vX39fV/59urLRZJVbElgXAi2wbFxicE2kFDCQOg1JGRJgcmk53/7nnMlG1OSnZll3+aH3BBwbCF9dPq5ulIsjuMeTx2Oj497n5Zjp/zyby46Pn76llOed3wQ+dVxi/PYKT9ynI/4vrgIP99myi8dF6d9vrLzIM2nT99Oyqf4dXHO19PjO+/4yVsry6eo8emZ/p7+si8//vS84+lbSHnxU8fTi09/1TMz3d+T+cLx6QfH5USWYxXkB58C1xe+yFx/fyZz/vz0p8eEaTnWIPTp3HlQeGR6xtefGf2VIwJqfyspP7j4wfTMTCTSPzFmBQO96Lj4dlE+hcjzwVz5pzMzczP9vp6J+VF4+elbRsmCEFCWz8zNzWR6fBPzY+Uz0x+AgN8iSgiT559enJqaAlHOTU/0RybG5iNI+fFbRPnUcf4DyOBzU3NglXP9oxPTo/Pz02+ZLC86zk8B0NTclC8yM+cbHR2dzjT2z0xDKPrgOPKk5bggpz74dG5mrqdnbq5nbGxsIuKbx4h0/vzUp8eQgCzHA9kOFjkHgBMzc5nG+fnR0Z7p0UhkuhxiU/nbQckgZ5CyZ943NdHY2Dg2MdY/MxGJzHzw6cxU+/k/PRr9iZRPP/roXx3ny9vnZgDSNz8242scqGgcHZ3vn57w+WbaZ6an2sFgL375F6N8+tHHv2AvPmifmp4G7wZNzzVubGw0jo3N+yKjPT2R9sh0e3s5bvOLjz76C1D+5CNG+OWPfvVFWXv7TGR6DgyycWJ6Y3l5YH5+fmza15jpicxFQJZTZV/8iMnyX3+wSH8Q5UcsVFcBYQ8UP9MgSiiDZkYbGzNly8vLjY3zjRmIRKP9vunpmXYw10x/zxc/Ysb5iy+fOqqMnXzzZ6U0EC/+CAnZuN8+F/H1zMw0VlRMWE+dqmgEwwRRNs5n+pHSB9UmFnL9IFIT8Oxnn137Xpzfk/JLZl1/80WZidgDvUNHx1ykJzM9Y62oGC1pPQWwjZEI/KNxIgOGMDXms5WUwXYICiL9uOqEneM4+4nKs38mWTJb/Igh9jBEX1nJqeqOdmh0JnpmMhsbFSWtFTAgi8PritEMJKJI41w1FYaqTVKrnciKR/coEnleeXD/VYasq/4EyqdoWF/+Mx6MDZ/PWr0uUIqUPf0TE77I442BitaBio3Hvv6KZcAcy/ggyI92ACWlVFivLumxEuKlVMyK8G2XnPjM8dneAZgBXLt2lM1+V8qnaI0/+sJXQCyrHqJ4bKRsB8rR0Uj/xvLAqeWNZWvPKDjRxsbYhG9mxjfXsUbzY4gnIg0s8DIvSzoNkef7xHa28oTdbn9+ovLbHyZLJscflfmADrtYn69kHQlxUA9Q+oBybDRiXV4+dWp52Zp5DN+Xl+cz03ORyFR77aXPxVZGuctpIs+rw+rwcJBEqU6en/0mL8iqE4RIgbSiLqAtfPMdKL+pMqR/LZ8DITCW+YwRidiqBYaI3yjVnO3tc/0ZiOSj01agBC/PgEiXT22MQoHpi0x11L93586Vry+d+fwMp1BeHlbwj384Pkk95IRhhd84PntOArC3GPxNSvD2N3+E0vz8Wv47uHXVP0eQjzHmxcgQaevnl662gzAzmTHI377+x0C5bB2A7ybkTHtn/XvvvXflyp0779kJDcQVHH5v2K+4olQlVf/rWzxkJVnQqK7KkiSpYBRkvzQPUH6Dn/37Z5WVJy+caf31r/8fYH7MdA14ADkdKRkyNY2IsTOXLt+5kQPKKfD5UQiUmX4U53LFqVMDEEEBMjLXkau/fOXKezjsu1QOKopXaQZZKs0X5JQAUnM4/tZRRSQqSrwE/GqQTyP9G2UJJvyccAS++IBGW38M0bEMEWEwRqHA+PmlyzfuXL582X51CnJkTyYz0Vjx2JrJlMCwWuGM4LwikY4+goNfsNfXc34RjBL17VW8fiWtxukuOfnXDsfvn0tgpLLfj3IeHiYpyj+/9hpKkONnJzgObNjrSXrSEsdFt+iv/3fEZJwuGWqN5RmFM/WAeOXK5ctX6kknYkYwHlqtjSXW0QnoziJM+JGZHCkaKd3VPOxXUl5v2p9S/H5e1zmViu/beSFJgvCBEg4r4Fw8DXFVRTrfJ0t0s12PCMaGQ9Akjuh0acaAtGmxmGhCtqIYERF1WU9I3xwSRTLzjRjUWYXZ38NcDSElVVXDaiIRJx6dB1F6/SA0JjYpIBCS0L2cLvDNSsCfBo2HlYAip4W8X+2n/AwYOT4tgCK/Zkb03tdnaICD+FYGupsuWwPGLRAlOKFQB3JExMtX3rtSvwDqtPjKyiFOZaxWizHKrJCafGVlPss207ccDPtTIS6t8cNKcxgcvDmdblaapSjl4WNOoirYK8gRvnmRXqXyiSM1XvWcrAgiuMN7V/5gjPcu0RbYwdrM9EzJVkwUt7aYNEHXly8bjJfr8SDbZZa7pWWWhhcv7jHEJvh7b/DFvVIcPktB3zLEGl5VUIzGVziYoHH8RNdkfANMNa00K0pgWKKJ5+eOoKyCbeklQPwaRgFT4DkvLS/7N2BESjFGP69nLoO6vmxnB9/2lZbevT44eM9izUAXDvqeR8u0lA4uDt7dh0niVGobHg6jlwwjlBoFSpnwVFVRjADZzCxBlWj0CMrP/u8JcorWQ/AtpvzDndYQF6fVmqiJbAhbl27cMBlR1Ww0TJcO5u7dLYMBSkfLZFYZiZSV3lvM3S2mJIIiD4NlgpezEQwL+K6KAQr03RxGAcMrkHGi2MktpndXkhD95M7XV2AUYV651MqTJNU0Rrkl6PX1prILjITYI9dfgDRLS4GyfwIp50cz/WCUpdfvllm4skXC8/ltQyLfPBwGL0YmBbwkRbxKXErz4F/+Xb9iYCptKoSiw3Z59nm89fMbV67so4Sfd04FIKsZlDHxUv0N/GMySrsBRUl7FbJY21N69+5dpOwxKCeY69y9fh30fY8MZ0VN0z1ef5gsUFUGCaqqIUw+KUGJpOlhftivDoM/KWH4qw7LIZEc8h5I9STceulOAZKB4rc7dR5QuYiYKMj6GzdQ42CPckAXWZYUsjJp6CkHzFJLmQ/yJJRs8xgwQZQgS9A3780aaYCKcQ5CTFuQRfawMhxMJCX4SKNUwWg53KyoSlj1D6tky384ElU5TpBLp0zKAiaMK3c+OUWItpXVxK1LBmT9ZYiPvOpNZg0rEJNBQnwRkCXYpaUwyiIRg9JOgh7NCLNb4jAhos4FVXUnHIbCiNeVMJwoFJsBrxRXmRlAtaTKAQhQh6P6T+xA+ckddIoiSha2T01yKSpuJf/RfgMhL6Oyg4rXkwVEEHFST+0QYvEB5b3BXG4QBGoF2Hs5eH39bmkEXCfoT3l01Iam+WWChdBqEECHVRmsLw0Kj1EtRKnKBQPg6c3Nw0EJZPv8J4fssoonLacu3TAoTdIrDPLG51Eu4FlpqYX6FDJxPQjSJQeDibDEqxKRJM4lgYku+soGOUAsi/SzSDTRU3Z3MMfl7vbUos9ADmvhiEp4CdxoUtDirra2NpmPUoXTqaBTGhIFCrlSBc8CRqJlOSiKqo6grK+ou3F5D/MKg7xzp/7nLdx2k3WsyTpvtQCoGZ5JQga3nFTVOOgH/ln6goPYWF5amld4Gby+znEWaHMSqj+hhuNSmOfhjHjC69S7G5fAb9KEFwUxS2NegWqq6mKZVCIegSfPf3GwJsI4RPif/7z+TjEmMqIdTjbNzzc2EQLxeh4ls7oaHFZ3ICCDMyoBSQ3LsgveHsTIDs1hrg8UDz8Xr0N0YslxYRe2UqKqkkiEg9IqbBzVW9FpohDmhRj0QHqW6isCDRMVVMRrALm/cGOUVUhJLv38kxuXC5j4CiHti2Oj1rExq712HqpxpAWmIOGiPCfJXDzO8QkOZUtypcCWu2fpgVA0WlaKwNfvwfsunpMljlc5kkClw++yxB6XEqgTVUh6BCFFdT94UQiMCd7RALLycK0OlHAc+88v5fNzEaR9DNq+0TGcVBkbs0/ON3EunuxI8YAKFau6ouyG/SrUrQQkxDWgT/c8hsbH5wMHvwdFoItf3QGXiIb9LQFFSihQifO8i8AXODtL7CGRZjUdvEfw7hI+rIEZkH2xsogSTpJ88vOvTczLecgbXNOYdbJ2jI154G1qrCWu1fBuAlJtOAx2ycfDBM0NTrOhH6N4DzS5VgiWfaU9IGQZRZ9I8Inw5O4KUCZ2wUBW4aR4olCQpiJ4Q1lB94APQaTkhwXvJEFJHtlDVq5AabLw00/2KJlN3qi3T0BzmB/zTU0oUPBZqLVA4xIXj3I8UMLh3DxZ7Ac0X08jyhIoLWXwrkxmeZKADROcK8qRXfa1ioZAeCFFIPsKgje9RTWPR0sqcK4cg/zbc0dR3g4o4Hz1ecw7dwzHuWGvHR2FThtAR1HjoPbRsVoi7yQkJdCy4lcVfwC+q8OrPPCQHgtSWjeQ8m5fmQUp5X8MQuUYgHYGTQOcHZQeBKWDyiUw78lAVtO86azuCUlGpoc+5tfQYzjOHdH3SBpu8clPIUkbhAhZf8VuaaodBXFaedIEmKMI3ASUUjy8y++qvAQxUEXZErcbYntZ391Ij3XZoMRQOctzCcIlZA58BSxSCsejihTcAVAJPU7R9KikX0hBhuc5sx6RIF8Kv/7xUbK8ZhfDeB6ACeWjoez6G1fes1sAb3RiDMSyPY+I8NdqaBwcXOJkpOR5VeaRsran726ZKcvr1/tfEL5bltX4girxuxIBpWM8wJBgRAVQN4z0pD8VYHx9fSanBzvoH1cdqtwcJxRW6C188tM/1BsDK3E7sUzyVpTlJN8EhGO1fBNQ8kFwVTUBfRR8qUowCFFOniXkBbhPmW9iY7nfZ7l+r3+RyN28HAafgY0CsC2ETPgu7ezEVyEqQFuGyT3Gy+i6uavO9vaOzhGjWIbGhn7oOHuQ8jZPvZwhzU8++fpyPfTP0BvKLkuGDbTNCaC1k9rRMiIHpXgwwUu78AqQmcaRcrH/HlBmNjb6I6VXS3uMN/FjnoCC5QSIk48HeSkowxdxeZFSzKocP0n6nM5OwGxvd15FTDiDoygdJwLQqWOxav/6k0/e+8OVenBl96xrO9Pfn5mYAE42rBbrBGh/FWM7x0OwThgY4LPdPHMfC1L2REwX36PkWVSSCKR9F1N3jVuhUCWlkoFtq5WMOHF0IGeHUb2LlUf0kFVckkYZJjT4C6wQl2dn3STTn7E0NDF5TuD3/gw0hasy1BmypEqJcAK/dhKrcjd4bVkZUPYPMEp08Vm3LIGrqAlpJyFD1JQSPIBi3pfHx7vbktlkyvuz7dHRijoUprOzEzkZpZ9qVY5vD1J+4zjBi4BJiho+Mju746rN9IN8UaLb22z2F5xH3glK8JVQAcDlAhNLwNl1wy9YeiAU9VcMMBdvYO/xbWATMp+QgFIKBsHBE8EgcX81XlPTHfSmUl6Js8wPLLeQqwiJWnfi0b1UP3IG5qw9LtKVIkoXGP9skFgyFnttpqcfRNOQ6enJvMDPmP4w5SSYujFMz8roPoN3I/0VFeDigz3Q7vTCRqvsY0g3uEP4N6q7+6vx8Zru7m5+gfW51orlZTtBxgKlTkNHzxN9hiWVHi9gdqEwa2TOksHJ6f4ycHj40ZA/A4NSKlBiKLL33Lvr629sBMp74DyuXp7bo1xlvwRfqviz3vFe9yN3/kiT8xXLN3kCwkTKTnxLo2cc146cJ6p6DrmVhuJFwqypqeEBrt+YAIaf21ggmpTyrEueleVZ9+qs2+2exYP6SnODgy+2BwdzpSB7udctu2ELt+wCRBQnUMvgAIICv4BC5bDGg0A7/3jDSnLOAiUv0JNHUp6DlGRMwejhOPMiOKxx8nZLDwMtY4U38MzOdvfiqKnpHR9nr3q7u2exyFwctFih1LNAiQlbsk9gi/Ga3hr2Gn5V5ppjehJMFef1cn0wEHNsDIrCPmdnh0EpUXry3KFZg3OM+6/f90qE3/VqYjKtukgXnq3Ljc7Lv9hueGE3HR8MahYGiMO9uipDDeyCCsfsuAfvlVpqLZbS64ssWvCYsWUcuDU7OTj31M8uBFlCZJAs5TSNjkKJfRUpMWBGMRBBSjz3bYHyLIP+p/c17EUDbOYyHkdCN8+7u2ddxVN7BIh48qcMHjtQGU/f7e6S4fxyOC03idUCT/ogXiJ0gIrv/9gI6td+Dz8tTIz/9L6IiGlp3w5BAN3u73Jkjg18cegT48OjaJmYu7q6WEPSBkUN2hNETKRU2OUPLU/631GW77eaiNyBI+87bh7FPCZqU4pOskTh90Pk0xOclDKuRcRiMajE0b78OkZuv39FjYIxxUEPhTMqli6MWnvxWwk1nRRMUkhBlh//HxCj4InyRTgQZFR/CjtufYW9PxmPhgOhVFIU4fgpqA500biAo8HxeKhghtYp9tZDS89gPHx469YmZc2isAljfUhgm8bxBEQRsKEul+Loo4eZi1ClgIep+GcfWv4n/H5goUiGkj8bw7MY2lxaWtqkmJAkRiQMra8t3bq1NkTFyQC99ezBA9sznH4M0ykwJ0EJ0GfthfGAEi5LbYV/T61lOR5+6dbS2vrQkHGKAVHT9bQS2I3vWYEJXsCRAgB60uIIUbGYMUvp+tKz8qnC3qnESfRB4Q0Y5evCpHiLvRRCHCduMqpJequ9mBLqmvKiNxhlEXX5Mzqp000mZsFQZJQZCwo7tOchEDrPgI9XijSVZ4c9Dz1o3z/Ws0BZvv+9oaTKBNh+i4Ie8dhD3qjxTvuDhzAewAfJ9eJfWfolUBbve4pOTrJfnSqnK8wF9NYHzx6CsDfBfCbzlBoGJcs1x0laKDMkutZ+cDyg/MJBynIajS0Zh0r4Kfy00Um/wD56RmOtMfAhgYsZsn0goNmuDWkHKMtBSbrxO0siUk4WLGYKJ/SNAd4OWcjiuHbbQ0VD5Fx26BAk/EqUNyjLny1tbhp7GvKbwlzXGcy/iVzKEN0takePWpjkYg+NTWNKCDwxphOT8sGthw/Ky6fKmSnZTGDCc+x02diMFbogSlO3Maqfc/xOoGnOmPa2mUbzcG1IWDcFSBWTconGklnjSHD2dMmQNH5WTlXOa5zh1BBNG62WKcuHIBh0BxCEIaxbNGZ4T6IgliEdNohVm5A2qu7T97eYe645zlCK1soFzLNZojSbCsVMwQppnv4ntvsYHE5cMw7NKYYwKYpwLUa4lbwoblGcn+A53bTLf8FJVDZaDUqRW4DIpmBdI5nipXyRsw0lTVFyhr7NPH5bp9jpcl7BlHiWg4Bg6rR9KE2MHdyKoYmvG9bHE0OYa8/QKBQOzOph3kZAWlEOXNZ06XJQQgse2LCBWzF+L1klDVFQ/561PSy4DuqblUYW1qAbDsTp5oab7GTyJzcUIqYsWwvbQOAxhXmfSQ/jnHfPOSB+KRznKUinfI2mCpQPMbYnvYrKMxB2KkuxyfxvT9EQV6zvqsI80e9EGkYdDe3JkpDdIkq2q39BytSQYTpwvsJShzHM/XroWnlHR14gKr6xNFWwNZ1w4q0OZvUPbi2dWjetzBBmOdWEfMiiZhoEd8pXmUj5reO/YTNxkDJ6kPIhZZSA5XwFlGCJ5QzymblfLhyja686DNBNgRk6vXWfbQMcfk5kp7UXicieMDfzOaG8EIVA36Hb1xx7lFUiaGiPcu2XuGECKWGvaJc23D2j9A454eUrZjuxTUYw5MmriF+J0U2UZ0dHOWtJcd58yTgXiPNiXviIalKawnyQt4510dwZdItavts1Z7N0RunJU7KcmTBFNRTi9lF25ClBVExQQ2zCwawcoqKx8X1DJhwB8Gf4Rjm1Zxnl/YfPbOX3YQOJ7AlzajOfQxKmvr2o77OO/ZRpoEy1si07DlM+2aNsLVDmt1hnGVaBthW+/B5qSJiuRKFci0OroxsnQ1sMynKzdjEpQZgoW8MwOgR9T99KofUx+x4dfRAjEW7pXIoZ273aT/kMKZPrexqPmpRM46IAxQ7O/KzbDMqAVlihY1AGkoYs6W/4aMCbFKU8z5OCIRSiEF6xqyzMG5iUZ6gHvCckGNveOkRpM71EShsvbcxhEkWU6MDF4xX9Tbb6frntwYMHD439UFU3KQP7yjPI5vlfus+iBW9Qem5f29edYfaB2ppLv5nShmIxHGBT5IoodUa5tI9yPcbF9r0D3qKvGShY2qb8arwQvG3mNhgYiNyNlGmgdBygfB+TDwQoU+6voVyyvbpvCiq8R+ncZLL85VoB6H75M7A6KIqKKZeglqt2so9fPcBaGut31RDmkLHJEwyyMraZr6MUmZSLKeNFlA+LjwfR0rDxBLU9geqbGnZJi0cSBBUbWrr14MmrcjwzyJIKl1xyFgsXSn2WDgrHXUMNGR3hGynvmzaMZuM3/wW736N0Ou/b1qhe8EPMdprCEmogYFyaD4TVKKuK0ppoVj9YkK8QzrPmdO4ziyGT0rS0tWyBknip58CswTmk5LGDuW9KPhTK4jo7w56iUCri3p33X9lQU2I+O/BRoyssbjKL/AJfYKO5u+KHpM1hCBSG1h7a7jvzsEMHZKmxGRG3kW5TR1AKCxhZDMr769D83XpluhLFMqH8ya1N7GK3UoH465q+N/Xr5lkFvNj6Cetg4Xjab6QMHaA86/iQ5f68vxTbIMurbLlYNhSW+CP60pGRhoaGvr6rVzv3jas4uTIyMnKIl48qrIMdWnvSmt5HWV1ECXnmMKWAlHxRfDUhnzDXUAKJBbIPcASpnAfMzJhxxjTenq8pDFt2AnMRL+wJmu0UoBqyXKHFdpmnPHNI40C5i366WXRYp/PVrSFzP1wRXaeTgTDTuF9eBmZss1XbnNXr62jITtvmK/hVW0mJDT2tvMCPnyFsMWrUKDhWqHG6xZTJQ5TfYrurQvIJUBtzEyfENNsmGFBK4orEh3wGnvNldXX1SyfmQFspOjF8h3ecSInBFd4bWnc6qyl96XwCebPaWVpQE7Dm9pvBCh1aelLudLJe0qTUDlGedVRpNGzIeQkkc2sTY27Wn8hPE5mA7fdtr5y26iHB5hToOpyRsOkU1p2l1SCLJ4D7Ek4PKF85ncDcWep00k36BFCRv5qW2oSXTpuNFcqA2reHuRBIbcGZrg0VyVIsng3Oz7JqZgflZ3MNWW9Ayqt55GqnqTAbsJc4QW507SU93UmrncLQafiOBM6XuHgUwICyFCkp3XSepqeF6s41obS0FLd5QktLWe1hmpWzoH/UvhrSWPdVoHz/MKXH7Aqgy4rzBUcZMYzQ3OkaPQ0AcFxa/RJkBHwo8pdIiVdrQKQvGeVLJkuQbDW1DW0CpY0OGZQvS0HiTwp2z9Tft2eoOFNvUvJbxXPWecozez1RwQ47DffszO91k26ulYKuBXralCWtBnEZsnwCbwtORjk0ZAOJg5bX6RAVOqtpZzV+h01evoS4/sRZwGSXopzOq8XhyqSMHU3pwesSxRO/V9vbMe4Vog1YZDVqef3JaZDV0DoTZ+cQaNwGf0uf2J68xJBTevp0NRjj0uZ66Xp1J+jfBiaMlKfhZF6Cjdr2U7JRZKUmpUD/x0FKs3Qj8rhbhmbF1XUkpRMPAh6BuwWHACG+Aq77e0fszLFp2FyurxBLnbDFaZvNxux2CC0BrCa/Q6bwHMcvLPB787lGHgfK9w9TQoqMs8n9bhy9RZR7Goe4sg5eetpZLAxIMphlcphlOD6gi1tZb/MqmDYGhs4CLDtH8LFqsAHznY6Ozj5Oak7p1Zub1dVnAhD0XLIbAICSi9LDGv8rx4ciFRSjYeVd3d1HUDqdL1+W5l9i/hs5lK8VgSYv1MiymvaGlL1IO1KUqOA7i1fw+ionXdBOLT0wmscp28M0XqOU8TIlLl0vaigKawYdJ3WIQGlWPvO9vfwhyvZ8pmsYeV1NAWVMTU3XQkgwyrXQoYsZI3uW0NHJJfShpX0zjuVLYaPtVCFbaEddeT7ruN2SZBPsxZROZpgHc9u+Cyt46Ru/SyQUq3lUIwcMRrZIMMrlN9gHnANTyEn65oNDs5CbUKnyXpzo9xZJsvjamcNRyeTJF1M6zUqBiTi/gMygU4Lsko3UzMsyp6pkNQv2jLME5hBDgTBgdrnkC3IXXtpxufYu1PD+NVv7EXOl6Bw6yOrk/uUlRVdLwVZve1k13N3ryssyn3L5hlq2LrkWTVzu6mrzJl1deDVRX3XJXNRL3MEgmHMoz5iNArxKVziXm4S9Lryu0+VSvWx5FLQi1Q/ajxxrKZy8ox86HN++du0/BqQ9yoZCELPX1tY21ZU6O+vq6k63TBKX2xVulUGU3bI35ZIhBEuu8VVXDVkxGYUW3l3z1VfyGVB6l5tPKrAtgLYpSb4N+/hn7a8Zz8QcCvP9s9ccb6QUCpR7iE1NdSU3N0osloGBCgBtaeBXadgFgc0dFIOyi0tpEOVqiNtuQuq8nf/tV+Pj46sC7M7tUmNBkDuovc2bhd03TL0Ost0WA+tSqPam+3tY2JSLKQHRAoiPB26WWHERdUnFxgATaIurC+Kq7NFduPDTS7rdNRIupkRIL69Tj/2XNePj7hVIvHK3S9fQhgHU5YEUt4+rY/+lhhhkS9WYpn4t5bl9lKYUHw88LrFareweDryTY2CjAjntsrt7mA67XFAehsijR49qFlaYb3sWtvCSU+C33TU1qyL4w2zXLlW6umfZ9VEvyUXKnYwOwpvz9Jkzp517lA9/CZQSFT50VL1BlicpjRPeDZCT4C0McaAE2SoeVyAkqBz+cXPjJio+Kl8QYFOIkx7yyN39qEZqwfvJ7EZnLnm7e2u60tTPdXXLSaENRI824iL2iYylz8k6D6eHRYPSvQtJ/k5sv4S/d5x9DSXI+ENN8LPrjqhnhlhRUl5ecnPgsdVaUbu4uF0Cqi8BUFB8CYDW2tvghDRRnOx6BBQ1O9KKPmlcD6Rptaa7+5Ea0zlXd9cw9Xb1PkIPknGtSsa6fRXTRNpo1guYttZFJ7ayQuXrZPmfHbffF7w8x9eaUryJRCUlYIw3b9aVNCxy3OL26YGK7cW6ZRQoCLnudF0tj5RCCAwTOGtqaqQFPmDES6n5UfejVU3jSfcjWROC7prhC96kl5AyXKJUe7Wj4zqbVBC2hNOmdQo7nVfZ1fG/fw0l9JFJmuAWLU219m1LxePHj2+WAN/AwE0YtdyL7cXFBouloc4CJU/tAJ7ATZCnxVLHcx5RE6JtDLO7FzwbnAcl1BJ8BAr2iBLnDoY1Kuqa7rkQlglnb9m2ZEabrnf8Zgubc0HMeljWbF/z59ohQ4aodvu1Pu6hOsdbrSAzi6UEIC2lDPHxwMZA7eJkw7Y1MjVd3pCLtryoG7g5cKrEUvf4cZmzlOfCraBzyZAmcNa4o+y+tJAMGm5LiwmuWff4FX8qdWEHFzQqKe8wGOeo9W7DlrYV2xKzyRBSTt0Kc2w9hEa9r49ErMR8YbXaF8udFhCW824dE2Td6dN1k3b7dgRUMmNZLLFwLaduDtRd7yytqLhb1sC5eF3TxNbfgJ8zzkfdvIaYGmSbLpIGWXa5H10A6/PjAqSQ7vEqQYnUjk1MLHqzyWw2mcoGnB3t5adXc2wxUYLuXwBzkDILlcBgrdVSWl5SUTEAEmWULWzqp8EKzd/9wW1LCUb3mwNoso8flzTVcrKrJYZ3MKzwLkbp7nalKV7uZ5QKUMrdvb/NqlDsRL16yquo0ioUoBZcigiIqVRSv97eUSpxnWz1GIQM7UC43KM05zBz1/sGLVZLE9glBh3Q+UDFImevq1uENF764kWDBUJnBUi6DoNTk8UKlJC+8dYaXA3gguTeBQmb4t0hCRdSagtQW49346KSFK6OQEZoCOy4rH1bSiWTSS/f10e4q+ayLAgRLQdEWUx5kl3OHxwc7HvRZLXUDTw2XOTmzYoSwLK8aGiofQHByFoBgqxDv6qzNDW9gOqju4t42B1AghZSpcmFSV4S8B4LRulP4uzuLBxd171ef7itLbgKiaPWinddbHPcAs495fowsneaF8z026+9A5ZRYsGWG7w+yG1bmb4NcWLUvGnJLeZyi4uLuRKMQzcxo4MgWaPz6FEX50Wla3j3HMCmJrdE+EcUKb0hziXjskcS8PuHg21sre12Wb+lwQIZd7Dvah9bRQSC7DMvoAgnHedeR/ktNhVaFIvlRcDMgdrrgGWg5DTQPgbtvMgtvsjlcg0ljBEEabUs9g0iZReEa7LCbv5gN3WInkl2rw3Kktd3uS7I5DyaRtDtbsOV8ZaMsczrhaUhxxZdduSbXS6N+v73199NfNZRGTLbgBxQ5l4g5wCLjBUDFdabEHkq6lpqT2Pe2aiAUvNF3+D1HGtugNJN7J4CZ0gSs9msJrm6XJIORZHsdkHkabITNMhFSyZjWSyq3HO5vWkjL6Urt994l/s1aCog+Kqs98hdH+zbbkK1s9Q9sIHygzBuK1ke2DgFFlnbBxY8yOHKcyI/6up65CJR5AQ8cSUq6uAVchtUlArHd0PJZh/NjE4gW20mU7bNqn3ZtVf5Q2jFxAzpIHD7j9yLD0mpEiTuXTBWrF0fxKhUV2GqfQNTTcmpZcZoGRy8fn0QV/zJj3hc1tgFvg0tTiCFNyxFA1ldB9cFb1fAIKDCc0HgyYxuL9ZaM/2obBdbHkd4KazGXRgYsHFUIaa23P4uTwy4fRIicsDENKISmieEdghEtpvLA8sl4Nnbg9fhJDgCHuru7jJ0DpxuduCoxEHISSXVNlC4hHVgLxZZtRMTkBj7LXa8TwWqDheJh73JVFg212ctQH3kOfGdnmtgitMzyTFnB85tS5lhnnWnQdnLp06DZwPjvXs57O2T0OwgAs8wEZSAX0tJvCa50MUmdNyzuKIR15Baty3MIJGxjST8elZXCqtSVwToQyoPBsrX3fNsWKfALkNATDLUDuYJFVxphaFsZBxky5w13d0LNSOuA3SbmBB2iDfl9aYCxO0ypn16QZg1uEBy0c7WSoJtyAGPJib9BcaoZgiy6rs+IwI2PBFCcWKbb3Ci2ks7Oq6Cri0vBu8ZggRjDNM0qpMtECVdBiYoMJDyX/Be4FGSnNzbC3VSzWz3uBvk1wYm2AUdb1qLxbJKYWXTAj6RoaXy+z3JAsUpmtYJsRPUjlEJwrC1qaHPFCTn6h13J+kwrvDtNtc/YtsNvupPXbiQ8hvzBC43bACUNbPjvV2zMsRLl9yst1JBC/DFEzc0BIL8/fd73gaKE22Z7YiJs68W0jcYJCAzxvgKFOLDVJwdH++exfW2sgEFJsf5U37FvBQPqRHqzd4aEOb4eNfOz2q6d3DmghYzqvCGdrRr//FnRFSCOI3YCeJEteOEHwDfA/uPhyAVasMpqncDJcgK9b533AXzJTbssEFNbw3K8qteF+yRXaNUi9cvgtekKw/MEnxXSvilv9PZ8iVTnPeQFP6ysiUkYk8rQGeIa5MZaW93YYqWM24ZdyOkQQl/oThWt1izXrx2P+jiqX7S8RrX/k7P26hMCzQrGeJERGA0cxnHrzCpiGdq0OhwqXUNqN3txliNC2kZIEq5d/yr/zo+/lVNt3uYLT3wFDOqoocjuydMqfzQ58BU4hJNpSDOwX2XaVQd7yxNyy5jmTWutOZdxYPNRcqrOJm0yktpEVTrKV54rGqCnvL4CX+i8vYfkebrKavO6Lhj0bwdYHAxd9Rl0JxRy4zk8ALeyMjrr5TiClp57wIDr2YFfSUpBOBkY2KyufKNmK+j/CtcYySyyz4Hj9uA86wjzo6rOCvH7iHpZG3qyFVjSmXE6cR6trOTVbWSGjxqzS9OL2iad1LF9SiiLmr/AIf8IRoPmesdG652YpfcwK6edTSMAAkhUFuPNBhNtAnZbkDDT/isAZeedxhXl7xHLFknw0oQryt56RbOx4r+pHbCce2z7015zdGC3RoZMRp6Z56BQfQRfKfDmCzGn51wJvkpbjKCzQG8OcKWVdB9i+ADcZIW4kSuwYAAvaYYM57foW0plazI/X6UZx0nBeww8lNNxtQwvLg6gvddobiYUGGYQLiFgeIEkZttTKB4bTQhSYEQnIpik607kqqzxe0CbfUGErsXKm9/X1lWOSpxvgz1O4LyRKsbYagGeAeja3c2GD/BSs0pbngxYpyX0baaCo/6o7jkDPKEGmd3aLMbnUhUZ9N0alhRhkUsOK59b0pQliETJOxDRY8gHoPoy8M4TaPI24STGAq4anoJSzS8DmkHiKADVjm8Q2+FkESCmX00K/iDzcPBoF+KJoW/OxLzTZSaQWlIqYFREiZEp+kZI6z7A23jbYJM2mCn2Ao2mBuQBFsPAu2rwCk0Gqa6qoIRhCchcMZFMYTPPeESQQYpqwGOSycrv5csv3VU6sWUfXlKkFWfKSlDaswmOw3KvP11GDMAgKajTwfoSoCGDIUTeA8X8iS15JYIpZMsBZv9zTtBdxDzR/bkUR70ZsroQco+ZgAjBiVe3EOLNe4XY/4F77Ce1aQkurG+UadaUsIJAbwRiE9SIc6lt5LQbeJNJsEdf3MNo5T4RPZwM/4mym8MypG8XaLGOzsLBomU7aYd5n+acbNhjxIKHiUaVnhR5LiEzBs3h6BLJaJClj3Eg/rdNeqFYUYZ9mez/hNH1etviOq3PbikGf0A3SIfwzsMs7tKTN/uNMwUfx6m3DVvXAFZiiIPsTOpENErJQU2rYBLt0JyTdBvUDarXFzmbn/P3GNQOvNwfeyH01iCYFyMHBn5I8ud4qq6qyZ4spD24KVYRQ/xWJnrC94YPq4jRj2rw8PqBaCs2XFfiJPnzysdP4gyH2YOM3HfdeyrObA65gICQm5RPTjcrAyjLGuCwwp34icffe88fjtl3AUywp75kF++xi/E41IUnzkRUNLpdAiH1xwpj8eL/SN7M5ROK0pzGLaMJiQpvmDcr8Z2IgkakyRCXmhWgXJ4p8bLk6ofUl+mqGTcASElgMijs8k/YxgPAhK1ZFL3HDV0PZnMmo/iyT8PTMD5GdicD6chBqG6g8MXUmG3W00N7wynJHLiB1XBkN1CuoaPxhBaNc0TSgdUth6ZN2/j+67qxnugFpgCAumQ1yNR6vVrAk3tNKe8k5wcbPMnU/7JA4/z+86UOhR+oRVVkl5zg5i0K0kSX3zL397AW/P4fffyFc7LrYZArDS0cyFp9AFQ0cOmz39YR1E5ad6VwT1/fgJGJRv2kKbpRqMqhbLZVMpvVmauLjc2asaAnrKrq8usyv1+v9e4y47gPXF422w66d3xpqLc8yp87hmM55VVP4yyipFV4Sh++8M0NtDmvX0rejareVSjr+2S86C9bhkvorNHPqCNetidHSSg4XNVnvNtQZk0/wwKjhP44JwqOPeq43pKJ4P9xugtsR8wOBcUbSvGZipcKD2Xy13zX2qMuRjofOPprJY/C7YaYysNtVklx8urXol7XnkszxIFsG+O6tQdJwxOQ6MKNueiEncZaMO/HW5jF5ldQQ8+X003GKO4KiT0D8Z+8bkz5ETVvidEHvczbnGnJ1PYBgQKnLggxJirUrL+LpwP2tUxOJiMCbzo5zl5m/1yFdNy1fc44g97XjDK86TH5GzDe1EYpycIbXhI8Lq65DB7mAYytplP0NCR8WzRwyu/+XNTssPdNjhV1sTwAdHEStO0SxHzcy3wUdyLFQcyntuvj/+IJ0SfQ05UZHLXaLZUNsWiQ+/AGHEeAxlxEZR2shKfcvkXedp2gdMUmslJixjx3n5jAvXaX+6Z4HucCYMTGzD0ZZMR50/FM8j4jeMvR8lEVHlS2xMezhqG4iYjLgULVX7PZ1b/OSgNzmbk9CKcOVGNiYYxfvhHZ/3+YygNzjPoMaFJBpg3USF08lgYj+l/J0AQximkeRYgmRuxIP7Zcez/uP4/im9Bnr87g7PY0N8wF9IPBMi3gdKQ54cY5kX9iCD+tlAWcRpB/Nrx7fl4/y+kcyy9ay3HzHjs/68Upvc/PYj/uSmZPK99e9w7Pf7/4c7x7fHv8s9A6XhH+Y7yHeU7yneU7yjfUb6jfEf5jvId5TvKd5TvKN9RvqN8R1k8/j+2hMoFDsJWgwAAAABJRU5ErkJggg==';
@@ -1077,13 +1077,34 @@ function participation(tid){
 
 /* ---------- penalties ---------- */
 const PEN_PER_PLAYER = 500;                 // v5.0 §3.1 — per available player who never took the court
-const penOf  = tid => (state.pen[tid]&&Number(state.pen[tid].pts))||0;
-const penNote= tid => (state.pen[tid]&&state.pen[tid].note)||'';
-function setPen(tid,pts,note){
+/* A team can pick up more than one penalty in a day, and they do not all belong
+   to the same place. A rule broken during Badminton is recorded against
+   Badminton; an unused player is a squad matter and belongs to no single sport.
+   Either way the deduction comes off the championship total — the sport is the
+   record of why, not a separate pot. */
+function penList(tid){
+  const p=state.pen[tid];
+  if(!p) return [];
+  if(Array.isArray(p)) return p.filter(x=>x&&Number(x.pts));
+  if(Number(p.pts)) return [{pts:Number(p.pts), note:p.note||'', sport:''}];   // pre-5.4 shape
+  return [];
+}
+const penOf   = tid => penList(tid).reduce((a,x)=>a+Number(x.pts||0),0);
+const penScope= x => x.sport&&SP[x.sport] ? SP[x.sport].name : 'General';
+const penNote = tid => penList(tid).map(x=>penScope(x)+' · '+x.pts+(x.note?' — '+x.note:'')).join(' · ');
+function addPen(tid,pts,note,sport){
   pts=Math.max(0,Math.round(Number(pts)||0));
-  if(!pts) delete state.pen[tid]; else state.pen[tid]={pts:pts, note:note||''};
+  if(!pts) return false;
+  const l=penList(tid);
+  l.push({pts:pts, note:note||'', sport:(sport&&SP[sport])?sport:''});
+  state.pen[tid]=l; save(); return true;
+}
+function removePen(tid,i){
+  const l=penList(tid); l.splice(i,1);
+  if(l.length) state.pen[tid]=l; else delete state.pen[tid];
   save();
 }
+function clearPen(tid){ delete state.pen[tid]; save(); }
 
 /* ============================ SHORT-HANDED PLAY ============================
    A team that cannot field the compulsory six has three ways out, in the order
@@ -1218,6 +1239,7 @@ function subPending(m){
 function pruneAcks(m){ const lead=leadOf(m); m.acked=(m.acked||[]).filter(g=>lead>=g); }
 
 function addPoint(m,side){
+  m.sc=null;                                 // the console is now the source of truth
   if(overOf(m)) return;
   if(subPending(m)) return;                 // confirm the rotation first
   m.log=(m.log||[]).concat([side]);
@@ -1290,7 +1312,9 @@ function scoreText(m){
     if(m.sport==='CR')    return w==='a'?[FF_CARROM,0]:[0,FF_CARROM];
     return w==='a'?['2','0']:['0','2'];
   }
-  if(s.kind==='racket'){ const x=scoreOf(m);
+  if(s.kind==='racket'){
+    if(m.sc && (m.sc.a==null||m.sc.b==null)) return ['',''];   // half-entered
+    const x=scoreOf(m);
     return (m.log&&m.log.length)||shortSide(m)?[x.a,x.b]:['','']; }
   if(m.sport==='CR'){ const g=carromAgg(m); return carromPlayed(m)?[g.a,g.b]:['',''] ; }
   const r=m.result; if(!r) return ['',''];
@@ -1374,6 +1398,37 @@ function leagueTable(sportKey){
 }
 
 /* order two teams by their group-stage record (used for 5th–8th and projections) */
+/* Two teams can run out of tie-breakers: level on wins, on difference, on
+   points scored, and either they never met or that game was drawn. §2.7 and
+   §2.8 end in drawing of lots, but the honest answer is that they finished
+   equal — so they share the position and split the points those places carry
+   between them. Nothing else in the championship arithmetic moves, because the
+   pool for the sport is unchanged. */
+function recordTied(sportKey,x,y){
+  const all={}; ['A','B'].forEach(g=>groupTable(sportKey,g).forEach(r=>all[r.tid]=r));
+  const rx=all[x]||blankRow(x), ry=all[y]||blankRow(y);
+  return rx.w===ry.w && (rx.pf-rx.pa)===(ry.pf-ry.pa) && rx.pf===ry.pf;
+}
+function leagueTied(sportKey,rx,ry,ms){
+  if(rx.pts!==ry.pts) return false;
+  if((rx.pf-rx.pa)!==(ry.pf-ry.pa)) return false;
+  const sub=h2h([rx,ry],ms);
+  if(sub[rx.tid].w!==sub[ry.tid].w) return false;
+  if(sub[rx.tid].diff!==sub[ry.tid].diff) return false;
+  return rx.pf===ry.pf;
+}
+/* Turn a finishing order plus a "are these two inseparable" test into shared
+   blocks: [[t1],[t2,t3],[t4]] means 1st, joint 2nd, then 4th. */
+function tieBlocks(order,sameFn){
+  const out=[];
+  order.forEach(tid=>{
+    const last=out[out.length-1];
+    if(last && sameFn(last[last.length-1], tid)) last.push(tid);
+    else out.push([tid]);
+  });
+  return out;
+}
+
 function byRecord(sportKey,ids){
   const all={}; ['A','B'].forEach(g=>groupTable(sportKey,g).forEach(r=>all[r.tid]=r));
   return ids.slice().sort((x,y)=>{ const rx=all[x]||blankRow(x), ry=all[y]||blankRow(y);
@@ -1415,8 +1470,12 @@ function sportRanking(sportKey){
   const s=SP[sportKey];
   if(s.kind==='league'){
     const tb=leagueTable(sportKey);
+    const ms=state.matches.filter(m=>m.sport===sportKey&&m.stage==='league');
+    const byId={}; tb.forEach(r=>byId[r.tid]=r);
     const done=state.matches.filter(m=>m.sport===sportKey).every(isPlayed);
-    return {order:tb.map(r=>r.tid), prov:!done};
+    const order=tb.map(r=>r.tid);
+    return {order:order, prov:!done,
+            blocks:tieBlocks(order,(x,y)=>leagueTied(sportKey,byId[x],byId[y],ms))};
   }
   const A=groupTable(sportKey,'A'), B=groupTable(sportKey,'B');
   const fi=state.matches.find(m=>m.id===sportKey+'-final');
@@ -1436,7 +1495,31 @@ function sportRanking(sportKey){
   const p78=byRecord(sportKey,[A[3]&&A[3].tid,B[3]&&B[3].tid].filter(Boolean));
   const order=[].concat(top2,mid2,p56,p78);
   TEAMS.forEach(t=>{ if(!order.includes(t.id)) order.push(t.id); });
-  return {order:order, prov:!(racketWinner(fi)&&racketWinner(th))};
+  /* Only the cross-group placings can end level — 1st to 4th are settled on
+     court by the final and the play-off. */
+  const shareable={};
+  [p56,p78].forEach(pair=>{ if(pair.length===2 && recordTied(sportKey,pair[0],pair[1]))
+    shareable[pair[0]+'|'+pair[1]]=true; });
+  return {order:order, prov:!(racketWinner(fi)&&racketWinner(th)),
+          blocks:tieBlocks(order,(x,y)=>!!shareable[x+'|'+y])};
+}
+
+/* Where a team sits when its place is shared: the span of positions and the
+   average of the points those positions carry. */
+const _shareCache={};
+function sharedAt(sk,tid){
+  const r=sportRanking(sk); if(!r.blocks) return null;
+  let pos=1;
+  for(const blk of r.blocks){
+    if(blk.indexOf(tid)>=0){
+      if(blk.length<2) return null;
+      const from=pos, to=pos+blk.length-1;
+      let sum=0; for(let p=from;p<=to;p++) sum+=SP[sk].pts[p-1];
+      return {from:from, to:to, size:blk.length, pts:Math.round(sum/blk.length)};
+    }
+    pos+=blk.length;
+  }
+  return null;
 }
 
 const sportStarted  = sk => state.matches.some(m=>m.sport===sk && isPlayed(m));
@@ -1455,9 +1538,11 @@ function championship(){
     SPORT_ORDER.forEach(sk=>{
       const done=sportComplete(sk);
       const i=onBy[sk]?rankBy[sk].indexOf(t.id):-1, rk=i<0?null:i+1;
-      const would=rk?SP[sk].pts[rk-1]:0;
+      const sh=onBy[sk]?sharedAt(sk,t.id):null;
+      const would=rk?(sh?sh.pts:SP[sk].pts[rk-1]):0;
       const pts=done?would:0;                    // nothing banked until the sport is finished
-      cells[sk]={rank:rk, pts:pts, would:would, prov:provBy[sk], done:done};
+      cells[sk]={rank:rk, pts:pts, would:would, prov:provBy[sk], done:done,
+                 shared:sh?sh.size:0, from:sh?sh.from:rk, to:sh?sh.to:rk};
       total+=pts;
     });
     const firsts=SPORT_ORDER.filter(sk=>cells[sk].rank===1).length;
@@ -1574,7 +1659,11 @@ function fxOpen(sk){
    is the other way round — the match was scored on paper and someone is typing
    the finished results in. One row per match, two boxes, no line-ups needed. */
 function entryRow(m){
-  const A=teamById(m.a), B=teamById(m.b), r=resultOf(m), sc=scoreText(m);
+  const A=teamById(m.a), B=teamById(m.b), r=resultOf(m);
+  const ent=enteredScores(m);
+  const sc = SP[m.sport].kind==='racket'
+    ? [ent.a==null?'':ent.a, ent.b==null?'':ent.b]
+    : scoreText(m);
   const dis=canEdit()?'':' disabled';
   if(!A||!B) return '<div class="erow"><div class="eno">'+esc(metaLine(m))+'</div>'+
     '<div class="dim" style="flex:1;font-size:12px">Waiting on the groups</div></div>';
@@ -1612,13 +1701,29 @@ function entryRow(m){
 
 /* Turn a typed final score into a rally log so every table, tie-break and
    share sheet downstream keeps working off one representation. */
+/* What has actually been typed into the two boxes, as opposed to what the rally
+   log implies. Typing one score used to leave the other reading 0 — and worse,
+   the match counted as played 25–0 the moment the first number went in, so the
+   table moved before the result was complete. The entered pair is kept
+   separately and a result only exists once both boxes hold a number. */
+function enteredScores(m){
+  if(m.sc) return {a:(m.sc.a==null?null:m.sc.a), b:(m.sc.b==null?null:m.sc.b)};
+  if((m.log&&m.log.length)||shortSide(m)){ const x=scoreOf(m); return {a:x.a, b:x.b}; }
+  return {a:null, b:null};
+}
 function setFinal(m,side,val){
-  const sc=scoreOf(m); const now={a:sc.a,b:sc.b};
-  now[side]=val===''?0:Math.max(0,Math.min(TARGET,parseInt(val,10)||0));
-  const log=[]; let x=now.a,y=now.b;
-  while(x>0||y>0){ if(x>0){log.push('a');x--;} if(y>0){log.push('b');y--;} }
-  m.log=log; m.acked=[GATE1,GATE2];
-  m.done=(now.a>=TARGET||now.b>=TARGET);
+  const now=enteredScores(m);
+  now[side] = (val==='' || val==null) ? null
+            : Math.max(0, Math.min(TARGET, parseInt(val,10)||0));
+  m.sc={a:now.a, b:now.b};
+  if(now.a==null || now.b==null){          // half a result is not a result
+    m.log=[]; m.acked=[]; m.done=false;
+  } else {
+    const h=headOf(m);                     // a head start is already in the number typed
+    const log=[]; let x=Math.max(0,now.a-h.a), y=Math.max(0,now.b-h.b);
+    while(x>0||y>0){ if(x>0){log.push('a');x--;} if(y>0){log.push('b');y--;} }
+    m.log=log; m.acked=[GATE1,GATE2]; m.done=true;
+  }
   syncKnockouts(); save();
 }
 
@@ -1692,8 +1797,9 @@ function ledger(){
       '<div class="ldg-pos">'+(i+1)+'</div>'+
       '<div class="ldg-team"><span class="nm">'+swatch(t)+' '+esc(t.name)+'</span><span class="ldg-bar">'+bar+'</span></div>'+
       SPORT_ORDER.map(k=>{ const c=r.cells[k];
+        const rk=c.shared?(c.from+'='):(c.rank||'–');
         return '<div class="ldg-cell'+(c.done?'':' tbd')+'" data-sp="'+k+'">'+
-          '<span class="rk">'+(c.rank||'–')+'</span>'+
+          '<span class="rk">'+rk+'</span>'+
           '<span class="pt">'+(c.done?c.pts:(c.rank?'('+c.would+')':'–'))+'</span></div>'; }).join('')+
       '<div class="ldg-tot"><b>'+r.total+'</b>'+
         (r.pen?'<span class="pen">−'+r.pen+'</span>':'')+'</div></div>';
@@ -1701,7 +1807,8 @@ function ledger(){
   h+='</div>';
   h+='<div class="row" style="margin-top:10px;gap:7px;flex-wrap:wrap">'+
      '<button class="btn sm pri" data-shareimg="1">Share as image</button>'+
-     '<button class="btn sm" data-sharetable="1">Share as text</button></div>';
+     '<button class="btn sm" data-sharetable="1">Share as text</button>'+
+     (canManage()?'<button class="btn sm" data-print="st">Print standings</button>':'')+'</div>';
   const pens=ch.rows.filter(r=>r.pen);
   const started=SPORT_ORDER.filter(sportStarted).length;
   const doneN=SPORT_ORDER.filter(sportComplete).length;
@@ -1713,8 +1820,9 @@ function ledger(){
        'Nothing is added to the total until that sport finishes.')+
      ' Top all five and you finish on 4,600.</p>';
   if(pens.length) h+='<div class="alert warn"><span>⚠</span><span><b>Penalties applied</b><br>'+
-    pens.map(r=>esc(teamById(r.tid).name)+' −'+r.pen+(penNote(r.tid)?' · '+esc(penNote(r.tid)):'')).join('<br>')+
-    '</span></div>';
+    pens.map(r=>'<b>'+esc(teamById(r.tid).name)+'</b> −'+r.pen+'<br>'+
+      penList(r.tid).map(x=>'&nbsp;&nbsp;−'+x.pts+' · '+esc(penScope(x))+(x.note?' — '+esc(x.note):'')).join('<br>')
+    ).join('<br>')+'</span></div>';
   return h;
 }
 
@@ -1763,11 +1871,18 @@ function rankBlock(sk){
   h+='<div class="card flat" style="margin:0"><div class="tw"><table><tr><th style="width:22px"></th>'+
     '<th>Team</th><th class="right">'+(done?'Points':'Would earn')+'</th></tr>';
   r.order.forEach((tid,i)=>{ const t=teamById(tid), on=teamPlayedIn(sk,tid);
+    const sh=sharedAt(sk,tid);
+    const posLbl = sh ? (sh.from+'='):(i+1);
+    const val = sh ? sh.pts : SP[sk].pts[i];
     h+='<tr'+(on?'':' style="opacity:.5"')+'><td class="cond" style="font-size:15px;color:'+
-        (i===0&&done?'var(--gold)':'var(--dim)')+'">'+(i+1)+'</td>'+
+        (i===0&&done?'var(--gold)':'var(--dim)')+'">'+posLbl+'</td>'+
       '<td><span class="row">'+swatch(t)+'<span class="tname">'+esc(t.name)+'</span>'+
+        (sh?'<span class="pill sched">tied '+sh.from+'–'+sh.to+'</span>':'')+
         (on?'':'<span class="dim" style="font-size:10px">not started</span>')+'</span></td>'+
-      '<td class="right mono">'+(done?'<b>'+SP[sk].pts[i]+'</b>':'('+SP[sk].pts[i]+')')+'</td></tr>'; });
+      '<td class="right mono">'+(done?'<b>'+val+'</b>':'('+val+')')+'</td></tr>'; });
+  const anyShared=r.order.some(tid=>sharedAt(sk,tid));
+  if(anyShared) h+='<p class="hint">Teams that cannot be separated on any criterion share the place and '+
+    'split the points those places carry (§2.7, §2.8).</p>';
   return h+'</table></div></div>';
 }
 
@@ -2024,23 +2139,46 @@ function participationBlock(t){
 
   /* penalty */
   const suggest=pr.breach.length*PEN_PER_PLAYER;
+  const list=penList(t.id);
   if(suggest) h+='<div class="alert bad"><span>−</span><span><b>Rules set this at '+suggest+' points</b><br>'+
-    PEN_PER_PLAYER+' per available player who never took the court (v5.0).</span></div>';
-  h+='<div class="eyebrow" style="margin:16px 2px 5px">Penalty</div>';
-  if(pen) h+='<div class="alert bad"><span>−</span><span><b>'+pen+' championship points deducted</b>'+
-    (penNote(t.id)?'<br>'+esc(penNote(t.id)):'')+'</span></div>';
-  else h+='<p class="hint" style="margin:0 2px 7px">No penalty on this team.</p>';
+    PEN_PER_PLAYER+' per available player who never took the court (v5.0). An unused player is a squad '+
+    'matter, so apply it as <b>General</b>.</span></div>';
+
+  h+='<div class="eyebrow" style="margin:16px 2px 5px">Penalties</div>';
+  if(list.length){
+    h+='<div class="card flat" style="margin:0 0 9px"><div class="roster">';
+    list.forEach((x,i)=>{
+      h+='<div class="rp2"><span class="who"><b>−'+x.pts+'</b>'+
+        '<span class="meta2">'+(x.sport&&SP[x.sport]
+          ? '<span class="sptag" data-sp="'+x.sport+'">'+esc(SP[x.sport].short)+'</span>'
+          : '<span class="cat m">General</span>')+
+        (x.note?'<span class="dim" style="font-size:10.5px">'+esc(x.note)+'</span>':'')+
+        '</span></span>'+
+        (canManage()?'<button class="availb out" data-penrm="'+t.id+'|'+i+'">Remove</button>':'')+
+        '</div>';
+    });
+    h+='</div></div>';
+    h+='<div class="alert bad"><span>−</span><span><b>'+penOf(t.id)+
+       ' championship points deducted in total</b></span></div>';
+  } else h+='<p class="hint" style="margin:0 2px 7px">No penalty on this team.</p>';
+
   if(canManage()){
-    h+='<div class="card" style="margin:0"><label class="fl">Deduction (championship points)</label>'+
-      '<div class="row"><input type="number" id="penpts_'+t.id+'" value="'+(pen||'')+'" placeholder="0" style="width:110px">'+
-      '<input type="text" id="pennote_'+t.id+'" value="'+esc(penNote(t.id))+'" placeholder="Reason — e.g. §3.1, two players unused" class="grow"></div>'+
+    h+='<div class="card" style="margin:0"><label class="fl">Add a penalty</label>'+
+      '<div class="row" style="gap:7px">'+
+      '<input type="number" id="penpts_'+t.id+'" placeholder="Points" style="width:100px">'+
+      '<select id="pensport_'+t.id+'" class="grow"><option value="">General — not a single sport</option>'+
+      SPORT_ORDER.map(sk=>'<option value="'+sk+'">'+esc(SP[sk].name)+'</option>').join('')+
+      '</select></div>'+
+      '<input type="text" id="pennote_'+t.id+'" placeholder="Reason — e.g. §3.1, one player never took the court" '+
+      'style="margin-top:7px">'+
       '<div class="row" style="margin-top:9px;flex-wrap:wrap;gap:7px">'+
-      '<button class="btn sm pri" data-pensave="'+t.id+'">Apply</button>'+
-      (suggest?'<button class="btn sm" data-pensuggest="'+t.id+'|'+suggest+'">Use suggested '+suggest+'</button>':'')+
-      (pen?'<button class="btn sm dan" data-penclear="'+t.id+'">Remove penalty</button>':'')+'</div>'+
-      '<p class="hint">Deducted from the team\'s championship total. The rules set no fixed figure, so '+
-      PEN_PER_PLAYER+' points per unused player is the figure set in the rules (v5.0); '+
-      'the Sports Committee may still apply a different amount here.</p></div>';
+      '<button class="btn sm pri" data-pensave="'+t.id+'">Add</button>'+
+      (suggest?'<button class="btn sm" data-pensuggest="'+t.id+'|'+suggest+'">Add suggested '+suggest+' (general)</button>':'')+
+      (list.length?'<button class="btn sm dan" data-penclear="'+t.id+'">Clear all</button>':'')+'</div>'+
+      '<p class="hint"><b>Apply to</b> — pick a sport when the breach happened in that sport, so the record '+
+      'shows where. Pick <b>General</b> for anything that belongs to the squad rather than one sport, such as '+
+      'a player who never took the court. Either way it comes off the championship total; the sport is the '+
+      'reason, not a separate pot.</p></div>';
   }
   return h;
 }
@@ -2536,6 +2674,132 @@ function roundSheet(sk,round,withData){
   return sheet(head,h);
 }
 
+/* ---------- standings, as a printable record ----------
+   The board on screen is built for a phone: colour, bars, tap targets. On paper
+   the committee wants the whole picture in one place — the championship board,
+   then every sport's tables, knockout results and final placing with the points
+   each rank earned. This is the document that gets signed at the end. */
+function standingsChampSheet(){
+  const ch=championship();
+  const doneN=SPORT_ORDER.filter(sportComplete).length;
+  const head=sheetHead('Championship board',
+    doneN===5?'Final — all five sports complete'
+             :doneN+' of 5 sports complete · a sport pays out only when all of its matches are done');
+  let h='<div class="rnd"><table class="fxt"><thead><tr>'+
+    '<th class="c" style="width:34px">#</th><th>Team</th>'+
+    SPORT_ORDER.map(k=>'<th class="c" style="width:66px">'+esc(SP[k].short)+'</th>').join('')+
+    '<th class="c" style="width:52px">Earned</th><th class="c" style="width:52px">Pen.</th>'+
+    '<th class="c" style="width:56px">Total</th></tr></thead><tbody>';
+  ch.rows.forEach((r,i)=>{
+    h+='<tr><td class="c">'+(i+1)+'</td><td><b>'+esc(teamById(r.tid).name)+'</b></td>'+
+      SPORT_ORDER.map(k=>{ const c=r.cells[k];
+        return '<td class="c" style="white-space:nowrap">'+(c.rank?c.rank:'–')+
+          '<span style="color:#777"> · '+(c.done?c.pts:(c.rank?'('+c.would+')':'–'))+'</span></td>'; }).join('')+
+      '<td class="c">'+r.earned+'</td>'+
+      '<td class="c">'+(r.pen?'−'+r.pen:'')+'</td>'+
+      '<td class="c"><b>'+r.total+'</b></td></tr>';
+  });
+  h+='</tbody></table>';
+  h+='<p class="note">Each cell shows the rank in that sport and the points it earned. A figure in brackets '+
+     'is what the rank would be worth once that sport finishes — it is not yet in the total. '+
+     'Maximum possible is 4,600.</p>';
+  const pens=ch.rows.filter(r=>r.pen);
+  if(pens.length){
+    h+='<p class="note"><b>Penalties</b></p><table class="fxt"><thead><tr>'+
+       '<th style="width:150px">Team</th><th class="c" style="width:70px">Points</th>'+
+       '<th style="width:110px">Applied to</th><th>Reason</th></tr></thead><tbody>';
+    pens.forEach(r=>penList(r.tid).forEach(x=>{
+      h+='<tr><td>'+esc(teamById(r.tid).name)+'</td><td class="c">−'+x.pts+'</td>'+
+        '<td>'+esc(penScope(x))+'</td><td>'+esc(x.note||'')+'</td></tr>';
+    }));
+    h+='</tbody></table>';
+  }
+  h+='<p class="note">Level on the total: most 1st places, then most 2nd places, then head-to-head, then lots.</p>';
+  h+='</div>';
+  h+='<div class="sign"><div>Sports Committee — name &amp; signature</div>'+
+     '<div>Sports Committee — name &amp; signature</div></div>';
+  return sheet(head,h);
+}
+
+function standingsSportSheet(sk){
+  const s=SP[sk], total=state.matches.filter(m=>m.sport===sk).length;
+  const played=state.matches.filter(m=>m.sport===sk&&isPlayed(m)).length;
+  const complete=sportComplete(sk);
+  const head=sheetHead(s.name+' — standings',
+    (complete?'Final':played+' of '+total+' matches played')+' · '+
+    (s.kind==='racket'?'two groups of four, top two into the semi-finals'
+                      :'one league, every team plays all seven others'));
+  let h='';
+
+  const tbl=(rows,label)=>{
+    const isCH=(sk==='CH'), isCR=(sk==='CR');
+    let x='<div class="rnd"><h2>'+esc(label)+'</h2>'+
+      '<table class="fxt"><thead><tr><th class="c" style="width:34px">#</th><th>Team</th>'+
+      '<th class="c" style="width:34px">P</th><th class="c" style="width:34px">W</th>'+
+      ((isCH||isCR)?'<th class="c" style="width:34px">D</th>':'')+
+      '<th class="c" style="width:34px">L</th>'+
+      (isCH?'':'<th class="c" style="width:52px">'+(isCR?'Coins':'For')+'</th>'+
+               '<th class="c" style="width:52px">Against</th><th class="c" style="width:48px">Diff</th>')+
+      '<th class="c" style="width:48px">Pts</th></tr></thead><tbody>';
+    rows.forEach((r,i)=>{
+      const q=(s.kind==='racket'&&i<2);
+      x+='<tr><td class="c">'+(i+1)+'</td><td>'+(q?'<b>':'')+esc(teamById(r.tid).name)+
+        (q?'</b> <span style="color:#777">· qualified</span>':'')+'</td>'+
+        '<td class="c">'+r.p+'</td><td class="c">'+r.w+'</td>'+
+        ((isCH||isCR)?'<td class="c">'+r.d+'</td>':'')+
+        '<td class="c">'+r.l+'</td>'+
+        (isCH?'':'<td class="c">'+r.pf+'</td><td class="c">'+r.pa+'</td>'+
+                 '<td class="c">'+((r.pf-r.pa)>0?'+':'')+(r.pf-r.pa)+'</td>')+
+        '<td class="c"><b>'+r.pts+'</b></td></tr>';
+    });
+    return x+'</tbody></table><p class="note tiny">Order: wins, then point difference, then the '+
+      'head-to-head result between teams still level, then points scored (&#167;2.8).</p></div>';
+  };
+
+  if(s.kind==='racket'){
+    h+=tbl(groupTable(sk,'A'),'Group A');
+    h+=tbl(groupTable(sk,'B'),'Group B');
+    const ko=['sf1','sf2','third','final'].map(x=>state.matches.find(m=>m.id===sk+'-'+x)).filter(Boolean);
+    h+='<div class="rnd"><h2>Knockout</h2><table class="fxt"><thead><tr>'+
+       '<th style="width:150px">Match</th><th>Team</th><th class="c sc">Score</th><th class="gap"></th>'+
+       '<th class="c sc">Score</th><th>Team</th></tr></thead><tbody>';
+    ko.forEach(m=>{
+      const nm={sf1:'Semi-Final 1',sf2:'Semi-Final 2',third:'3rd Place Play-off',final:'Final'}[m.id.split('-').pop()];
+      const r=resultOf(m), sc=scoreText(m), lbl=slotLabels(m);
+      h+='<tr><td><b>'+esc(nm)+'</b></td>'+
+        '<td'+(r==='a'?' class="wn"':'')+'>'+(lbl[0]||'<i>to be decided</i>')+'</td>'+
+        '<td class="c sc">'+esc(sc[0])+'</td><td class="gap"></td>'+
+        '<td class="c sc">'+esc(sc[1])+'</td>'+
+        '<td'+(r==='b'?' class="wn"':'')+'>'+(lbl[1]||'<i>to be decided</i>')+'</td></tr>';
+    });
+    h+='</tbody></table></div>';
+  } else {
+    h+=tbl(leagueTable(sk), s.name+' league');
+  }
+
+  const rk=sportRanking(sk);
+  h+='<div class="rnd"><h2>'+(complete?'Final placing &amp; championship points':'Placing as it stands')+'</h2>';
+  if(!complete) h+='<p class="note tiny">Not final — '+(total-played)+' match'+((total-played)===1?'':'es')+
+    ' still to play. Nothing is carried to the championship board until the sport finishes.</p>';
+  h+='<table class="fxt"><thead><tr><th class="c" style="width:34px">#</th><th>Team</th>'+
+     '<th class="c" style="width:150px">'+(complete?'Championship points':'Would earn')+'</th></tr></thead><tbody>';
+  let anyShared=false;
+  rk.order.forEach((tid,i)=>{
+    const on=teamPlayedIn(sk,tid), sh=sharedAt(sk,tid);
+    if(sh) anyShared=true;
+    h+='<tr><td class="c">'+(sh?sh.from+'=':(i+1))+'</td><td>'+esc(teamById(tid).name)+
+      (sh?' <span style="color:#777">· tied for '+sh.from+'–'+sh.to+'</span>':'')+
+      (on?'':' <span style="color:#999">· not started</span>')+'</td>'+
+      '<td class="c"><b>'+(sh?sh.pts:s.pts[i])+'</b></td></tr>';
+  });
+  h+='</tbody></table>';
+  if(anyShared) h+='<p class="note">Teams that cannot be separated on any criterion share the place and '+
+    'split the points those places carry between them (&#167;2.7, &#167;2.8).</p>';
+  h+='</div>';
+  h+='<div class="sign"><div>Referee / Scorer</div><div>Sports Committee</div></div>';
+  return sheet(head,h);
+}
+
 /* ---------- captain's line-up form ----------
    The fixture line-up sheet is the officials' copy and shows both teams side by
    side. This is the captain's copy: one team only, every sport it plays, with
@@ -2702,6 +2966,11 @@ function printSheets(){
   if(typeof pr==='string' && pr.indexOf(':')<0) return (teamById(pr)?teamSheet(teamById(pr)):'');
   const [kind,mode,scope]=pr.split(':');
   const withData=(mode==='filled');
+  if(kind==='st'){
+    if(scope==='all') return standingsChampSheet()+DAY_ORDER.map(standingsSportSheet).join('');
+    if(scope==='champ') return standingsChampSheet();
+    return SP[scope]?standingsSportSheet(scope):'';
+  }
   if(kind==='sq'){
     const sk=state.teamView; if(!SP[sk]) return '';
     const list=(scope==='all')?TEAMS:[teamById(scope)].filter(Boolean);
@@ -2735,6 +3004,19 @@ function printSheets(){
 
 /* Blank or filled, and for one sport or the whole day. */
 function printChooser(kind){
+  if(kind==='st'){
+    const cur=(state.standSport&&state.standSport!=='overall')?state.standSport:null;
+    return '<h3>Print standings</h3>'+
+      '<p class="hint" style="margin-bottom:12px">A record of where things stand: the championship board, '+
+      'then each sport\'s tables, knockout results and placing. Prints as recorded right now — anything '+
+      'unfinished is marked as such.</p>'+
+      '<div class="row" style="gap:8px;flex-wrap:wrap">'+
+      '<button class="btn pri grow" data-doprint="st:now:all">Everything — board and all five sports</button>'+
+      '<button class="btn grow" data-doprint="st:now:champ">Championship board only</button></div>'+
+      (cur?'<button class="btn" style="width:100%;margin-top:8px" data-doprint="st:now:'+cur+'">'+
+        esc(SP[cur].name)+' only</button>':'')+
+      '<button class="btn" style="width:100%;margin-top:10px" data-close="1">Cancel</button>';
+  }
   const scope=(state.sportFilter==='all')?'all':state.sportFilter;
   const what=kind==='fx'?'Fixture sheets':'Line-up sheets';
   const where=scope==='all'?'all five sports':SP[scope].name;
@@ -2764,6 +3046,13 @@ function doPrint(which){
 const RULES=[
  ['What changed in 5.1 and 5.2',
   '<p>The playing format has not moved since 5.0. These are the changes since then, and they are what the app enforces.</p>'+
+  '<h4>Version 5.5</h4>'+
+  '<ul><li><b>Teams that cannot be separated share the place</b> and split the points those places carry, '+
+  'instead of drawing lots. Shown as 5= with the average — 550 rather than 600 and 500.</li>'+
+  '<li><b>Penalties can be applied to a sport</b> or left general, so the record shows where a breach happened. '+
+  'Either way the deduction comes off the championship total.</li></ul>'+
+  '<h4>Version 5.4</h4>'+
+  '<ul><li><b>Tie-breakers within a sport are wins, then point difference, then head-to-head</b>, then points scored.</li></ul>'+
   '<h4>Version 5.3</h4>'+
   '<ul><li><b>The minimum squad is 9 men + 1 woman.</b> Below that a Men General B player may take a third '+
   'sport, with committee and opponent approval.</li>'+
@@ -2786,7 +3075,7 @@ const RULES=[
   '<li><b>500 points per player who never plays.</b> Any squad member marked available who does not play a single '+
   'sport across the league costs the team 500 Championship Points, per player.</li></ul>'],
  ['Format change · what the referee console adds',
-  '<p>The playing format is unchanged in <b>Rules v5.3</b> — three pairs, rotation when the leading score reaches 7 and 14, first to 25, golden point at 24–24, ends at 14.</p>'+
+  '<p>The playing format is unchanged in <b>Rules v5.5</b> — three pairs, rotation when the leading score reaches 7 and 14, first to 25, golden point at 24–24, ends at 14.</p>'+
   '<p>What is new is how the match is <b>run and recorded</b>. The referee console tracks the things the rulebook leaves to the referee\'s memory:</p>'+
   '<ul><li><b>Serve is tracked live.</b> A ball icon marks the server and the box they must serve from. '+
     'Pickleball and Badminton follow §5.1 / §6.1 — serve from the right when your own score is even, partners swap on every point you win, serve transfers when you lose the rally. '+
@@ -2803,7 +3092,8 @@ const RULES=[
   '<ul><li>Pickleball, Badminton, Table Tennis: <b>1000 · 900 · 800 · 700 · 600 · 500 · 400 · 300</b></li>'+
   '<li>Carrom and Chess: <b>800 · 700 · 600 · 500 · 400 · 300 · 200 · 100</b></li></ul>'+
   '<p>Top all five and you finish on <b>4,600</b>. Level on the overall total is broken by most 1st places, then most 2nds and on down, then head-to-head, then lots.</p>'+
-  '<p><b>Within a single sport</b> — a group table or a Carrom/Chess league — teams level on table points are separated in this order: <b>wins, then point difference, then the head-to-head result between them, then points scored, then drawing of lots.</b> Every team in a group plays the same number of matches, so the table points and the wins say the same thing; difference is what usually settles it.</p>'],
+  '<p><b>Within a single sport</b> — a group table or a Carrom/Chess league — teams are separated in this order: <b>wins, then point difference, then the head-to-head result between them, then points scored.</b> Every team in a group plays the same number of matches, so the table points and the wins say the same thing; difference is what usually settles it.</p>'+
+  '<p><b>If nothing separates them they share the place.</b> Both are shown at the higher position with an equals sign — 5= — and the points for the two places are added together and split evenly, so a shared 5th and 6th is 550 each rather than 600 and 500. The total the sport pays out never changes. This comes up between the two groups, where teams often never meet, and in Chess whenever two teams are level on points and their game was drawn — Chess has no independent difference figure, since with 2/1/0 over seven rounds difference is always exactly twice (points − 7).</p>'],
  ['Racket sports — the format',
   '<p>Two groups of four play a round robin. The top two in each group go to the semi-finals (A1 v B2, B1 v A2). The final decides 1st and 2nd; the play-off between the beaten semi-finalists decides 3rd and 4th.</p>'+
   '<p>The four teams that miss the semis are ranked 5th–8th on their group record — the two third-placed teams take 5th and 6th, the two fourth-placed take 7th and 8th, separated by wins, then point difference, then points scored.</p>'],
@@ -2869,7 +3159,7 @@ const RULES=[
   '<p>One 1-minute timeout per team per game, medical timeouts up to 3 minutes. One challenge per phase, per team — a successful challenge is not deducted.</p>'],
 ];
 function viewRules(){
-  let h='<h2 class="sec">Rules</h2><p class="hint">Odyssey Sports League 2026 · Official Rules &amp; Regulations v5.3</p><div class="rules">';
+  let h='<h2 class="sec">Rules</h2><p class="hint">Odyssey Sports League 2026 · Official Rules &amp; Regulations v5.5</p><div class="rules">';
   RULES.forEach((r,i)=>{ h+='<div class="acc'+(i===0?' open':'')+'"><button data-acc="'+i+'">'+
     '<span class="cond" style="font-size:12px;color:var(--gold)">'+String(i+1).padStart(2,'0')+'</span>'+
     esc(r[0])+'<span class="ar">›</span></button><div class="body">'+r[1]+'</div></div>'; });
@@ -3368,7 +3658,7 @@ const K_CFG   = () => sync.event+':cfg:access';
 
 function matchPayload(m){
   return { a:m.a||null, b:m.b||null, done:!!m.done,
-           ff:m.ff||null, head:m.head||null,
+           ff:m.ff||null, head:m.head||null, sc:m.sc||null,
            log:m.log||null, lineup:m.lineup||null, acked:m.acked||null, pos:m.pos||null,
            startLeft:m.startLeft||null, invert:!!m.invert,
            boards:m.boards||null, pairs:m.pairs||null,
@@ -3381,6 +3671,7 @@ function applyMatch(id,d){
     if(d[k]!==undefined&&d[k]!==null) m[k]=d[k]; });
   if(d.result!==undefined) m.result=d.result;
   if(d.ff!==undefined) m.ff=d.ff||null;
+  if(d.sc!==undefined) m.sc=d.sc||null;
   if(d.head!==undefined) m.head=d.head||null;
   m.invert=!!d.invert; m.done=!!d.done;
   return true;
@@ -3392,7 +3683,7 @@ function syncSnapshot(){
   state.matches.forEach(m=>{ o[K_MATCH(m.id)]=matchPayload(m); });
   TEAMS.forEach(t=>{ o[K_NOM(t.id)]=state.nom[t.id]||{};
                      o[K_AV(t.id)]=state.avail[t.id]||{};
-                     o[K_PEN(t.id)]=state.pen[t.id]||{}; });
+                     o[K_PEN(t.id)]=penList(t.id); });
   o[K_CFG()]={pinHash:state.pinHash||null, adminHash:state.adminHash||null};
   return o;
 }
@@ -3504,8 +3795,10 @@ async function syncPull(force){
         if(d.pinHash!==undefined && d.pinHash!==state.pinHash){ state.pinHash=d.pinHash||null; }
         if(d.adminHash!==undefined && d.adminHash!==state.adminHash){ state.adminHash=d.adminHash||null; }
         hit=true; }
-      if(kind==='pen' && teamById(id)){ const d=r.data||{};
-        if(d && d.pts) state.pen[id]=d; else delete state.pen[id]; hit=true; }
+      if(kind==='pen' && teamById(id)){ const d=r.data;
+        const empty = !d || (Array.isArray(d)?d.length===0:!d.pts);
+        if(empty) delete state.pen[id]; else state.pen[id]=d;
+        hit=true; }
       if(!hit) return;
       sync.rev[r.key]=r.rev; sync.sent[r.key]=remoteStr; changed++;
     });
@@ -3694,7 +3987,7 @@ function scopeRounds(sk){
   return out;
 }
 function clearMatch(m,alsoLineups){
-  m.log=[]; m.acked=[]; m.done=false; m.result=null; m.ff=null; m.head=null;
+  m.log=[]; m.acked=[]; m.done=false; m.result=null; m.ff=null; m.head=null; m.sc=null;
   if(m.boards) m.boards=[{a:null,b:null},{a:null,b:null}];
   if(alsoLineups){ m.lineup={}; m.pos={}; m.pairs={}; m.players={}; m.invert=false; m.startLeft=null; }
 }
@@ -4058,7 +4351,7 @@ document.addEventListener('click',e=>{
     undoPoint(m); return render(); }
   if((el=g('data-resetsc'))){ const m=state.matches.find(x=>x.id===el.getAttribute('data-resetsc'));
     if(!confirm('Clear the score for this match? The line-ups stay as they are.')) return;
-    m.log=[]; m.acked=[]; m.done=false; m.result=null; m.ff=null; m.head=null;
+    m.log=[]; m.acked=[]; m.done=false; m.result=null; m.ff=null; m.head=null; m.sc=null;
     if(m.boards) m.boards=[{a:null,b:null},{a:null,b:null}];
     syncKnockouts(); save(); return render(); }
   if((el=g('data-resetlu'))){ const m=state.matches.find(x=>x.id===el.getAttribute('data-resetlu'));
@@ -4097,15 +4390,21 @@ document.addEventListener('click',e=>{
     return doPrint(w); }
   if((el=g('data-pensave'))){ if(!canManage()) return needAdmin();
     const tid=el.getAttribute('data-pensave');
-    const pts=($('#penpts_'+tid)||{}).value, note=($('#pennote_'+tid)||{}).value;
-    setPen(tid,pts,note); toast(Number(pts)>0?'Penalty applied':'Penalty removed'); return render(); }
+    const pts=($('#penpts_'+tid)||{}).value, note=($('#pennote_'+tid)||{}).value,
+          sport=($('#pensport_'+tid)||{}).value;
+    if(!addPen(tid,pts,note,sport)) return toast('Enter how many points to deduct');
+    toast('Penalty added'); return render(); }
   if((el=g('data-pensuggest'))){ if(!canManage()) return needAdmin();
     const [tid,pts]=el.getAttribute('data-pensuggest').split('|');
     const pr=participation(tid);
-    setPen(tid,pts,'§3.1 — '+pr.breach.length+' player'+(pr.breach.length>1?'s':'')+' did not play');
-    toast('Suggested penalty applied'); return render(); }
+    addPen(tid,pts,'§3.1 — '+pr.breach.length+' player'+(pr.breach.length>1?'s':'')+' did not play','');
+    toast('Suggested penalty added'); return render(); }
+  if((el=g('data-penrm'))){ if(!canManage()) return needAdmin();
+    const [tid,i]=el.getAttribute('data-penrm').split('|');
+    removePen(tid,Number(i)); toast('Penalty removed'); return render(); }
   if((el=g('data-penclear'))){ if(!canManage()) return needAdmin();
-    setPen(el.getAttribute('data-penclear'),0,''); toast('Penalty removed'); return render(); }
+    if(!confirm('Clear every penalty on this team?')) return;
+    clearPen(el.getAttribute('data-penclear')); toast('Penalties cleared'); return render(); }
   if((el=g('data-auto'))){ if(!canManage()) return needAdmin();
     autoNominate(el.getAttribute('data-auto')); save(); toast('Nominations filled'); return render(); }
   if((el=g('data-clearnom'))){ if(!canManage()) return needAdmin();
